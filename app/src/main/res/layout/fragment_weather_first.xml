@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/logInBg"
+     >
+    <!--00ABE5-->
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:text="Location"
+        android:textColor="#FFFFFF"
+        android:textSize="23sp" />
+
+
+    <TextView
+        android:id="@+id/last_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:text="Updated"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_updated"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="Day"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iconforwheather"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Temp Today"
+        android:textColor="#FFFFFF"
+        android:textSize="35dp" />
+
+    <ImageView
+        android:id="@+id/iconforwheather"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tv_day"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/farm_img_green_24" />
+
+
+       <LinearLayout
+           android:layout_below="@id/tvTitle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_horizontal"
+           android:layout_marginTop="17dp"
+           android:id="@+id/lincond"
+           android:weightSum="1" >
+       <TextView
+           android:text="Condition :"
+           android:textSize="17sp"
+           android:textColor="#FFFFFF"
+           android:layout_width="0dp"
+           android:layout_weight="0.5"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="10dp"
+           android:textStyle="bold"
+           android:gravity="end"/>
+           <TextView
+               android:text="Condition"
+               android:textSize="17sp"
+               android:textColor="#FFFFFF"
+               android:layout_width="0dp"
+               android:layout_weight="0.5"
+               android:textStyle="bold"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvcondition"
+               android:gravity="start"/>
+       </LinearLayout>
+
+           <LinearLayout
+               android:layout_below="@id/lincond"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center_horizontal"
+               android:id="@+id/linrel"
+               android:layout_marginTop="10dp"
+               android:weightSum="1">
+               <TextView
+                   android:text="Relative Humidity :"
+                   android:textSize="17sp"
+                   android:textColor="#FFFFFF"
+                   android:textStyle="bold"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.5"
+                   android:layout_marginRight="10dp"
+                   android:gravity="end"/>
+               <TextView
+                   android:text="Rel Hum"
+                   android:textSize="17sp"
+                   android:textColor="#FFFFFF"
+                   android:layout_width="0dp"
+                   android:textStyle="bold"
+                   android:layout_weight="0.5"
+                   android:layout_height="wrap_content"
+                   android:gravity="start"
+                   android:id="@+id/tvrel_humidity"/>
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@id/linrel"
+               android:id="@+id/linwind"
+               android:gravity="center_horizontal"
+               android:layout_marginTop="10dp"
+               android:weightSum="1">
+               <TextView
+                   android:text="Wind Speed :"
+                   android:textSize="17sp"
+                   android:textColor="#FFFFFF"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:textStyle="bold"
+                   android:layout_weight="0.5"
+                   android:layout_marginRight="10dp"
+                   android:gravity="end"/>
+               <TextView
+                   android:text="Wind dir"
+                   android:textSize="17sp"
+                   android:textColor="#FFFFFF"
+                   android:layout_width="0dp"
+                   android:layout_weight="0.5"
+                   android:textStyle="bold"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/tv_wind_string"
+                   android:gravity="start"/>
+           </LinearLayout>
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="25dp"
+               android:layout_below="@id/linwind">
+               <TextView
+                   android:layout_marginLeft="5dp"
+                   android:text="Low :"
+                   android:textSize="22sp"
+                   android:textColor="#FFFFFF"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="10dp"
+                   android:id="@+id/textView3" />
+
+               <TextView
+                   android:layout_toRightOf="@id/textView3"
+                   android:id="@+id/temp_low"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Low_temp"
+                   android:textColor="#FFFFFF"
+                   android:textStyle="bold"
+                   android:textSize="22sp" />
+
+
+               <TextView
+
+
+                   android:id="@+id/tvlabelhigh"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentTop="true"
+                   android:layout_marginEnd="11dp"
+                   android:layout_marginRight="11dp"
+                   android:layout_toLeftOf="@+id/temp_high"
+                   android:layout_toStartOf="@+id/temp_high"
+                   android:text="High :"
+                   android:textColor="#FFFFFF"
+                   android:textSize="22sp" />
+
+               <TextView
+                   android:id="@+id/temp_high"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentEnd="true"
+                   android:layout_alignParentRight="true"
+                   android:layout_alignParentTop="true"
+                   android:text="temp_high"
+                   android:textStyle="bold"
+                   android:textColor="#FFFFFF"
+                   android:layout_marginRight="5dp"
+                   android:textSize="22sp" />
+
+           </RelativeLayout>
+    <!--
+          <TextView
+              android:id="@+id/tvTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Temp Today"
+              android:textColor="#FFFFFF"
+              android:textSize="50dp" />
+      -->
+
+
+</RelativeLayout>

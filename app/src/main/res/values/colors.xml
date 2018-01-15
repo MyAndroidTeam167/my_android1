@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#238E68</color>
+    <color name="colorPrimaryDark">#238E68</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="logInBg">#8FBC8F </color>
+    <color name="greenColShade">#C0D9AF</color>
+    <color name="saddlebrown">#800000</color>
+    <color name="lightbrown">#A52A2A</color>
+    <color name="lightGreen">#E5FFE5</color>
+    <color name="ettextbrown">#614126</color>
+    <color name="farmText">#6F4242</color>
+    <color name="taskStatusPending">#FF6347</color>
+    <color name="taskStatusDone">#3CB371</color>
+    <color name="taskStatusUpcoming">#79CDCD</color>
+    <color name="taskStatusUpcomingTint">#F5F5F5</color>
+    <color name="greyInactive">#696969</color>
+
+
+
+    <color name="green">#73B802</color>
+    <color name="greendark">#5C9301</color>
+    <color name="scondarytxt">#979797</color>
+    <color name="primarytxt">#3F3F3F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="lightgreen">#ABD467</color>
+    <color name="grey">#EEEEEE</color>
+    <color name="drawer_line_dark">#373737</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="bright_blue">#3686FF</color>
+
+</resources>

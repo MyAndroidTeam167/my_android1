@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#98FB98">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/datelinarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/dateforfarmcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date :"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_weight="1"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_toRightOf="@+id/dateforfarmcal"
+            android:id="@+id/dateforfarmcalcontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+
+            android:text="date"
+            android:layout_weight="1"
+            android:textSize="18sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/activityfarmcallinearlayout"
+            android:layout_below="@+id/datelinarlayout"
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity :"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/activityfarmcal"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/activityfarmcalcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="activity"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+
+                android:textSize="18sp"/>        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/activitydescriptionfarmcallinearlayout"
+            android:layout_below="@+id/activityfarmcallinearlayout"
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/activitydescriptionfarmcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity Description :"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/activitydescriptionfarmcalcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="activity description"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:textSize="18sp"/>        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

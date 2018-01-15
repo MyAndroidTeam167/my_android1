@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+   <!-- <include
+        layout="@layout/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+   <!-- <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="My Farm"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />-->
+    <TextView
+        android:id="@+id/labelmyfarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="My Farm"
+        android:textColor="#FFFFFF" />
+
+    <Spinner
+        android:id="@+id/spinnernavheaderr"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/labelmyfarm"
+        android:layout_alignStart="@+id/labelmyfarm"
+        android:layout_below="@+id/labelmyfarm"
+        android:layout_marginTop="24dp" />
+    <!--<item
+        android:id="@+id/navigation_drawer_item3"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Select Farm"
+        android:actionLayout="@layout/spinner"/>-->
+   <!-- <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/user" />
+
+        <
+
+
+-->
+
+    <ImageView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_toEndOf="@+id/spinnernavheaderr"
+        android:layout_toRightOf="@+id/spinnernavheaderr"
+        android:src="@drawable/addfarmnew" />
+   <!-- <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="android.studio@android.com" />
+-->
+</RelativeLayout>

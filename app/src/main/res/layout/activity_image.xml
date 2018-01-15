@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Response.ImageActivity">
+
+    <RelativeLayout
+        android:id="@+id/imagendbut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/imgprvw"
+            android:layout_width="150dp"
+            android:layout_height="350dp"
+            android:src="@drawable/user"/>
+
+        <Button
+            android:layout_toRightOf="@+id/imgprvw"
+            android:id="@+id/buttimage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="click for image"
+    />
+        <Button
+            android:layout_toRightOf="@+id/buttimage"
+            android:id="@+id/testlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            />
+        <Button
+            android:layout_toRightOf="@+id/imgprvw"
+            android:layout_below="@+id/buttimage"
+            android:id="@+id/profiledemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fillprofile"/>
+
+        <Button
+            android:layout_toRightOf="@+id/profiledemo"
+            android:layout_below="@+id/testlogout"
+            android:id="@+id/profileactivitydemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ProfileActivity"/>
+        <Button
+            android:layout_toRightOf="@+id/imgprvw"
+            android:layout_below="@+id/profiledemo"
+            android:id="@+id/fillprofiledemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FarmAddressActivity"/>
+
+</RelativeLayout>
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imagendbut"
+        >
+   <!-- <TextView
+        android:id="@+id/latlong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="hello"
+        />-->
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+
+            android:id="@+id/exif"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="hello"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+

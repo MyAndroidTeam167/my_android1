@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">मेरा खेत</string>
+    <string name="email">ईमेल/मोबाइल</string>
+    <string name="Accountlogin">खाता प्रवेश</string>
+    <string name="password">पासवर्ड</string>
+    <string name="show_password">पासवर्ड दिखाएं</string>
+    <string name="forget_password">पासवर्ड भूल गए?</string>
+    <string name="need_help">मदद चाहिए!</string>
+    <string name="sign_in">साइन इन करें</string>
+    <string name="action_settings">Settings</string>
+    <string name="new_user">नया उपयोगकर्ता यहां रजिस्टर करें</string>
+    <string name="password_er">पासवर्ड 8-32 वर्ण होना चाहिए</string>
+    <string name="invalid_email_mobile">अमान्य ईमेल या मोबाइल नंबर</string>
+    <string name="dialog_password_incorrect">लॉगिन असफल रहा ..</string>
+    <string name="dialog_password_incorrect_helper">उपयोगकर्ता नाम / पासवर्ड गलत है</string>
+    <string name="login_successfull">लॉग इन सफल</string>
+    <string name="dialog_please_wait">"कृपया प्रतीक्षा करें..."</string>
+    <string name="RegisterAccount">नये खाते को पंजीकृत करें</string>
+    <string name="email_signup">ईमेल</string>
+    <string name="mobile_no">मोबाइल नंबर</string>
+    <string name="role">भूमिका</string>
+    <string name="farmer">किसान</string>
+    <string name="inspector">इंस्पेक्टर</string>
+    <string name="admin">व्यवस्थापक</string>
+    <string name="confirm_password">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="register">रजिस्टर</string>
+    <string name="old_user">पहले से सदस्य हैं? लॉग इन करें</string>
+    <string name="samepassword">पासवर्ड एक ही होना चाहिए</string>
+    <string name="invalid_mobile_no">अमान्य मोबाइल नंबर</string>
+    <string name="invalid_email">अवैध ईमेल</string>
+
+    <string name="title_activity_set_language">अवैध ईमेल</string>
+    <string name="dummy_button">अवैध ईमेल</string>
+    <string name="dummy_content">अवैध ईमेल</string>
+    <string name="title_activity_profile">मेरे खेत का कैलेंडर</string>
+    <string name="navigation_drawer_open">अवैध ईमेल</string>
+    <string name="navigation_drawer_close">अवैध ईमेल</string>
+    <string name="setting">सेटिंग्स</string>
+
+
+
+
+</resources>

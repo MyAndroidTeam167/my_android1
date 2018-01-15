@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/calendar_col_50"
+            android:title="Calendar" />
+        <item android:id="@+id/nav_my_farm"
+            android:icon="@drawable/farm_images_50"
+            android:title="My Farm"/>
+        <item android:id="@+id/nav_weather_report"
+            android:icon="@drawable/weather_50"
+            android:title="Weather Report"/>
+        <item
+            android:id="@+id/nav_my_activities"
+            android:icon="@drawable/pending"
+            android:title="Pending Activities">
+        </item>
+        <item
+            android:id="@+id/nav_completed_activities"
+            android:icon="@drawable/all_activity_40"
+            android:title="All Activities" />
+        <item
+            android:id="@+id/nav_soil_test"
+            android:icon="@drawable/soil_test_50"
+            android:title="Soil Test" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/notifications_50"
+            android:title="Notifications" />
+
+        <item android:id="@+id/nav_farm_images"
+            android:icon="@drawable/farm_img_green_24"
+            android:title="Farm Images"/>
+
+        <item android:id="@+id/nav_farm_contract"
+            android:icon="@drawable/contract_40"
+            android:title="Farm Contract"/>
+    </group>
+
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_my_profile"
+                android:icon="@drawable/profile_40"
+                android:title="My Profile"/>
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/share_50"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/settings_50"
+                android:title="Settings" />
+            <!--<item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout_50"
+                android:title="Logout" />-->
+        </menu>
+    </item>
+
+
+</menu>

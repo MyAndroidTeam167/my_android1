@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hp.farmapp.CalendarPackage.CalendarTask.FarmActionReplyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_actionbar"
+            layout="@layout/my_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:scaleType="fitXY"
+            android:id="@+id/img_view"
+            />
+
+        <LinearLayout
+            android:id="@+id/task_reply_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/greenColShade"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Name"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/reply_activity_name_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/logInBg"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Date"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/reply_activity_date_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/greenColShade"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Description"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/reply_activity_description_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:inputType="textMultiLine"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/logInBg"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_compulsary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Compulsary"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    android:padding="2dp"
+                    />
+
+                <TextView
+                    android:id="@+id/reply_activity_compulsary_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/greenColShade"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_chemical_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Chemical"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/reply_activity_chemical_name_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/logInBg"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_quantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Chemical Qty"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/reply_activity_quantity_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:padding="2dp"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/greenColShade"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/reply_activity_done"
+                    android:layout_width="0dp"
+                    android:padding="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Is Done"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp" />
+
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:buttonTint="@color/ettextbrown"
+                    android:checked="false"
+                    android:padding="2dp"
+                    android:id="@+id/reply_done_status"
+                    android:text=""
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/logInBg"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Comment"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    android:padding="2dp"
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/et_farmer_reply"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/ettextbrown"
+                    android:textSize="20dp"
+                    android:padding="2dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/greyInactive"
+                    android:id="@+id/tv_farmer_reply"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="22dp"
+                android:padding="5dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Submit"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

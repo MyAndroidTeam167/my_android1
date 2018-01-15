@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_actionbar"
+            layout="@layout/my_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_actionbar">
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout2sett">
+
+
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:id="@+id/txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/white"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:singleLine="true"
+                        android:text="Account"
+                        android:textColor="@color/saddlebrown"
+                        android:textSize="20sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1"
+                        android:layout_gravity="center"
+                        android:layout_margin="30dp"
+                        android:orientation="horizontal">
+
+
+                        <com.example.hp.farmapp.custom.CustomTextView
+                            android:id="@+id/tvsetlanguage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_weight=".5"
+                            android:gravity="center"
+                            android:background="@drawable/box"
+                            android:padding="15dp"
+                            android:textColor="#FFFFFF"
+                            android:text="Change Language"
+                            app:edittextfont="ROBOTO-REGULAR.TTF"/>
+
+                        <com.example.hp.farmapp.custom.CustomTextView
+                            android:id="@+id/tvchangepass"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center"
+                            android:layout_weight=".5"
+                            android:textSize="15sp"
+                            android:background="@drawable/box"
+                            android:padding="15dp"
+                            android:textColor="#FFFFFF"
+                            android:text="Change Password"
+                            app:edittextfont="ROBOTO-REGULAR.TTF"/>
+
+
+                    </LinearLayout>
+
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:singleLine="true"
+                        android:text="Settings"
+                        android:textColor="@color/saddlebrown"
+                        android:textSize="20sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                       <!-- <com.example.hp.farmapp.custom.CustomTextView
+                            android:id="@+id/push_notifications"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/line"
+                            android:padding="20dp"
+                            android:singleLine="true"
+                            android:text="Push Notification"
+                            android:textColor="@color/scondarytxt"
+                            android:textSize="15sp"
+                            app:edittextfont="ROBOTO-REGULAR.TTF" />
+-->
+                       <!-- <com.rey.material.widget.Switch
+                            style="@style/Material.Widget.Switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="30dp"
+                            android:checked="false"
+                            android:gravity="center" />-->
+
+                    </RelativeLayout>
+                    <!-- <com.chingon.custom.CustomTextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                          android:background="@drawable/line"
+                         android:layout_marginTop="30dp"
+                         android:text="Push Notification "
+                         android:drawableRight="@mipmap/onbutton"
+                         android:padding="20dp"
+                         android:singleLine="true"
+                         android:textColor="@color/scondarytxt"
+                         android:textSize="15sp"
+                         app:edittextfont="ROBOTO-REGULAR.TTF"
+                          />-->
+
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/line"
+                        android:drawableRight="@mipmap/dropdown"
+                        android:padding="20dp"
+                        android:singleLine="true"
+                        android:text="Privacy Policy"
+                        android:textColor="@color/scondarytxt"
+                        android:textSize="15sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />
+
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/line"
+                        android:drawableRight="@mipmap/dropdown"
+                        android:padding="20dp"
+                        android:singleLine="true"
+                        android:text="Terms of Use"
+                        android:textColor="@color/scondarytxt"
+                        android:textSize="15sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />
+
+
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:id="@+id/logout_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="35dp"
+                        android:textSize="20sp"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/box"
+                        android:padding="15dp"
+                        android:textColor="#FFFFFF"
+                        android:text="Logout"
+                        app:edittextfont="ROBOTO-REGULAR.TTF"/>
+                  <!--  <com.example.hp.farmapp.custom.CustomTextView
+                        android:id="@+id/logout_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/line"
+                        android:padding="20dp"
+                        android:singleLine="true"
+                        android:text="Logout"
+                        android:textColor="@color/scondarytxt"
+                        android:textSize="15sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />-->
+                </LinearLayout>
+
+
+            </ScrollView>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
