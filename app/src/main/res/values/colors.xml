@@ -30,5 +30,7 @@
     <color name="drawer_line_dark">#373737</color>
     <color name="gray">#EEEEEE</color>
     <color name="bright_blue">#3686FF</color>
-
+    <color name="deep_blue">#00BFFF</color>
+    <color name="lightGrey">#D3D3D3</color>
+    <color name="textGrey">#808080</color>
 </resources>

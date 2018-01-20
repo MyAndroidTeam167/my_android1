@@ -1,10 +1,12 @@
 package com.example.hp.farmapp.CalendarPackage;
 
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -26,9 +28,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +89,9 @@ private static final String REGISTER_URL_ALL = "https://www.oswalcorns.com/my_fa
 
 //    FarmCalAdapter farmCalAdapter;
     RecyclerView mrecyclerView;
+    int pStatus = 0;
+    private Handler handler = new Handler();
+    TextView tv;
     String url;
 //    private List<Profilebeans> farmcal;
 public final String KEY_PERSON_NUM="person_num";
@@ -135,10 +142,52 @@ public final String KEY_PERSON_NUM="person_num";
         Toolbar toolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         //toolbar.setTitle("Kumar");
         setSupportActionBar(toolbar);
-
         context=this;
 
 
+
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.circular);
+        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+        mProgress.setProgress(0);   // Main Progress
+        mProgress.setSecondaryProgress(0); // Secondary Progress
+        mProgress.setMax(10); // Maximum Progress
+        mProgress.setProgressDrawable(drawable);
+
+        ObjectAnimator animation = ObjectAnimator.ofInt(mProgress, "progress", 0, 6);
+        animation.setDuration(800);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.start();
+
+        tv = (TextView) findViewById(R.id.tv);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                while (pStatus < 6) {
+                    pStatus += 1;
+
+                    handler.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            mProgress.setProgress(pStatus);
+                            tv.setText(pStatus + "/10");
+
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        // Just to display the progress slowly
+                        Thread.sleep(16); //thread will take approx 3 seconds to finish
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
         if (getSupportActionBar() != null){
             /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
