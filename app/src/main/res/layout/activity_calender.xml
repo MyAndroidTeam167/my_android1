@@ -3,43 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearlayoutlanding"
+
+    <ImageView
+        android:id="@+id/bck_land_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/new_img_bck_2"
+        android:scaleType="fitXY"
+        android:src="#73006400" />
+
+    <RelativeLayout
+        android:id="@+id/rel_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bg_spinner"
+        android:orientation="horizontal">
+
+        <Spinner
+
+            android:id="@+id/landing_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="#BF006400"
+            android:popupBackground="#99006400"
+            android:spinnerMode="dropdown">
+
+        </Spinner>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="1.0"
-            android:scaleType="fitXY"
-            android:src="@drawable/vegetables" />
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/landing_spinner"
+            android:layout_alignRight="@+id/landing_spinner"
+            android:src="@drawable/drop_down_white" />
+    </RelativeLayout>
+    <!--
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+    -->
 
-
-    <TextView
-        android:id="@+id/title_landing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="10dp"
-        android:drawableLeft="@drawable/farmer_24"
-        android:shadowColor="#000000"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
-        android:text="Kone Wala khet"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <!-- <TextView
+         android:id="@+id/title_landing"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_marginLeft="10dp"
+         android:drawableLeft="@drawable/namaste_skin_24"
+         android:shadowColor="#000000"
+         android:shadowDx="1"
+         android:shadowDy="1"
+         android:layout_below="@id/landing_spinner"
+         android:shadowRadius="2"
+         android:text="Namaste"
+         android:textColor="#FFFFFF"
+         android:textSize="20sp"
+         android:textStyle="bold" />-->
 
     <ProgressBar
         android:id="@+id/circularProgressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_below="@id/title_landing"
+        android:layout_below="@id/rel_spinner"
         android:layout_centerHorizontal="true"
         android:indeterminate="false"
         android:max="10"
@@ -56,12 +84,17 @@
         android:id="@+id/tv"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_below="@id/title_landing"
+        android:layout_below="@id/rel_spinner"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:text="5"
         android:textColor="@color/white"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/ranking_landing"
@@ -73,7 +106,7 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="2"
-        android:text="Ranking"
+        android:text="Rating"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -121,20 +154,22 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/task_completed_no."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:shadowColor="#000000"
+                    android:shadowColor="#00FF00"
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
                     android:text="10/50"
-                    android:textColor="@color/deep_blue"
-                    android:textSize="18sp"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/full_layout"
                 android:layout_width="300dp"
                 android:layout_height="7dp"
                 android:layout_marginBottom="6dp"
@@ -144,9 +179,10 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/task_completed_green_fill"
                     android:layout_width="60dp"
                     android:layout_height="6dp"
-                    android:background="@color/deep_blue"></LinearLayout>
+                    android:background="#00FF00"></LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -182,16 +218,17 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/task_pending_no."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:shadowColor="#000000"
+                    android:shadowColor="#ff0000"
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
                     android:text="12"
-                    android:textColor="#ff0000"
-                    android:textSize="18sp"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -205,6 +242,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/task_pending_red_fill"
                     android:layout_width="60dp"
                     android:layout_height="6dp"
                     android:background="#ff0000"></LinearLayout>
@@ -250,6 +288,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_sowing_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
@@ -281,7 +320,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:drawableLeft="@drawable/crop_dark_red"
+                android:drawableLeft="@drawable/crop_light_green_26"
                 android:inputType="text"
                 android:shadowColor="#000000"
                 android:shadowDx="1"
@@ -293,6 +332,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_crop_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
@@ -336,6 +376,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_harvest_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
@@ -361,7 +402,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="cursive"
         android:inputType="textMultiLine"
         android:shadowColor="#000000"
@@ -491,6 +532,8 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         />-->
+
+
 </RelativeLayout>
 
     <!--

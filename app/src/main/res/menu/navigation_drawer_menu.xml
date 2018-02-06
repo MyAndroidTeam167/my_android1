@@ -21,16 +21,16 @@
         <item
             android:id="@+id/nav_my_activities"
             android:icon="@drawable/pending"
-            android:title="Pending Activities">
+            android:title="Activities">
         </item>
-        <item
+       <!-- <item
             android:id="@+id/nav_completed_activities"
             android:icon="@drawable/all_activity_40"
-            android:title="All Activities" />
+            android:title="All Activities" />-->
         <item
             android:id="@+id/nav_soil_test"
             android:icon="@drawable/soil_test_50"
-            android:title="Soil Test" />
+            android:title="Soil Health Card" />
         <item
             android:id="@+id/nav_notification"
             android:icon="@drawable/notifications_50"
@@ -46,17 +46,17 @@
     </group>
 
 
-    <item android:title="">
+    <item android:title="My Account">
         <menu>
             <item
                 android:id="@+id/nav_my_profile"
                 android:icon="@drawable/profile_40"
                 android:title="My Profile"/>
 
-            <item
+           <!-- <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/share_50"
-                android:title="Share" />
+                android:title="Share" />-->
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/settings_50"

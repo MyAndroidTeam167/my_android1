@@ -4,15 +4,20 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +49,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.Adapter.SpinnerAdapter;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.ShowTaskActivity;
+import com.example.hp.farmapp.CalendarPackage.CalendarTask.ShowTaskViewPagerActivity;
 import com.example.hp.farmapp.CalendarPackage.NavGetterSetter.SpinnerData;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
@@ -56,24 +62,40 @@ import com.example.hp.farmapp.PersonData.ShowProfileActivity;
 import com.example.hp.farmapp.Notification.NotificationActivity;
 import com.example.hp.farmapp.R;
 
+import com.example.hp.farmapp.Response.ImageActivity;
 import com.example.hp.farmapp.Settings.SettingActivity;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.Weather.WeatherViewPagerActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStates;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 public class LandingActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,AdapterView.OnItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,AdapterView.OnItemSelectedListener,GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
 //    private ProfileAdapter mAdapter;
 //    String Responsee;
@@ -86,18 +108,26 @@ public class LandingActivity extends AppCompatActivity
 private static final String REGISTER_URL_ALL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
     private static final String FETCH_FARM_COUNT = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/count_farm_num";
     private static final String FETCH_FARM_NUM_NAME = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/fetch_farm_num_and_name";
+    private static final String FETCH_CROP_DETAILS = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_crop_details";
+
 
 //    FarmCalAdapter farmCalAdapter;
     RecyclerView mrecyclerView;
     int pStatus = 0;
     private Handler handler = new Handler();
+    int spinner_positionn=0;
+    String farmnum="1";
     TextView tv;
-    String url;
+    String urlsend;
 //    private List<Profilebeans> farmcal;
 public final String KEY_PERSON_NUM="person_num";
+    public final String KEY_FARM_NUM="farm_num";
+
     private String person_num,no_of_farms;
     private LinearLayoutManager mLayoutManager;
     LinearLayout linearLayout;
+    //LocationRequest mLocationRequest;
+    GoogleApiClient googleApiClient;
     TextView Addfarm;
 //    public GregorianCalendar cal_month, cal_month_copy;
 //    private CalendarAdapter cal_adapter;
@@ -138,56 +168,77 @@ public final String KEY_PERSON_NUM="person_num";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         TextView title=(TextView)findViewById(R.id.tittlelanding);
+
+
+
         title.setText(R.string.title_activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         //toolbar.setTitle("Kumar");
         setSupportActionBar(toolbar);
         context=this;
 
+        spinner_positionn=SharedPreferencesMethod.getInt(context,"spinner_postion")-1;
 
 
-        Resources res = getResources();
-        Drawable drawable = res.getDrawable(R.drawable.circular);
-        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
-        mProgress.setProgress(0);   // Main Progress
-        mProgress.setSecondaryProgress(0); // Secondary Progress
-        mProgress.setMax(10); // Maximum Progress
-        mProgress.setProgressDrawable(drawable);
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(LocationServices.API).addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(LandingActivity.this).build();
+            googleApiClient.connect();
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setInterval(30 * 1000);
+            locationRequest.setFastestInterval(5 * 1000);
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                    .addLocationRequest(locationRequest);
 
-        ObjectAnimator animation = ObjectAnimator.ofInt(mProgress, "progress", 0, 6);
-        animation.setDuration(800);
-        animation.setInterpolator(new DecelerateInterpolator());
-        animation.start();
+            // **************************
+            builder.setAlwaysShow(true); // this is the key ingredient
+            // **************************
 
-        tv = (TextView) findViewById(R.id.tv);
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (pStatus < 6) {
-                    pStatus += 1;
-
-                    handler.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            mProgress.setProgress(pStatus);
-                            tv.setText(pStatus + "/10");
-
-                        }
-                    });
-                    try {
-                        // Sleep for 200 milliseconds.
-                        // Just to display the progress slowly
-                        Thread.sleep(16); //thread will take approx 3 seconds to finish
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi
+                    .checkLocationSettings(googleApiClient, builder.build());
+            result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+                @Override
+                public void onResult(LocationSettingsResult result) {
+                    final Status status = result.getStatus();
+                    final LocationSettingsStates state = result
+                            .getLocationSettingsStates();
+                    switch (status.getStatusCode()) {
+                        case LocationSettingsStatusCodes.SUCCESS:
+                            // All location settings are satisfied. The client can
+                            // initialize location
+                            // requests here.
+                            break;
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            // Location settings are not satisfied. But could be
+                            // fixed by showing the user
+                            // a dialog.
+                            try {
+                                // Show the dialog by calling
+                                // startResolutionForResult(),
+                                // and check the result in onActivityResult().
+                                status.startResolutionForResult(LandingActivity.this, 1000);
+                            } catch (IntentSender.SendIntentException e) {
+                                // Ignore the error.
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            // Location settings are not satisfied. However, we have
+                            // no way to fix the
+                            // settings so we won't show the dialog.
+                            break;
                     }
                 }
-            }
-        }).start();
+            });
+        }
+
+        /*ImageView imageView=(ImageView)findViewById(R.id.bck_land_img);
+        Drawable d = imageView.getBackground();
+        d.setAlpha(185);
+        imageView.setBackground(d);*/
+
+
 
         if (getSupportActionBar() != null){
             /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -247,8 +298,11 @@ public final String KEY_PERSON_NUM="person_num";
 
 
 
-        AsyncTaskRunner runner=new AsyncTaskRunner();
-        runner.execute();
+
+
+        // sum=sum/totalcount;
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -264,7 +318,7 @@ public final String KEY_PERSON_NUM="person_num";
 
 
         //spinner = (Spinner)navigationView.inflateHeaderView(R.layout.nav_header_profile).findViewById(R.id.spinnernavheaderr);
-        spinner=(Spinner)header.findViewById(R.id.spinnernavheaderr);
+        spinner=(Spinner)findViewById(R.id.landing_spinner);
         spinner.setOnItemSelectedListener(this);
 
       /*  Addfarm.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +331,7 @@ public final String KEY_PERSON_NUM="person_num";
         });*/
 
 
-        ImageView text = (ImageView) header.findViewById(R.id.textView);
+       /* ImageView text = (ImageView) header.findViewById(R.id.textView);
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,7 +341,7 @@ public final String KEY_PERSON_NUM="person_num";
                 finish();
             }
         });
-
+*/
         person_num = SharedPreferencesMethod.getString(context,"person_num");
         Log.e("PERSON_NUM",person_num+"kumar");
        // getFarmCount();
@@ -299,7 +353,23 @@ public final String KEY_PERSON_NUM="person_num";
         SpinnerData spinDta = new SpinnerData();
         spinDta = SpinnerDatums.get(position);
         SharedPreferencesMethod.setString(context,"farm_num",spinDta.getItem_value());
-        Toast.makeText(getApplicationContext(), spinDta.getItem_value(), Toast.LENGTH_SHORT).show();
+        if(spinDta.getItem_name().equals("Add New Farm")){
+            DataHandler.newInstance().setFromActivty("landingactivity");
+            Intent intent=new Intent(context,FarmAddActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            urlsend = REGISTER_URL_ALL;
+            AsyncTaskRunner runnerall = new AsyncTaskRunner();
+            runnerall.execute(urlsend, "fetchall",farmnum);
+            urlsend = FETCH_CROP_DETAILS;
+            farmnum=spinDta.getItem_value();
+            AsyncTaskRunner runnercrop = new AsyncTaskRunner();
+            runnercrop.execute(urlsend, "fetchcrop",farmnum);
+            SharedPreferencesMethod.setInt(context,"spinner_postion",position);
+
+            Toast.makeText(getApplicationContext(), spinDta.getItem_name() + "   " + spinDta.getItem_value(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -361,8 +431,19 @@ public final String KEY_PERSON_NUM="person_num";
                                 Log.e("check","Farm Name = "+spinnerDatum.getItem_name()+farm_name);
                             }
                             Log.e("check"," "+SpinnerDatums.size());
+
+                            spinnerDatum = new SpinnerData();
+                            spinnerDatum.setItem_name("Add New Farm");
+                            spinnerDatum.setItem_value("0");
+                            SpinnerDatums.add(spinnerDatum);
+
+                            Log.e("check"," "+SpinnerDatums.size());
                             SpinnerAdapter spinnerAdapter=new SpinnerAdapter(getApplicationContext(),SpinnerDatums);
+
+
                             spinner.setAdapter(spinnerAdapter);
+                            spinner.setSelection(spinner_positionn);
+
 //                            SpinnerAdapter spinnerAdapter = new SpinnerAdapter(SpinnerDatums,android.R.layout.simple_spinner_dropdown_item,context);
 
                         }catch (Exception e) {
@@ -576,32 +657,34 @@ public final String KEY_PERSON_NUM="person_num";
             Intent intent=new Intent(context,DisplayCalendarActivity.class);
             startActivity(intent);
             // Handle the camera action
-        } else if (id == R.id.nav_completed_activities) {
+        }
+        /*else if (id == R.id.nav_completed_activities) {
             Intent intent=new Intent(context,ShowTaskActivity.class);
             intent.putExtra("Type","all_activities");
             startActivity(intent);
 
-        }else if(id==R.id.nav_my_activities){
-            Intent intent= new Intent(context, ShowTaskActivity.class);
-            intent.putExtra("Type","pending_activities");
+        }*/
+        else if(id==R.id.nav_my_activities){
+            Intent intent= new Intent(context, ShowTaskViewPagerActivity.class);
+            intent.putExtra("Type","all_activities");
             startActivity(intent);
-
-
-        }else if (id == R.id.nav_notification) {
+        }
+        else if (id == R.id.nav_notification) {
             Intent intent=new Intent(context,NotificationActivity.class);
             startActivity(intent);
 
         }
-        else if (id == R.id.nav_share) {
+
+       /* else if (id == R.id.nav_share) {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             startActivity(Intent.createChooser(sharingIntent, "Share With"));
             return true;
-        }
+        }*/
+
         else if (id == R.id.nav_settings) {
             Intent intent=new Intent(context,SettingActivity.class);
             startActivity(intent);
-
         }
         else if(id==R.id.nav_soil_test){
 
@@ -644,6 +727,21 @@ public final String KEY_PERSON_NUM="person_num";
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
 
@@ -838,16 +936,31 @@ public final String KEY_PERSON_NUM="person_num";
         @Override
         protected String doInBackground(String... params) {
 
+            final String urlonrecieve,flagonrecieve;
+            urlonrecieve=params[0];
+            flagonrecieve=params[1];
 
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL_ALL,
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlonrecieve,
                     new com.android.volley.Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
-                            JSONArray jsonarray = null;
-                            try {
-                                jsonarray = new JSONArray(response);
+
+                            if(flagonrecieve.equals("fetchall")) {
+                                JSONArray jsonarray = null;
+                                try {
+                                    final int[] fullfill = new int[1];
+
+                                    int completedcount=0,pendingcount=0,totalcount=0,sum=0;
+
+                                    jsonarray = new JSONArray(response);
+                                    TextView tvtask_completed_num = (TextView) findViewById(R.id.task_completed_no_);
+                                    TextView tvtask_pending_num = (TextView) findViewById(R.id.task_pending_no_);
+                                    TextView tv_ranking = (TextView) findViewById(R.id.tv);
+
+
                                 /*farmcalid=new String[jsonarray.length()];
                                 farmcalactivity=new String[jsonarray.length()];
                                 farmcaldate=new String[jsonarray.length()];
@@ -856,18 +969,34 @@ public final String KEY_PERSON_NUM="person_num";
                                 farmcalisdone = new String[jsonarray.length()];*/
                                /* taskdatums=new ArrayList<>();
                                 Taskdata taskdatum=new Taskdata();*/
-                                CalendarCollection.date_collection_arr=new ArrayList<CalendarCollection>();
+                                    CalendarCollection.date_collection_arr = new ArrayList<CalendarCollection>();
 
-                                for (int i = 0; i < jsonarray.length(); i++) {
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    String id = jsonobject.getString("id");
-                                    String activity=jsonobject.getString("activity");
-                                    String activitydescription=jsonobject.getString("activity_description");
-                                    String date=jsonobject.getString("date");
-                                    String activity_img = jsonobject.getString("img_link");
-                                    String is_done = jsonobject.getString("is_done");
+                                    totalcount = jsonarray.length();
+                                    for (int i = 0; i < jsonarray.length(); i++) {
+                                        JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                        String id = jsonobject.getString("id");
+                                        String activity = jsonobject.getString("activity");
+                                        String activitydescription = jsonobject.getString("activity_description");
+                                        String date = jsonobject.getString("date");
+                                        String activity_img = jsonobject.getString("img_link");
+                                        String is_done = jsonobject.getString("is_done");
+                                        String rating_factor = jsonobject.getString("rating_effective_fact");
+                                        String date_today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-                                    CalendarCollection.date_collection_arr.add(new CalendarCollection(date,activity));
+                                        sum = Integer.parseInt(rating_factor) + sum;
+                                        //Toast.makeText(context, Integer.parseInt(rating_factor), Toast.LENGTH_SHORT).show();
+
+
+                                        if (is_done.equals("Y")) {
+                                            completedcount++;
+                                        } else {
+                                            if (date.compareTo(date_today) < 0) {
+                                                pendingcount++;
+                                            }
+                                        }
+
+
+                                        CalendarCollection.date_collection_arr.add(new CalendarCollection(date, activity));
                                    /* CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-10","Basel dose"));
                                     CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-15","Herbicide spray"));
                                     CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-21","weed removel (if needed)"));
@@ -893,9 +1022,91 @@ public final String KEY_PERSON_NUM="person_num";
                                     taskdatum.setIsDone(is_done);
                                     taskdatums.add(taskdatum);*/
 
-                                   // Log.e("Date :",date+"activity"+activity+taskdatums.size());
+                                        // Log.e("Date :",date+"activity"+activity+taskdatums.size());
 
-                                }
+                                    }
+
+                                    sum = sum / totalcount;
+
+
+                                    tvtask_completed_num.setText(completedcount + "/" + totalcount);
+                                    tvtask_pending_num.setText(pendingcount + "");
+                                    //  Toast.makeText(context, String.valueOf(sum), Toast.LENGTH_SHORT).show();
+                                    tv_ranking.setText(String.valueOf(sum));
+                                    // float ratio=completedcount/totalcount;
+                                    final LinearLayout completed_fill = (LinearLayout) findViewById(R.id.task_completed_green_fill);
+                                    final LinearLayout full_fill = (LinearLayout) findViewById(R.id.full_layout);
+                                    final LinearLayout pending_fill = (LinearLayout) findViewById(R.id.task_pending_red_fill);
+
+                                    final int finalCompletedcount = completedcount;
+                                    final int finalTotalcount = totalcount;
+                                    final int finalPendingcount = pendingcount;
+                                    completed_fill.post(new Runnable()
+                                {
+
+                                    @Override
+                                    public void run()
+                                    {
+                                        fullfill[0] =full_fill.getWidth();
+                                        Log.i("TEST", "Layout width : "+ full_fill.getWidth());
+
+                                        LinearLayout.LayoutParams lpcompleted = new LinearLayout.LayoutParams(fullfill[0] * finalCompletedcount / finalTotalcount,
+                                                21); // or set height to any fixed value you want
+                                        completed_fill.setLayoutParams(lpcompleted);
+                                        LinearLayout.LayoutParams lppending = new LinearLayout.LayoutParams(fullfill[0] * finalPendingcount / finalTotalcount,
+                                                21); // or set height to any fixed value you want
+                                        pending_fill.setLayoutParams(lppending);
+
+                                    }
+                                });
+
+
+                                    Resources res = getResources();
+                                    Drawable drawable = res.getDrawable(R.drawable.circular);
+                                    final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+                                    mProgress.setProgress(0);   // Main Progress
+                                    mProgress.setSecondaryProgress(0); // Secondary Progress
+                                    mProgress.setMax(10); // Maximum Progress
+                                    mProgress.setProgressDrawable(drawable);
+
+                                    ObjectAnimator animation = ObjectAnimator.ofInt(mProgress, "progress", 0, sum);
+                                    animation.setDuration(800);
+                                    animation.setInterpolator(new DecelerateInterpolator());
+                                    animation.start();
+
+                                    tv = (TextView) findViewById(R.id.tv);
+                                    final int finalSum = sum;
+                                    new Thread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            // TODO Auto-generated method stub
+                                            while (pStatus < finalSum) {
+                                                pStatus += 1;
+
+                                                handler.post(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        // TODO Auto-generated method stub
+                                                        mProgress.setProgress(pStatus);
+                                                        tv.setText(pStatus + "/10");
+
+                                                    }
+                                                });
+                                                try {
+                                                    // Sleep for 200 milliseconds.
+                                                    // Just to display the progress slowly
+                                                    Thread.sleep(16); //thread will take approx 3 seconds to finish
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    }).start();
+
+
+                                    //    Toast.makeText(context, completedcount+"  "+pendingcount, Toast.LENGTH_SHORT).show();
                                /* Log.e("TaskDatum:",String.valueOf(taskdatums.size()));
                                 mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
                                 mprogressDialog.dismiss();
@@ -906,8 +1117,40 @@ public final String KEY_PERSON_NUM="person_num";
                                 mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                                 mRecyclerView.setLayoutManager(mLayoutManager);*/
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }else /*if(flagonrecieve.equals("fetchcrop"))*/{
+
+                                JSONObject jsonObjectnew;
+                                String crop_name=null;
+                                String date_of_sowing=null;
+                                String Expected_date_of_harvest=null;
+                               // Log.e("CHECK",response);
+                                TextView tv_sowingdate=(TextView)findViewById(R.id.tv_sowing_date);
+                                TextView tv_crop_name=(TextView)findViewById(R.id.tv_crop_name);
+                                TextView tv_harvest_date=(TextView)findViewById(R.id.tv_harvest_date);
+
+                                try {
+                                    jsonObjectnew=new JSONObject(response);
+                                    crop_name= jsonObjectnew.getString("crop_name");
+                                    date_of_sowing= jsonObjectnew.getString("date_of_sowing");
+                                    Expected_date_of_harvest =jsonObjectnew.getString("expct_dateof_harvest");
+
+                                    tv_crop_name.setText(crop_name);
+                                    tv_harvest_date.setText(Expected_date_of_harvest);
+                                    tv_sowingdate.setText(date_of_sowing);
+
+
+                                }
+
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
                             }
                         }
                     },
@@ -919,6 +1162,9 @@ public final String KEY_PERSON_NUM="person_num";
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String,String> params = new HashMap<String, String>();
+                    if(farmnum!=null){
+                        params.put(KEY_FARM_NUM,farmnum);
+                    }
                     /*if(date!=null) {
                         params.put(TASK_DATE, date);
                     }*/
@@ -936,29 +1182,28 @@ public final String KEY_PERSON_NUM="person_num";
 
         @Override
         protected void onPreExecute() {
-            /*mprogressDialog =new ProgressDialog(context);
-            mprogressDialog.setMessage("Loading....");
-            mprogressDialog.show();*/
+
         }
 
         @Override
         protected void onPostExecute(String s) {
 
-           /* mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-           Log.e("TaskDatum:",String.valueOf(taskdatums.size()));
-            mAdapter = new TaskRecyclerViewAdapter(taskdatums,context);
-
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            mLayoutManager = new LinearLayoutManager(context);
-            mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            mRecyclerView.setLayoutManager(mLayoutManager);*/
-        }
+           }
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
 
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1000) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+            } if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
 

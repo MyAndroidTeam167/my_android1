@@ -5,11 +5,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
+   <!-- <include
         android:id="@+id/toolbar_actionbar"
         layout="@layout/my_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/showprofiletoolbar"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/gobackbuttfarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="@drawable/new_go_back"
+            android:layout_marginLeft="20dp"/>
+
+        <com.example.hp.farmapp.PersonData.customfonts.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Farm"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:textColor="#fff"/>
+        <!--   <ImageButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="14dp"
+               android:src="@drawable/edit"
+               android:layout_gravity="right"
+               android:layout_marginRight="20dp"
+               android:textColor="#fff"/>-->
+        <ImageButton
+            android:id="@+id/editoptionforfarm"
+            android:layout_width="40dp"
+            android:fitsSystemWindows="true"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/login_title"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/editsmall" />
+
+    </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"

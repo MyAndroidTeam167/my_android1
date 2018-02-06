@@ -171,6 +171,20 @@
                         android:textSize="15sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
 
+                    <com.example.hp.farmapp.custom.CustomTextView
+                        android:id="@+id/share_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/line"
+                        android:drawableRight="@mipmap/dropdown"
+                        android:padding="20dp"
+                        android:singleLine="true"
+                        android:text="Share"
+                        android:textColor="@color/scondarytxt"
+                        android:textSize="15sp"
+                        app:edittextfont="ROBOTO-REGULAR.TTF" />
+
 
                     <com.example.hp.farmapp.custom.CustomTextView
                         android:id="@+id/logout_setting"

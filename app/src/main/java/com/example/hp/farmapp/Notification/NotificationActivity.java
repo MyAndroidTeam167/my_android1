@@ -2,6 +2,7 @@ package com.example.hp.farmapp.Notification;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +39,7 @@ public class NotificationActivity extends AppCompatActivity {
     private ProfileAdapter mAdapter;
     Toolbar mActionBarToolbar;
 
-    String id;
+    String id="0";
     LinearLayoutManager linearLayoutManager;
     Context context;
    // Runnable refresh;
@@ -86,23 +88,43 @@ public class NotificationActivity extends AppCompatActivity {
         }
 
 
-        notirec=(RecyclerView)findViewById(R.id.notirecycl);
+        prepareProfileData();
 
-        mAdapter = new ProfileAdapter(getProfiles);
+        notirec=(RecyclerView)findViewById(R.id.notirecycl);
+        Typeface cFontnormal = Typeface.createFromAsset(getAssets(), "fonts/roboto.regular.ttf");
+        Typeface cFontbold = Typeface.createFromAsset(getAssets(), "fonts/Caviar_Dreams_Bold.ttf");
+        Typeface cFontitalic = Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams_Italic.ttf");
+
+        mAdapter = new ProfileAdapter(getProfiles,cFontnormal,cFontbold,cFontitalic);
         notirec.setAdapter(mAdapter);
+        //mAdapter.notifyDataSetChanged();
         linearLayoutManager=new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         //notirec.setHasFixedSize(true);
         notirec.setLayoutManager(linearLayoutManager);
-        notirec.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
-        notirec.setItemAnimator(new DefaultItemAnimator());
+        //notirec.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        //notirec.setItemAnimator(new DefaultItemAnimator());
 
+
+        LinearLayout linearLayout=(LinearLayout)findViewById(R.id.noti_hide_lay);
+       /* if (mAdapter.getItemCount() == 0)
+        {
+            linearLayout.setVisibility(View.VISIBLE);
+            Toast.makeText(context, "New Notifications 0", Toast.LENGTH_SHORT).show();
+
+
+        }else {
+
+            linearLayout.setVisibility(View.GONE);
+            Toast.makeText(context, "New Notifications 1", Toast.LENGTH_SHORT).show();
+
+        }*/
 
         notirec.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), notirec, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 GetProfile getProfile = getProfiles.get(position);
-                Toast.makeText(getApplicationContext(), getProfile.getActivity() + " is selected!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getProfile.getNoticationdescription() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -110,12 +132,12 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onLongClick(View view, int position) {
 
+                Toast.makeText(getApplicationContext(), getprofile.getNotification(), Toast.LENGTH_LONG).show();
             }
 
         }));
-        this.mHandler = new Handler();
-        m_Runnable.run();
-        mAdapter.notifyDataSetChanged();
+       // this.mHandler = new Handler();
+       // m_Runnable.run();
 
 
 
@@ -141,7 +163,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
 
-   /* private void prepareProfileData() {
+    private void prepareProfileData() {
 
         DatabaseHandler db = new DatabaseHandler(this);
 
@@ -152,8 +174,10 @@ public class NotificationActivity extends AppCompatActivity {
             String log = "Id: "+cn.get_id()+" ,Notification: " + cn.getNotification();
               // Writing Contacts to log
 
-              getProfiles.add(cn.get_id(),cn.getNotification());
-            Log.e("Notification in db: ", log);
+              getprofile=new GetProfile(Integer.valueOf(id),cn.getNotification(),cn.getNoticationdescription(),cn.getNotidate());
+              //getprofile.setYear(123);
+              getProfiles.add(getprofile);
+              Log.e("Notification in db: ", log);
         }
         //GetProfile getprofile=new GetProfile("New Activity","new Description","2015");
         //getProfiles.add(getprofile);
@@ -161,13 +185,23 @@ public class NotificationActivity extends AppCompatActivity {
         //getprofile=new GetProfile("New Activity 2","new Description 2","2016");
         //getProfiles.add(getprofile);
 
-        mAdapter.notifyDataSetChanged();
+        LinearLayout linearLayout=(LinearLayout)findViewById(R.id.noti_hide_lay);
+
+        if(id=="0"){
+            linearLayout.setVisibility(View.VISIBLE);
+
+        }else{
+            linearLayout.setVisibility(View.GONE);
+
+        }
 
 
-    }*/
 
 
-    private final Runnable m_Runnable = new Runnable()
+    }
+
+
+  /*  private final Runnable m_Runnable = new Runnable()
     {
         public void run()
 
@@ -179,15 +213,25 @@ public class NotificationActivity extends AppCompatActivity {
 
             List<GetProfile> contacts = db.getAllNotifications();
 
+
             for (GetProfile cn : contacts) {
-                String log = "Id: "+cn.get_id()+" ,Notification: " + cn.getNotification();
+                String log = "Id: "+cn.get_id()+" ,Notification: " + cn.getNotification()+" Notification Description"+ cn.getNoticationdescription()+"Date :"+cn.getNotidate();
                 id=String.valueOf(cn.get_id());
                 // Writing Contacts to log
 
-                getprofile=new GetProfile(cn.getNotification(),id);
+                getprofile=new GetProfile(Integer.valueOf(id),cn.getNotification(),cn.getNoticationdescription(),cn.getNotidate());
                 //getprofile.setYear(123);
                 getProfiles.add(getprofile);
                 Log.e("Notification in db: ", log);
+            }
+            LinearLayout linearLayout=(LinearLayout)findViewById(R.id.noti_hide_lay);
+
+            if(id=="0"){
+                linearLayout.setVisibility(View.VISIBLE);
+
+            }else{
+                linearLayout.setVisibility(View.GONE);
+
             }
 
             //GetProfile getprofile=new GetProfile("New Activity","new Description","2015");
@@ -198,5 +242,5 @@ public class NotificationActivity extends AppCompatActivity {
 
         }
 
-    };
+    };*/
 }

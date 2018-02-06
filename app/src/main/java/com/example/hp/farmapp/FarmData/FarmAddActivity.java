@@ -175,19 +175,19 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
                 return v;
             }
         };*/
-        aa.setDropDownViewResource(R.layout.spinner_item);
+        aa.setDropDownViewResource(R.layout.spinner_item_new_black_text);
         spin_soil_type.setAdapter(aa);
 
 
         personnumfromfillprofile = SharedPreferencesMethod.getString(context, "person_num");
         usernumfrommainact = SharedPreferencesMethod.getString(context, "UserNum");
+        //getSupportActionBar().setTitle("My Title");
+
 
         TextView title = (TextView) findViewById(R.id.tittle);
         title.setText("Farm Information");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
-
-        //getSupportActionBar().setTitle("My Title");
 
         if (getSupportActionBar() != null) {
           /*  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -486,6 +486,9 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
         strstate = statefarmadd.getSelectedItem().toString();
         strfarmpetname = farmpetname.getText().toString().trim();
         strsoiltypefromspinner = spin_soil_type.getSelectedItem().toString().trim();
+
+
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new com.android.volley.Response.Listener<String>() {

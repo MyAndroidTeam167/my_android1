@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,11 +75,15 @@ AdapterView.OnItemSelectedListener  {
         tvsetlanguage.setOnClickListener(this);
         TextView tvchangepass=(TextView)findViewById(R.id.tvchangepass);
         tvchangepass.setOnClickListener(this);
+        TextView tvshare=(TextView)findViewById(R.id.share_setting);
+        tvshare.setOnClickListener(this);
 
         TextView title=(TextView)findViewById(R.id.tittle);
         title.setText(R.string.setting);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
+
+
 
         //getSupportActionBar().setTitle("My Title");
 
@@ -206,6 +211,18 @@ AdapterView.OnItemSelectedListener  {
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }*/
+        }
+        if(v.getId()==R.id.share_setting){
+            /*Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sharingIntent, "Share With"));*/
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Hey check out my app at: https://play.google.com/store/apps/details?id=com.google.android.apps.plus");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+            //return true;
         }
     }
 

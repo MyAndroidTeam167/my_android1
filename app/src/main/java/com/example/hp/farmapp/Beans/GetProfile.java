@@ -5,37 +5,41 @@ package com.example.hp.farmapp.Beans;
  */
 public class GetProfile {
     String activity;
-    String activitydescription;
     String notification;
     int _id;
-    int yeartpeid;
+    String noticationdescription;
 
-    public String getActivitydescription() {
-        return activitydescription;
+    public String getNotidate() {
+        return notidate;
     }
 
-    public void setActivitydescription(String activitydescription) {
-        this.activitydescription = activitydescription;
+    public void setNotidate(String notidate) {
+        this.notidate = notidate;
     }
 
-    public GetProfile(String activity, String activitydescription) {
-        this.activity = activity;
-this.activitydescription=activitydescription;    }
+    String notidate;
 
-    public int getYeartpeid() {
-        return yeartpeid;
+    public String getNoticationdescription() {
+        return noticationdescription;
     }
 
-    public void setYeartpeid(int yeartpeid) {
-        this.yeartpeid = yeartpeid;
+    public void setNoticationdescription(String noticationdescription) {
+        this.noticationdescription = noticationdescription;
     }
 
-    public GetProfile(int id, String notification) {
+    public GetProfile(int id, String notification,String notificationdescription,String notidate) {
         this._id = id;
         this.notification = notification;
+        this.noticationdescription=notificationdescription;
+        this.notidate=notidate;
 
     }
 
+    public GetProfile(String notification,String noticationdescription,String notidate){
+        this.notification=notification;
+        this.noticationdescription=noticationdescription;
+        this.notidate=notidate;
+    }
     public GetProfile(){}
 
     public GetProfile(String notification){

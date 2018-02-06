@@ -12,18 +12,35 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/noti_hide_lay">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/notification"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:text="No New Notifications"
+        android:textSize="22sp"
+        android:textStyle="italic|bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_below="@id/toolbar_actionbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/cardview_light_background">
+        >
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/notirecycl"
-        android:padding="10dp"
-        android:elevation="5dp"
         >
 
     </android.support.v7.widget.RecyclerView>

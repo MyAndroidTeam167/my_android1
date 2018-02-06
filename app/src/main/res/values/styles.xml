@@ -13,7 +13,10 @@
 
     <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
     <item name="android:textColor">@color/saddlebrown</item>
+    </style>
 
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

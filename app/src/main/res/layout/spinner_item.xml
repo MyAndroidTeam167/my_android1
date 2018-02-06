@@ -2,11 +2,18 @@
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="15sp"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:textSize="17sp"
     android:gravity="left"
-    android:textColor="#000000"
+    android:textColor="#FFFFFF"
     android:padding="5dip"
     android:id="@+id/text11"
     android:text="0.12354v34"
+    android:textAlignment="center"
+    android:ellipsize="marquee"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:singleLine="true"
+    style="?attr/spinnerDropDownItemStyle"
+
     />

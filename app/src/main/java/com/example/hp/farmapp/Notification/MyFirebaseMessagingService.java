@@ -230,7 +230,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             SharedPreferencesMethod.setString(context,"message"+Integer.toString(j),message);
 
         DatabaseHandler db = new DatabaseHandler(this);
-        db.addNotification(new GetProfile(message));
+        db.addNotification(new GetProfile(message,title,formattedDate));
 
 
         //String title = data.getString("title");

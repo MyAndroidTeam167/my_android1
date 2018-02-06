@@ -1,11 +1,18 @@
 package com.example.hp.farmapp.CalendarPackage.CalendarTask;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +20,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,23 +33,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
+import com.example.hp.farmapp.CalendarPackage.ChatBox.ChatActivity;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.Notification.NotificationActivity;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Boolean.TRUE;
 
 public class FarmActionReplyActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
@@ -51,6 +76,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     Button mButton;
     EditText mEditText;
     String sTaskStatus;
+    TextView allMessagesLink;
     final String DATA_ID = "data_id";
     final String DATA_TASK_DATE = "data_task_date";
     final String DATA_TASK_STATUS = "task_done_status";
@@ -58,7 +84,27 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     String fetch_id, description,farmerReply, chemical, chemical_qty, compulsary, activity, img_link, done, date_of_task;
     String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/fetch_farm_day_data_by_id";
     String SAVE_FARMER_RESPONSE_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/set_farmer_reponse";
+//    String SAVE_FARMER_RESPONSE_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_audio_response";
+
     TextView tvFarmerReply, tvactivityName, tvactivityDescription, tvactivityDate, tvchemical, tvqtychemical, tvCompulsary;
+
+    private static final String LOG_TAG = "AudioRecordTest";
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static String mFileName = null;
+    private MediaRecorder mRecorder = null;
+    private MediaPlayer mPlayer = null;
+    String encoded;
+    private String farm_num;
+    private String user_num;
+
+    private Button recordButton,playButton;
+    boolean mStartRecording,mStartPlaying;
+    final String API_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_audio_response";
+    private boolean permissionToRecordAccepted = false;
+    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
+    ProgressDialog progressDialog;
+    private int flag = 0;
+    File file;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,6 +144,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         mButton = (Button) findViewById(R.id.button_submit);
         mEditText = (EditText) findViewById(R.id.et_farmer_reply);
         tvFarmerReply = (TextView) findViewById(R.id.tv_farmer_reply);
+        allMessagesLink=(TextView)findViewById(R.id.view_all_messages);
 
         //getSupportActionBar().setTitle("My Title");
 
@@ -106,10 +153,58 @@ public class FarmActionReplyActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
+        user_num = SharedPreferencesMethod.getString(context,"UserNum");
+        farm_num=SharedPreferencesMethod.getString(context,"farm_num");
         Bundle extras = getIntent().getExtras();
         final String id = extras.getString("id");
         final String task_date = extras.getString("task_date");
+
+        mFileName = getExternalCacheDir().getAbsolutePath();
+        mFileName += "/audiorecordtest.3gp";
+
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+
+        recordButton = (Button)findViewById(R.id.recordButton);
+        playButton=(Button)findViewById(R.id.playButton);
+        recordButton.setText("Record");
+        playButton.setText("Play");
+        mStartRecording = TRUE;
+        mStartPlaying = TRUE;
+        if(flag==0){
+            playButton.setClickable(false);
+            playButton.setEnabled(false);
+            playButton.setBackgroundColor(Color.parseColor("#808080"));
+        }
+
+        recordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRecord(mStartRecording);
+                flag=1;
+                playButton.setClickable(true);
+                playButton.setEnabled(true);
+                playButton.setBackgroundColor(Color.parseColor("#238E68"));
+                if(mStartRecording) {
+                    recordButton.setText("Stop");
+                } else {
+                    recordButton.setText("Record");
+                }
+                mStartRecording = !mStartRecording;
+            }
+        });
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPlay(mStartPlaying);
+                if (mStartPlaying) {
+                    playButton.setText("Stop");
+                } else {
+                    playButton.setText("Play");
+                }
+                mStartPlaying = !mStartPlaying;
+            }
+        });
+
 //        Toast.makeText(getApplicationContext()," "+id+" "+task_date,Toast.LENGTH_SHORT).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
@@ -148,6 +243,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                 mCheckBox.setChecked(true);
                                 mCheckBox.setClickable(false);
                                 mButton.setClickable(false);
+                                mButton.setEnabled(false);
                                 mButton.setBackgroundColor(Color.parseColor("#808080"));
                                 mEditText.setVisibility(View.GONE);
                                 tvFarmerReply.setText(farmerReply);
@@ -155,7 +251,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                 mCheckBox.setChecked(false);
                                 tvFarmerReply.setVisibility(View.GONE);
                             }
-                        } catch (JSONException e) {
+                        }catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -164,7 +260,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                     }
-                }) {
+                }){
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -186,6 +282,22 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                file = new File(mFileName);
+                int size = (int)file.length();
+                Log.e("checkArray","Size of audio byte file = "+size);
+                byte[] bytes = new byte[size];
+                try {
+                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                    buf.read(bytes, 0, bytes.length);
+                    buf.close();
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                encoded = Base64.encodeToString(bytes, 0);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setCancelable(true);
                 alertDialogBuilder.setMessage("Want to submit your response?");
@@ -201,7 +313,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                         final String response = mEditText.getText().toString().trim();
                         if(!isResponseFilled(response)){
                             dialog.cancel();
-                            Toast.makeText(context,"Please Enter Comment",Toast.LENGTH_LONG).show();
+//                            Toast.makeText(context,"Please Enter Comment",Toast.LENGTH_LONG).show();
                             mEditText.setError("Enter Reponse");
 
                         }else {
@@ -209,27 +321,77 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                     new com.android.volley.Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                                            try {
+                                            Log.e("check","This is resp"+response);
+                                            Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
+                                            boolean deleted = file.delete();
+                                            Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
+                                            //intent.putExtra("Type","all_activities");
+                                            startActivity(intent);
+                                            finish();
+                                            /*try {
                                                 JSONObject jobject = null;
                                                 jobject = new JSONObject(response);
-                                                Log.e("check", "today date " + jobject.getString("today_date"));
+//                                                Log.e("check",response);
+////                                                Log.e("check", "today date " + jobject.getString("today_date"));
+//                                                Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
+//                                                boolean deleted = file.delete();
+//                                                Intent intent=new Intent(context,ShowTaskActivity.class);
+//                                                intent.putExtra("Type","all_activities");
+//                                                startActivity(intent);
+//                                                finish();
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
-                                            }
+                                            }*/
                                         }
                                     },
                                     new com.android.volley.Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
+                                            Log.e("checkArray",error.toString());
+                                            NetworkResponse networkResponse = error.networkResponse;
+                                            Log.e("checkArray",String.valueOf(networkResponse.statusCode));
+                                            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                                Log.e("checkArray","timeout error");
+
+                                            } else if (error instanceof AuthFailureError) {
+                                                Log.e("checkArray","authfailure error");
+
+                                            } else if (error instanceof ServerError) {
+                                                Log.e("checkArray","Server error");
+
+                                            } else if (error instanceof NetworkError) {
+                                                //TODO
+                                                Log.e("checkArray","network error");
+
+                                            } else if (error instanceof ParseError) {
+                                                Log.e("checkArray","parse error");
+                                                //TODO
+                                            }
                                         }
                                     }) {
 
                                 @Override
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<String, String>();
+                                    String AUDIO = "audio_file";
+                                    String USERNUM = "user_num";
+                                    String FARMNUM = "farm_num";
+                                    String BYFARMER = "by_farmer";
+                                    String BYADMIN = "by_admin";
+                                    String BYINSPECTOR = "by_inspector";
+                                    params.put(BYADMIN,"N");
+                                    params.put(BYFARMER,"Y");
+                                    params.put(BYINSPECTOR,"N");
+                                    Log.e("check","Reached Params");
+                                    if(user_num!=null){
+                                        params.put(USERNUM,user_num);
+                                    }
+                                    if(farm_num!=null){
+                                        params.put(FARMNUM,farm_num);
+                                    }
                                     if (response != null) {
                                         params.put(FARMER_REPLY, response);
-                                        Log.e("check", "REached params response = " + response);
+//                                        Log.e("check", "REached params response = " + response);
                                     }
                                     if (sTaskStatus != null) {
                                         params.put(DATA_TASK_STATUS, sTaskStatus);
@@ -240,6 +402,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                     if (date_of_task != null) {
                                         params.put(DATA_TASK_DATE, date_of_task);
                                     }
+                                    if(encoded!=null){
+                                        params.put(AUDIO,encoded);
+                                    }
                                     return params;
                                 }
                             };
@@ -247,10 +412,13 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                             RequestQueue requestQueueNew = Volley.newRequestQueue(context);
                             requestQueueNew.add(stringRequestNew);
 
-                            Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(context,LandingActivity.class);
                             startActivity(intent);
-                            finish();
+                            Intent intent=new Intent(context,ShowTaskActivity.class);
+                            intent.putExtra("Type","all_activities");
+                            startActivity(intent);
+                            finish();*/
                         }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -263,6 +431,16 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                 // Create the AlertDialog object and return it
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+            }
+        });
+        allMessagesLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(context,"Open Chat Box",Toast.LENGTH_LONG).show();
+                Log.e("check","open chat box");
+                Intent intent=new Intent(context,ChatActivity.class);
+                intent.putExtra("fetchId",fetch_id);
+                startActivity(intent);
             }
         });
        /* Uri uri = Uri.parse();
@@ -286,5 +464,76 @@ public class FarmActionReplyActivity extends AppCompatActivity {
             flag=false;
         }
         return flag;
+    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if (!permissionToRecordAccepted ) finish();
+    }
+
+    private void onRecord(boolean start) {
+        if (start) {
+            startRecording();
+        } else {
+            stopRecording();
+        }
+    }
+
+    private void onPlay(boolean start) {
+        if (start) {
+            startPlaying();
+        } else {
+            stopPlaying();
+        }
+    }
+
+    private void startPlaying() {
+        mPlayer = new MediaPlayer();
+        try {
+            mPlayer.setDataSource(mFileName);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "prepare() failed");
+        }
+    }
+
+    private void stopPlaying() {
+        mPlayer.release();
+        mPlayer = null;
+    }
+    private void startRecording() {
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(mFileName);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "prepare() failed");
+        }
+        mRecorder.start();
+    }
+    private void stopRecording() {
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+    }
+    public void onStop() {
+        super.onStop();
+        if (mRecorder != null) {
+            mRecorder.release();
+            mRecorder = null;
+        }
+        if (mPlayer != null) {
+            mPlayer.release();
+            mPlayer = null;
+        }
     }
 }

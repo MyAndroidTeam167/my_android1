@@ -11,8 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
+import com.example.hp.farmapp.FarmData.FarmPackage.EditFarmActivity;
 import com.example.hp.farmapp.Login.MainActivity;
+import com.example.hp.farmapp.PersonData.EditProfileActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.app.Config;
@@ -50,6 +55,8 @@ public class ShowFarmActivity extends AppCompatActivity {
     public static final String KEY_USER_NUM = "user_num";
     public static final String KEY_FARM_NUM = "farm_num";
     ProgressDialog progressDialog;
+    ImageButton editshowfarm;
+    ImageView goback;
 
 
     @Override
@@ -57,14 +64,14 @@ public class ShowFarmActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*Intent intent=new Intent(context,LandingActivity.class);
+        *//*Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
-        finish();*/
+        finish();*//*
         super.onBackPressed();
-        return super.onOptionsItemSelected(item);
-    }
+        //return super.onOptionsItemSelected(item);
+    }*/
 
     protected void onCreate(Bundle savedInstanceState) {
         Window window = this.getWindow();
@@ -77,18 +84,20 @@ public class ShowFarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_farm);
         context=this;
 
-        TextView title=(TextView)findViewById(R.id.tittle);
+        /*TextView title=(TextView)findViewById(R.id.tittle);
         title.setText("My Farm");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
-        setSupportActionBar(mActionBarToolbar);
+        setSupportActionBar(mActionBarToolbar);*/
 
         //getSupportActionBar().setTitle("My Title");
 
-        if (getSupportActionBar() != null){
+        /*if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        }*/
+
+
         FarmNum=SharedPreferencesMethod.getString(context,"farm_num");
         UserNum=SharedPreferencesMethod.getString(context,"UserNum");
         mFarmName=(TextView)findViewById(R.id.farm_name_tv);
@@ -102,6 +111,29 @@ public class ShowFarmActivity extends AppCompatActivity {
         mHarvestDate=(TextView)findViewById(R.id.harvest_date_tv);
         mSpecialNote=(TextView)findViewById(R.id.special_note_tv);
         mFarmAddress=(TextView)findViewById(R.id.farm_address_tv);
+        editshowfarm=(ImageButton)findViewById(R.id.editoptionforfarm);
+        goback=(ImageView)findViewById(R.id.gobackbuttfarm);
+
+
+
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Intent intent=new Intent(context,LandingActivity.class);
+                startActivity(intent);
+                finish();*/
+                onBackPressed();
+            }
+        });
+
+        editshowfarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,EditFarmActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
 
@@ -194,6 +226,20 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         harvest_date=jobject.getString("expct_dateof_harvest");
                                         crop_name=jobject.getString("crop_name");
                                         pet_name=jobject.getString("farm_pet_name");
+
+
+                                        DataHandler.newInstance().setFardmaddsoiltype(soiltype);
+                                        DataHandler.newInstance().setFarmaddaddl1(addl1);
+                                        DataHandler.newInstance().setFarmaddaddl2(addl2);
+                                        DataHandler.newInstance().setFarmaddaddl3(addl3);
+                                        DataHandler.newInstance().setFarmaddirrigationtype(irrigationtype);
+                                        DataHandler.newInstance().setFarmaddarea(area);
+                                        DataHandler.newInstance().setFarmaddcity(farm_city);
+                                        DataHandler.newInstance().setFarmaddcountry(farm_country);
+                                        DataHandler.newInstance().setFarmdaddstate(farm_state);
+                                        DataHandler.newInstance().setFarmaddspclcmnt(speccomment);
+                                        DataHandler.newInstance().setFarmaddpetname(pet_name);
+
 
 
                                     /*    SharedPreferencesMethod.setString(context,"farm_area",area);

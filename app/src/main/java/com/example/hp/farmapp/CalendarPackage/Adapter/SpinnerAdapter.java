@@ -6,9 +6,11 @@
 package com.example.hp.farmapp.CalendarPackage.Adapter;
 
         import android.content.Context;
+        import android.graphics.Color;
         import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
         import android.util.Log;
+        import android.view.Gravity;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -54,10 +56,27 @@ public class SpinnerAdapter extends BaseAdapter{
         return 0;
     }
 
+   /* @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+      //  TextView txt = new TextView(MainActivity.this);
+       *//* TextView txt = (TextView) convertView.findViewById(R.id.text11);
+        txt.setPadding(16, 16, 16, 16);
+        txt.setTextSize(18);
+        txt.setGravity(Gravity.CENTER_VERTICAL);
+        txt.setTextColor(Color.parseColor("#000000"));
+        SpinnerData spinnerData = SpinnerDatums.get(position);
+        txt.setText(spinnerData.getItem_name());
+        return  txt;*//*
+
+    }*/
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = flater.inflate(R.layout.spinner_item, null);
         TextView names = (TextView) view.findViewById(R.id.text11);
+        names.setGravity(Gravity.CENTER);
+        names.setPadding(16, 16, 16, 16);
+        names.setTextSize(16);
+       // names.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.new_drop_down, 0);
         SpinnerData spinnerData = SpinnerDatums.get(i);
         names.setText(spinnerData.getItem_name());
         return view;

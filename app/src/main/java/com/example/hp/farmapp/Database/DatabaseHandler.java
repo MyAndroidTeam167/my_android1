@@ -12,8 +12,11 @@ package com.example.hp.farmapp.Database;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteOpenHelper;
         import android.support.design.widget.TabLayout;
+        import android.util.Log;
 
         import com.example.hp.farmapp.Beans.GetProfile;
+
+        import static okhttp3.internal.Internal.instance;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -30,6 +33,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NOTIFICATION = "notificationnew";
+    private static final String KEY_NOTIFICATION_DESCRIPTION = "notificationdescription";
+    private static final String KEY_NOTIFICATION_DATE = "notidate";
+
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,9 +47,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NOTIFICATION + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NOTIFICATION + " TEXT"
-                +")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NOTIFICATION + " TEXT,"
+                +KEY_NOTIFICATION_DESCRIPTION+" TEXT,"+KEY_NOTIFICATION_DATE+" TEXT);";
         db.execSQL(CREATE_CONTACTS_TABLE);
+
+
+/*
+        String TABLE= "DESCRIBE "+TABLE_NOTIFICATION;
+         String query=TABLE;
+        Cursor cursor=db.rawQuery(query,null);
+        while (cursor.moveToNext()) {
+            String result_0=cursor.getString(0);
+            String result_1=cursor.getString(1);
+
+            Log.e("Table :","This is data"+result_0+"  "+result_1);
+
+            //and so on
+        }
+        cursor.close();
+*/
+      //  db.close();
+
     }
 
     // Upgrading database
@@ -65,10 +90,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
     values.put(KEY_NOTIFICATION,getnoti.getNotification());
+    values.put(KEY_NOTIFICATION_DESCRIPTION,getnoti.getNoticationdescription());
+    values.put(KEY_NOTIFICATION_DATE,getnoti.getNotidate());
 
         // Inserting Row
         db.insert(TABLE_NOTIFICATION, null, values);
-        //2nd argument is String containing nullColumnHack
+
+/*
+        String TABLE= "DESCRIBE "+TABLE_NOTIFICATION;
+
+
+
+        String query=TABLE;
+        Cursor cursor=db.rawQuery(query,null);
+        while (cursor.moveToNext()) {
+            String result_0=cursor.getString(0);
+            String result_1=cursor.getString(1);
+
+            Log.e("Table :","This is data"+result_0+"  "+result_1);
+
+            //and so on
+        }
+        cursor.close(); //2nd argument is String containing nullColumnHack
+*/
         db.close(); // Closing database connection
     }
 
@@ -83,7 +127,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         GetProfile notification = new GetProfile(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1));
+                cursor.getString(1),cursor.getString(2),cursor.getString(3));
         // return contact
         return notification;
     }
@@ -103,6 +147,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 GetProfile notification = new GetProfile();
                 notification.set_id(Integer.parseInt(cursor.getString(0)));
                 notification.setNotification(cursor.getString(1));
+                notification.setNoticationdescription(cursor.getString(2));
+                notification.setNotidate(cursor.getString(3));
                 // Adding contact to list
                 notificationlist.add(notification);
             } while (cursor.moveToNext());

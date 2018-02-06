@@ -23,6 +23,105 @@ public class DataHandler {
     int msgcount;
     String personnum;
     String fromActivty;
+    String farmaddarea;
+    String fardmaddsoiltype;
+    String farmaddirrigationtype;
+    String farmaddspclcmnt;
+    String farmaddaddl1;
+    String farmaddaddl2;
+    String farmaddaddl3;
+    String farmaddcountry;
+    String farmdaddstate;
+    String farmaddcity;
+    String farmaddpetname;
+
+    public String getFarmaddarea() {
+        return farmaddarea;
+    }
+
+    public void setFarmaddarea(String farmaddarea) {
+        this.farmaddarea = farmaddarea;
+    }
+
+    public String getFardmaddsoiltype() {
+        return fardmaddsoiltype;
+    }
+
+    public void setFardmaddsoiltype(String fardmaddsoiltype) {
+        this.fardmaddsoiltype = fardmaddsoiltype;
+    }
+
+    public String getFarmaddirrigationtype() {
+        return farmaddirrigationtype;
+    }
+
+    public void setFarmaddirrigationtype(String farmaddirrigationtype) {
+        this.farmaddirrigationtype = farmaddirrigationtype;
+    }
+
+    public String getFarmaddspclcmnt() {
+        return farmaddspclcmnt;
+    }
+
+    public void setFarmaddspclcmnt(String farmaddspclcmnt) {
+        this.farmaddspclcmnt = farmaddspclcmnt;
+    }
+
+    public String getFarmaddaddl1() {
+        return farmaddaddl1;
+    }
+
+    public void setFarmaddaddl1(String farmaddaddl1) {
+        this.farmaddaddl1 = farmaddaddl1;
+    }
+
+    public String getFarmaddaddl2() {
+        return farmaddaddl2;
+    }
+
+    public void setFarmaddaddl2(String farmaddaddl2) {
+        this.farmaddaddl2 = farmaddaddl2;
+    }
+
+    public String getFarmaddaddl3() {
+        return farmaddaddl3;
+    }
+
+    public void setFarmaddaddl3(String farmaddaddl3) {
+        this.farmaddaddl3 = farmaddaddl3;
+    }
+
+    public String getFarmaddcountry() {
+        return farmaddcountry;
+    }
+
+    public void setFarmaddcountry(String farmaddcountry) {
+        this.farmaddcountry = farmaddcountry;
+    }
+
+    public String getFarmdaddstate() {
+        return farmdaddstate;
+    }
+
+    public void setFarmdaddstate(String farmdaddstate) {
+        this.farmdaddstate = farmdaddstate;
+    }
+
+    public String getFarmaddcity() {
+        return farmaddcity;
+    }
+
+    public void setFarmaddcity(String farmaddcity) {
+        this.farmaddcity = farmaddcity;
+    }
+
+    public String getFarmaddpetname() {
+        return farmaddpetname;
+    }
+
+    public void setFarmaddpetname(String farmaddpetname) {
+        this.farmaddpetname = farmaddpetname;
+    }
 
     public String getFromActivty() {
         return fromActivty;
