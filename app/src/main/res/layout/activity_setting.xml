@@ -207,7 +207,7 @@
                         android:textStyle="italic"
                         android:layout_marginLeft="10dp"
                         android:textSize="15dp"
-                        android:text="version-0.11001"/>
+                        android:text="version-0.21001"/>
                   <!--  <com.example.hp.farmapp.custom.CustomTextView
                         android:id="@+id/logout_setting"
                         android:layout_width="match_parent"

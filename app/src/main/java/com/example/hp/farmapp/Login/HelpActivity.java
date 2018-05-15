@@ -44,7 +44,7 @@ public class HelpActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
@@ -75,7 +75,7 @@ public class HelpActivity extends AppCompatActivity {
         pd.show();
         wv1.setWebViewClient(new MyBrowser());
 
-        String url = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/need_help_page";
+        String url = "http://spade.farm/app/index.php/farmApp/need_help_page";
         wv1.getSettings().setLoadsImagesAutomatically(true);
         wv1.getSettings().setLoadWithOverviewMode(true);
         wv1.getSettings().setUseWideViewPort(true);

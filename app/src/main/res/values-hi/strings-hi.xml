@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">मेरा खेत</string>
+    <string name="app_name">SpadeKrashak</string>
     <string name="email">ईमेल/मोबाइल</string>
     <string name="Accountlogin">खाता प्रवेश</string>
     <string name="password">पासवर्ड</string>
@@ -33,12 +33,95 @@
     <string name="title_activity_set_language">अवैध ईमेल</string>
     <string name="dummy_button">अवैध ईमेल</string>
     <string name="dummy_content">अवैध ईमेल</string>
-    <string name="title_activity_profile">मेरे खेत का कैलेंडर</string>
+    <string name="title_activity_profile">घर</string>
     <string name="navigation_drawer_open">अवैध ईमेल</string>
     <string name="navigation_drawer_close">अवैध ईमेल</string>
     <string name="setting">सेटिंग्स</string>
 
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="my_farm">मेरा खेत</string>
+    <string name="activities">गतिविधियों</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="weather">मौसम</string>
+    <string name="calendar">कैलेंडर</string>
+    <string name="soil_health_card">मिट्टी का स्वास्थ्य कार्ड</string>
+    <string name="notification">सूचनाएं</string>
+    <string name="farm_images">खेत की छवियां</string>
+    <string name="farm_contract">कृषि अनुबंध</string>
+    <string name="company_name">कंपनी का नाम</string>
+    <string name="internet_not_connected">कृप्या। अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें</string>
+    <string name="sowing_date">बुवाई की तारीख - </string>
+    <string name="crop_name">फसल का नाम - </string>
+    <string name="harvest_date">कटाई की तारीख - </string>
+    <string name="task_completed">पूर्ण कार्य की संख्या</string>
+    <string name="task_pending">लंबित कार्य की संख्या</string>
+    <string name="inspector_name">इंस्पेक्टर</string>
+    <string name="rating">रेटिंग</string>
+    <string name="insp_name">भगवान राम</string>
+    <string name="welcome">आपका स्वागत है</string>
+    <string name="sure_exit_text">क्या आप वास्तव में बाहर निकलना चाहते हैं?</string>
 
+
+    <string name="first_name">पहला नाम</string>
+    <string name="middle_name">मध्य नाम</string>
+    <string name="last_name">अंतिम नाम</string>
+    <string name="aadhar_number">आधार संख्या</string>
+    <string name="pan_number">पैन नंबर</string>
+    <string name="date_of_birth">जन्म की तारीख</string>
+    <string name="alternate_mobile_no">वैकल्पिक मोबाइल नंबर</string>
+    <string name="landline_no">लैंडलाइन नंबर</string>
+    <string name="address_line_1">पता लाइन 1</string>
+    <string name="address_line_2">पता लाइन 2</string>
+    <string name="address_line_3">पता लाइन 3</string>
+    <string name="country">देश</string>
+    <string name="state">State</string>
+    <string name="city">राज्य</string>
+    <string name="update_profile">प्रोफ़ाइल अपडेट करें</string>
+
+
+    <string name="change_language">भाषा बदलो</string>
+    <string name="change_password">पासवर्ड बदलें</string>
+    <string name="privacy_policy">गोपनीय नीति </string>
+    <string name="terms_of_use">उपयोग की शर्तें</string>
+    <string name="share">साझा करें</string>
+    <string name="logout">लोग आउट</string>
+
+    <string name="farm_name">खेत का नाम</string>
+    <string name="area">क्षेत्र</string>
+    <string name="soil_type">मिट्टी का प्रकार</string>
+    <string name="irrigation_type">सिंचाई प्रकार</string>
+    <string name="special_note">विशेष लेख</string>
+    <string name="farm_address">खेत का पता</string>
+
+    <string name="my_profile">मेरी प्रोफाइल</string>
+    <string name="capture_image">छवि कैप्चर करें</string>
+    <string name="name_pro">नाम</string>
+    <string name="email_pro">ईमेल</string>
+    <string name="dob_pro">जन्म तिथि</string>
+    <string name="mob_no">मोबाइल नंबर</string>
+    <string name="Mob_no_alt">वैकल्पिक मोबाइल नंबर</string>
+    <string name="aadhar_no">आधार नंबर</string>
+    <string name="pan_no">पैन नंबर</string>
+    <string name="address_pro">पता</string>
+
+    <string name="soil_test">मिट्टी की जांच</string>
+    <string name="nutrient">पोषक</string>
+    <string name="test_value">मूल्य परीक्षण</string>
+    <string name="ph">पी. एच.</string>
+    <string name="ec">ई. सी.</string>
+    <string name="org_carbon">जैविक कार्बन</string>
+    <string name="avlb_nitrogen">उपलब्ध नाइट्रोजन</string>
+    <string name="avlb_phosphorus">उपलब्ध फॉस्फोरस</string>
+    <string name="avlb_potassium">उपलब्ध पोटेशियम</string>
+    <string name="avlb_sulphur">उपलब्ध सल्फर</string>
+    <string name="avlb_zinc">उपलब्ध जिंक</string>
+    <string name="avlb_boron">उपलब्ध बोरॉन</string>
+    <string name="avlb_iron">उपलब्ध आयरन</string>
+    <string name="avlb_manganese">उपलब्ध मैंगनीज</string>
+    <string name="avlb_copper">उपलब्ध कॉपर</string>
+    <string name="yes_text">हाँ</string>
+    <string name="no_text">नहीं</string>
+    <string name="fill_profile">प्रोफाइल भरें</string>
 
 
 </resources>

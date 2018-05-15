@@ -37,12 +37,13 @@ public class FrgtPassActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(from_activity!=null){
         if(from_activity.equals("from_setting") )
         {
             Intent intent=new Intent(context,SettingActivity.class);
             startActivity(intent);
             finish();
-        }
+        }}
         else{
             Intent intent=new Intent(context,MainActivity.class);
             startActivity(intent);
@@ -54,11 +55,13 @@ public class FrgtPassActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(from_activity.equals("from_setting") )
-        {
-            Intent intent=new Intent(context,SettingActivity.class);
-            startActivity(intent);
-            finish();
+        if(from_activity!=null) {
+
+            if (from_activity.equals("from_setting")) {
+                Intent intent = new Intent(context, SettingActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         else{
             Intent intent=new Intent(context,MainActivity.class);
@@ -75,7 +78,7 @@ public class FrgtPassActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frgt_pass);
@@ -91,13 +94,12 @@ public class FrgtPassActivity extends AppCompatActivity {
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        if(from_activity.equals("from_setting")){
-
-            title.setText("Change Password");
-
+        if(from_activity!=null) {
+            if (from_activity.equals("from_setting")) {
+                title.setText("Change Password");
+            }
         }else{
             title.setText("Forgot Password");
-
         }
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
@@ -120,7 +122,6 @@ public class FrgtPassActivity extends AppCompatActivity {
                     frgtet.setError(getString(R.string.invalid_email));
                 }
                 else{
-
                    forgetpassmailormobile= frgtet.getText().toString();
                     DataHandler.newInstance().setMoborEmailonforget(forgetpassmailormobile);
                     Intent intent=new Intent(context,CnfrmPassActivity.class);
@@ -133,11 +134,13 @@ public class FrgtPassActivity extends AppCompatActivity {
         cancelfrgt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(from_activity.equals("from_setting") )
-                {
-                    Intent intent=new Intent(context,SettingActivity.class);
-                    startActivity(intent);
-                    finish();
+                if(from_activity!=null) {
+
+                    if (from_activity.equals("from_setting")) {
+                        Intent intent = new Intent(context, SettingActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 else{
                     Intent intent=new Intent(context,MainActivity.class);

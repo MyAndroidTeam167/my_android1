@@ -34,6 +34,138 @@ public class DataHandler {
     String farmdaddstate;
     String farmaddcity;
     String farmaddpetname;
+    String showfarmgpsc1,showfarmgpsc2,showfarmgpsc3,showfarmgpsc4,showfarmgpsc5,showfarmgpsc6;
+    String showfarmfarmnum;
+    String showfarmaddressnum;
+    String showfarmiscropassigned;
+    String showfarmisverified;
+    String farm_cal_mast_num;
+    String farm_dwork_num;
+    String event_date;
+
+    public String getIs_active_otp() {
+        return is_active_otp;
+    }
+
+    public void setIs_active_otp(String is_active_otp) {
+        this.is_active_otp = is_active_otp;
+    }
+
+    String is_active_otp;
+
+    public String getEvent_date() {
+        return event_date;
+    }
+
+    public void setEvent_date(String event_date) {
+        this.event_date = event_date;
+    }
+
+    public String getFarm_cal_mast_num() {
+        return farm_cal_mast_num;
+    }
+
+    public void setFarm_cal_mast_num(String farm_cal_mast_num) {
+        this.farm_cal_mast_num = farm_cal_mast_num;
+    }
+
+    public String getFarm_dwork_num() {
+        return farm_dwork_num;
+    }
+
+    public void setFarm_dwork_num(String farm_dwork_num) {
+        this.farm_dwork_num = farm_dwork_num;
+    }
+
+    public String getShowfarmiscropassigned() {
+        return showfarmiscropassigned;
+    }
+
+    public void setShowfarmiscropassigned(String showfarmiscropassigned) {
+        this.showfarmiscropassigned = showfarmiscropassigned;
+    }
+
+    public String getShowfarmisverified() {
+        return showfarmisverified;
+    }
+
+    public void setShowfarmisverified(String showfarmisverified) {
+        this.showfarmisverified = showfarmisverified;
+    }
+
+    public String getShowfarmpersonnum() {
+        return showfarmpersonnum;
+    }
+
+    public void setShowfarmpersonnum(String showfarmpersonnum) {
+        this.showfarmpersonnum = showfarmpersonnum;
+    }
+
+    String showfarmpersonnum;
+
+    public String getShowfarmgpsc1() {
+        return showfarmgpsc1;
+    }
+
+    public void setShowfarmgpsc1(String showfarmgpsc1) {
+        this.showfarmgpsc1 = showfarmgpsc1;
+    }
+
+    public String getShowfarmgpsc2() {
+        return showfarmgpsc2;
+    }
+
+    public void setShowfarmgpsc2(String showfarmgpsc2) {
+        this.showfarmgpsc2 = showfarmgpsc2;
+    }
+
+    public String getShowfarmgpsc3() {
+        return showfarmgpsc3;
+    }
+
+    public void setShowfarmgpsc3(String showfarmgpsc3) {
+        this.showfarmgpsc3 = showfarmgpsc3;
+    }
+
+    public String getShowfarmgpsc4() {
+        return showfarmgpsc4;
+    }
+
+    public void setShowfarmgpsc4(String showfarmgpsc4) {
+        this.showfarmgpsc4 = showfarmgpsc4;
+    }
+
+    public String getShowfarmgpsc5() {
+        return showfarmgpsc5;
+    }
+
+    public void setShowfarmgpsc5(String showfarmgpsc5) {
+        this.showfarmgpsc5 = showfarmgpsc5;
+    }
+
+    public String getShowfarmgpsc6() {
+        return showfarmgpsc6;
+    }
+
+    public void setShowfarmgpsc6(String showfarmgpsc6) {
+        this.showfarmgpsc6 = showfarmgpsc6;
+    }
+
+    public String getShowfarmfarmnum() {
+        return showfarmfarmnum;
+    }
+
+    public void setShowfarmfarmnum(String showfarmfarmnum) {
+        this.showfarmfarmnum = showfarmfarmnum;
+    }
+
+    public String getShowfarmaddressnum() {
+        return showfarmaddressnum;
+    }
+
+    public void setShowfarmaddressnum(String showfarmaddressnum) {
+        this.showfarmaddressnum = showfarmaddressnum;
+    }
 
     public String getFarmaddarea() {
         return farmaddarea;

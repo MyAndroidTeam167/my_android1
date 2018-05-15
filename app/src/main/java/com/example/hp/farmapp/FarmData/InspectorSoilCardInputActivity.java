@@ -79,7 +79,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
     final String PARAMS_TEST_VALUE = "test_value";
     final String PARAMS_UNIT = "unit";
     final String PARAMS_RATING = "rating";
-    final String REGISTER_URL="https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/inspector_soil_card_input";
+    final String REGISTER_URL="http://spade.farm/app/index.php/farmApp/inspector_soil_card_input";
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,7 +94,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspector_soil_card_input);

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.hp.farmapp.CalendarPackage.CalendarCollection;
+import com.example.hp.farmapp.CalendarPackage.CalendarTask.FarmActionReplyActivity;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.ShowTaskActivity;
 import com.example.hp.farmapp.CalendarPackage.EventDisplayActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -239,6 +240,8 @@ public class CalendarAdapter extends BaseAdapter {
 		for (int i = 0; i < len; i++) {
 			CalendarCollection cal_obj = CalendarCollection.date_collection_arr.get(i);
 			String date = cal_obj.date;
+			String farm_cal_mast_num=cal_obj.farm_cal_mast_num;
+			String farm_num=cal_obj.farm_num;
 			int len1 = day_string.size();
 			if (len1 > pos) {
 
@@ -261,6 +264,8 @@ public class CalendarAdapter extends BaseAdapter {
 		eventmsgs = new String[10];
 
 		String event_date_final = "";
+		String farm_num="";
+		 String farm_cal_mast_num = "";
 
 		for (int i = 0; i < len; i++) {
 
@@ -270,15 +275,23 @@ public class CalendarAdapter extends BaseAdapter {
 
 			final String event_message = cal_collection.event_message;
 
+			farm_cal_mast_num=cal_collection.farm_cal_mast_num;
+
+			farm_num =cal_collection.farm_num;
+
 //          final String eventdate="";
 
 //          final String mesage="";
 
 //            int count_date = 0;
 
-			Log.d("cal_coll", event_date);
+			Log.e("cal_coll", event_date);
 
-			Log.d("cal_coll", event_message);
+			Log.e("cal_coll", event_message);
+
+			Log.e("cal_coll",farm_cal_mast_num);
+			Log.e("cal_coll",farm_num);
+
 
 
 
@@ -324,9 +337,13 @@ public class CalendarAdapter extends BaseAdapter {
 				Log.e("ARRAY", "" + eventmsgs[j]);
 			}
 			Intent intent = new Intent(context, ShowTaskActivity.class);
-			intent.putExtra("eventdate", event_date_final);
-			intent.putExtra("evntmsg", eventmsgs);
-			intent.putExtra("msgCount", count);
+			//intent.putExtra("eventdate", event_date_final);
+			//intent.putExtra("evntmsg", eventmsgs);
+			//intent.putExtra("msgCount", count);
+			//intent.putExtra("farm_num",farm_num);
+			DataHandler.newInstance().setFarm_cal_mast_num(farm_cal_mast_num);
+			DataHandler.newInstance().setEvent_date(event_date_final);
+			//intent.putExtra("farm_cal_mast_num",farm_cal_mast_num);
 			intent.putExtra("Type", "calendar_activity");
 //          intent.putExtra("evntmsg",eventmsgs[2]);
 			context.startActivity(intent);

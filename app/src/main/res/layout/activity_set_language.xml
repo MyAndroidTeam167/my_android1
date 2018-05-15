@@ -3,17 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light">
+    android:background="#1C1717"
+    >
 
-    <ImageView
-        android:id="@+id/img_post"
-        android:layout_centerInParent="true"
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fitsSystemWindows="true"
-        android:background="@android:color/holo_green_light"
-        android:src="@mipmap/langmyfarm" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_post"
+            android:layout_width="@dimen/_210sdp"
+            android:layout_height="@dimen/_210sdp"
+            android:src="@drawable/new_earth"
+            android:elevation="@dimen/_5sdp"
+            />
+        <!--<ImageView
+            android:layout_width="@dimen/_210sdp"
+            android:layout_height="@dimen/_210sdp"
+            android:background="@drawable/rounded_lay_for_earth"
+            />-->
+    </RelativeLayout>
+
 
 
     <LinearLayout
@@ -22,35 +41,49 @@
         android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
 
             <TextView
-            android:id="@+id/w_espanol"
+            android:id="@+id/lang_hindi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Hindi"
-
-            android:textSize="15sp"
+            android:padding="@dimen/_5sdp"
+            android:text="हिंदी"
+            android:textSize="@dimen/_15ssp"
 />
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"/>
+            android:background="#696969"/>
 
             <TextView
-            android:id="@+id/w_skip"
+            android:id="@+id/lang_english"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="@dimen/_5sdp"
             android:text="English"
-            android:textSize="15sp"
+            android:textSize="@dimen/_15ssp"
            />
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#696969"/>
+
+        <TextView
+            android:id="@+id/lang_telgu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="తెలుగు"
+            android:textSize="@dimen/_15ssp"
+            />
 
     </LinearLayout>
 

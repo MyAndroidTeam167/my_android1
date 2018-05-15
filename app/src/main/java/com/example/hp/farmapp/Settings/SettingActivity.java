@@ -17,29 +17,28 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.ForgetPass.FrgtPassActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Locale;
-import java.util.logging.LoggingPermission;
 
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener,
+public class SettingActivity extends BaseActivity implements View.OnClickListener,
 AdapterView.OnItemSelectedListener  {
 
     Context context;
     Toolbar mActionBarToolbar;
-    String[] country = {"English","Hindi"};
+    String[] country = {"English","Hindi","Telugu"};
     String setlanguage;
+    String user_num;
 
 
     @Override
@@ -63,11 +62,12 @@ AdapterView.OnItemSelectedListener  {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         context=this;
+        user_num=SharedPreferencesMethod.getString(context,"UserNum");
 
         TextView tvlogout= (TextView) findViewById(R.id.logout_setting);
         tvlogout.setOnClickListener(this);
@@ -116,11 +116,13 @@ AdapterView.OnItemSelectedListener  {
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic("foo-bar");
+                            FirebaseMessaging.getInstance().unsubscribeFromTopic("user_"+user_num);
                             SharedPreferencesMethod.clear(context);
                             SharedPreferencesMethod.setBoolean(context, "Login", false);
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
-                            finish();                        }
+                            finish();                       }
                     })
                     .setNegativeButton("No", null)
                     .show();
@@ -152,33 +154,51 @@ AdapterView.OnItemSelectedListener  {
             dialogBuilder.setMessage("Change Language");
             dialogBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-
                     setlanguage=spinner.getSelectedItem().toString();
-
-
 
                     if(setlanguage.equals("Hindi")){
                         changeLang("hi");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,SharedPreferencesMethod.LANGUAGE,languageselected);
-                        Intent intent = new Intent(context, SettingActivity.class);
-                        startActivity(intent);
+                        SharedPreferencesMethod.setString(context,"lang","Hindi");
+                        Intent intent=getIntent();
                         finish();
+                        startActivity(intent);
+                        /*Intent intent = new Intent(context, SettingActivity.class);
+                        startActivity(intent);
+                        finish();*/
                         //dialog.cancel();
                     }
                     else if(setlanguage.equals("English")){
                         changeLang("en");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,SharedPreferencesMethod.LANGUAGE,languageselected);
-                        Intent intent = new Intent(context, SettingActivity.class);
-                        startActivity(intent);
+                        SharedPreferencesMethod.setString(context,"lang","English");
+                        Intent intent=getIntent();
                         finish();
+                        startActivity(intent);
+                        /*Intent intent = new Intent(context, SettingActivity.class);
+                        startActivity(intent);
+                        finish();*/
                        // dialog.cancel();
                     }
+                    else if(setlanguage.equals("Telgu")){
+                        changeLang("te");
+                        Log.e("Lang :",setlanguage);
+                        String languageselected = setlanguage;
+                        SharedPreferencesMethod.setString(context,"lang","Telgu");
+                        Intent intent=getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
                     else{
-                        Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                        changeLang("en");
+                        Log.e("Lang :",setlanguage);
+                        String languageselected = setlanguage;
+                        SharedPreferencesMethod.setString(context,"lang","English");
+                        Intent intent=getIntent();
+                        finish();
+                        startActivity(intent);
                     }
 
                 }

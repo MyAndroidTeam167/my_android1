@@ -26,9 +26,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
-import com.example.hp.farmapp.FarmData.FarmAddActivity;
+import com.example.hp.farmapp.FarmData.ShowFarmActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -47,20 +46,32 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
     private static final String DEFAULT_LOCAL = "India";
     private static final String DEFAULT_LOCAL_STATE = "Madhya Pradesh";
     private static final String DEFAULT_LOCAL_CITY = "Indore";
-    private static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/insert_new_farm";
+    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/edit_farm";
     public static final String AREA = "area";
     public static final String SOILTYPE = "soilType";
     public static final String IRRIGATIONTYPE = "irrigationType";
     public static final String SEPCCOMMENT = "specComment";
     public static final String ADDL1 = "addL1";
-    public static final String PERSONNUM = "person_num";
-    public static final String USERNUM = "user_num";
+    public static final String ADRESSNUM = "address_num";
+    public static final String FARMNUM = "farm_num";
     public static final String ADDL2 = "addL2";
     public static final String ADDL3 = "addL3";
     public static final String CITY = "city";
     public static final String STATE = "state";
     public static final String COUNTRY = "country";
     public static final String FARM_PET_NAME = "farm_pet_name";
+    public static final String GPSC1 = "GPSc1";
+    public static final String GPSC2 = "GPSc2";
+    public static final String GPSC3 = "GPSc3";
+    public static final String GPSC4 = "GPSc4";
+    public static final String GPSC5 = "GPSc5";
+    public static final String GPSC6 = "GPSc6";
+    public static final String IS_VERIFIED = "is_verified";
+    public static final String IS_CROP_ASSIGNED = "is_crop_assigned";
+    public static final String PERSON_NUM = "person_num";
+    public static final String KEY_TOKEN = "token3";
+
+
     ProgressDialog progressDialog;
 
     EditText addl1farmadd, addl2farmadd, addl3farmadd, farmpetname,areafarmadd;
@@ -70,17 +81,15 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
     String Countryidonclick = "";
     Toolbar mActionBarToolbar;
     String stateidonclick = "";
-    String strirrigationtype, strspeccmnt, straddl1, straddl2, steaddl3,strarea,strsoiltype,strsoiltypefromspinner;
-    String strcity, strstate, strcountry, personnumfromfillprofile, usernumfrommainact, strfarmpetname;
+    String strirrigationtype, strspeccmnt, straddl1, straddl2, steaddl3,strarea,strsoiltype,strsoiltypefromspinner,str_is_verified,str_is_crop_assigned,str_person_num;
+    String strcity, strstate, strcountry, personnumfromfillprofile, usernumfrommainact, strfarmpetname,strfarm_num,straddress_num,strgpsc1,strgpsc2,strgpsc3,strgpsc4,strgpsc5,strgpsc6;
     String[] soiltype = {"Select Soil Type", "Alluvial Soils", "Black Soils", "Red Soils", "Laterite Soils", "Mountain Soils", "Desert Soils", "Other"};
     Context context;
+    String ct1="";
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*Intent intent=new Intent(context,MainActivity.class);
-        startActivity(intent);
-        finish();*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -94,7 +103,7 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_farm);
@@ -118,7 +127,7 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, soiltype);
         aa.setDropDownViewResource(R.layout.spinner_item_new_black_text);
         spin_soil_type.setAdapter(aa);
-
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
 
 
 
@@ -133,6 +142,17 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
         strspeccmnt= DataHandler.newInstance().getFarmaddspclcmnt();
         strirrigationtype= DataHandler.newInstance().getFarmaddirrigationtype();
         strsoiltype=DataHandler.newInstance().getFardmaddsoiltype();
+        strfarm_num=DataHandler.newInstance().getShowfarmfarmnum();
+        straddress_num=DataHandler.newInstance().getShowfarmaddressnum();
+        strgpsc1=DataHandler.newInstance().getShowfarmgpsc1();
+        strgpsc2=DataHandler.newInstance().getShowfarmgpsc2();
+        strgpsc3=DataHandler.newInstance().getShowfarmgpsc3();
+        strgpsc4=DataHandler.newInstance().getShowfarmgpsc4();
+        strgpsc5=DataHandler.newInstance().getShowfarmgpsc5();
+        strgpsc6=DataHandler.newInstance().getShowfarmgpsc6();
+        str_is_crop_assigned=DataHandler.newInstance().getShowfarmiscropassigned();
+        str_is_verified=DataHandler.newInstance().getShowfarmisverified();
+        str_person_num=DataHandler.newInstance().getShowfarmpersonnum();
 
 
 
@@ -174,7 +194,6 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
 
             }
 
-            //Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
             ArrayAdapter<String> countryadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries);
             citizenship.setAdapter(countryadapter);
             citizenship.setSelection(countryadapter.getPosition(DEFAULT_LOCAL));
@@ -182,6 +201,8 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
 
 
             citizenship.setEnabled(false);
+            statefarmadd.setEnabled(false);
+            cityfarmadd.setEnabled(false);
 
 
             citizenship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -241,8 +262,6 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
 
                                 ArrayList<String> city = new ArrayList<String>();
 
-                                // Toast.makeText(FarmAddActivity.this, finalstate[position] + finalstateid[position], Toast.LENGTH_SHORT).show();
-
 
                                 JSONObject objcity = null;
                                 int stateidcount = 0;
@@ -281,7 +300,6 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
                                         }
 
                                     }
-                                    //Toast.makeText(FarmAddActivity.this, Integer.toString(stateidcount), Toast.LENGTH_SHORT).show();
                                     ArrayAdapter<String> cityadapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, city);
                                     cityfarmadd.setAdapter(cityadapter);
                                     cityfarmadd.setSelection(cityadapter.getPosition(DEFAULT_LOCAL_CITY));
@@ -328,12 +346,6 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
 
 
                 strarea = areafarmadd.getText().toString().trim();
-               /* strgpsc1=gpsc1farmadd.getText().toString().trim();
-                strgpsc2=gpsc2farmadd.getText().toString().trim();
-                strgpsc3=gpsc3farmadd.getText().toString().trim();
-                strgpsc4=gpsc4farmadd.getText().toString().trim();
-                strgpsc5=gpsc5farmadd.getText().toString().trim();
-                strgpsc6=gpsc6farmadd.getText().toString().trim();*/
                 strsoiltype = soiltypefarmadd.getText().toString().trim();
                 strirrigationtype = irrigationtypefarmadd.getText().toString().trim();
                 strspeccmnt = speccommentfarmadd.getText().toString().trim();
@@ -437,13 +449,8 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
 
     public void GetText() throws JSONException {
         // Get user defined values
+        Log.e("Tag","in gettext");
         strarea = areafarmadd.getText().toString().trim();
-       /* strgpsc1=gpsc1farmadd.getText().toString().trim();
-        strgpsc2=gpsc2farmadd.getText().toString().trim();
-        strgpsc3=gpsc3farmadd.getText().toString().trim();
-        strgpsc4=gpsc4farmadd.getText().toString().trim();
-        strgpsc5=gpsc5farmadd.getText().toString().trim();
-        strgpsc6=gpsc6farmadd.getText().toString().trim();*/
         strsoiltype = soiltypefarmadd.getText().toString().trim();
         strirrigationtype = irrigationtypefarmadd.getText().toString().trim();
         strspeccmnt = speccommentfarmadd.getText().toString().trim();
@@ -463,21 +470,28 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.e("Tag","in response");
 
-                        if (response.equals("\"Successfully added Farm and Address\"")) {
+                        if (response.equals("\"Farm updated Successfully\"")) {
                             progressDialog.dismiss();
                             Toast.makeText(EditFarmActivity.this, response, Toast.LENGTH_LONG).show();
                             SharedPreferencesMethod.setBoolean(context, "Login", true);
-                            Intent intent = new Intent(context, LandingActivity.class);
+                            Intent intent = new Intent(context, ShowFarmActivity.class);
                             startActivity(intent);
                             finish();
+                        }
+                        else{
+
+                            Toast.makeText(context, "Failed to Update data  -->>" +response, Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
                         }
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Log.e(TAG,error.toString());
+                        Log.e("TAG",error.toString());
+                        Log.e("Tag","in erroe");
                         progressDialog.dismiss();
                         Toast.makeText(EditFarmActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -485,12 +499,6 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-               /* params.put(GPSC1,sfrstnamefill);
-                params.put(GPSC2, smiddlenamefill);
-                params.put(GPSC3, slastnamefill);
-                params.put(GPSC4, sadharnofill);
-                params.put(GPSC5, spannofill);
-                params.put(GPSC6, sdobfill);*/
                 if (strsoiltypefromspinner.equals("Other")) {
                     params.put(SOILTYPE, strsoiltype);
                 } else {
@@ -505,9 +513,19 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
                 params.put(COUNTRY, strcountry);
                 params.put(STATE, strstate);
                 params.put(CITY, strcity);
-                params.put(PERSONNUM, personnumfromfillprofile);
-                params.put(USERNUM, usernumfrommainact);
                 params.put(FARM_PET_NAME, strfarmpetname);
+                params.put(ADRESSNUM, straddress_num);
+                params.put(FARMNUM, strfarm_num);
+                params.put(GPSC1, strgpsc1);
+                params.put(GPSC2, strgpsc2);
+                params.put(GPSC3,strgpsc3);
+                params.put(GPSC4, strgpsc4);
+                params.put(GPSC5, strgpsc5);
+                params.put(GPSC6, strgpsc6);
+                params.put(IS_VERIFIED, str_is_verified);
+                params.put(IS_CROP_ASSIGNED, str_is_crop_assigned);
+                params.put(PERSON_NUM, str_person_num);
+                params.put(KEY_TOKEN,ct1);
 
                 return params;
             }

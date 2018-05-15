@@ -112,6 +112,7 @@ public class Weather_firstFragment extends Fragment {
             mday_num=getArguments().getString(ARG_DAY_NUM);
             mmonth=getArguments().getString(ARG_MONTH);
             myear=getArguments().getString(ARG_YEAR);
+            mPage = getArguments().getInt(ARG_PAGE);
 
         }
     }
@@ -142,7 +143,7 @@ public class Weather_firstFragment extends Fragment {
         TextView wind_string=(TextView)view.findViewById(R.id.tv_wind_string);
 
         tvTitle.setTextSize(50);
-        tvTitle.setText(mtmp_today+"°C");
+        tvTitle.setText(mtmp_today+"\u00B0"+"C");
         location.setText(mcitystatecount);
         last_updated.setText(mobservation_time);
         day.setText(mday+",  "+mday_num+"/"+mmonth+"/"+myear);

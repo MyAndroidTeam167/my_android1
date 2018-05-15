@@ -21,10 +21,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.Company.CompanyActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.Signup.SetLanguageActivity;
-import com.example.hp.farmapp.CalendarPackage.ListViewActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -32,7 +33,7 @@ import com.example.hp.farmapp.app.Config;
 
 import java.util.Locale;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private Thread mThread;
     private int versionCode;
@@ -48,71 +49,19 @@ public class SplashActivity extends AppCompatActivity {
     Context context;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
-    String languageset;
+    String languageset="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //Locale myLocale;
-        /*if (lang.equalsIgnoreCase(""))
-            return;*/
-     /*   myLocale = new Locale("hi");
-        Locale.setDefault(myLocale);
-        android.content.res.Configuration config = new android.content.res.Configuration();
-        config.locale = myLocale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-*/
         getSupportActionBar().hide();
-
         setContentView(R.layout.activity_splash);
-
         context=this;
-
-
-
-
-        //i=SharedPreferencesMethod.getInt(context,"count");
-
-
-       /* if(i==0) {
-            Toast.makeText(SplashActivity.this, Integer.toString(i), Toast.LENGTH_SHORT).show();
-        }*/
-       /* mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                // checking for type intent filter
-                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
-                    // gcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-
-                    displayFirebaseRegId();
-
-                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
-                    // new push notification is received
-
-                    String message = intent.getStringExtra("message");
-
-                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
-
-                    //txtMessage.setText(message);
-                    FirebaseCrash.report(new Exception("My first Android non-fatal error"));
-                }
-            }
-        };
-
-        displayFirebaseRegId();
-*/
+        languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
         init();
         scheduleAlarm();
-
-
-
-
     }
 
     private void displayFirebaseRegId() {
@@ -131,29 +80,14 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        //LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
     }
 
     private void init() {
         context = this;
-        //new MyDialog(context , MyDialog.FORGOT_PASSWORD , null).show();
-       // FacebookSdk.sdkInitialize(context);
-        //Uri targetUrl = AppLinks.getTargetUrlFromInboundIntent(this, getIntent());
-       /* if (targetUrl != null) {
-            Log.i("Activity", "App Link Target URL: " + targetUrl.toString());
-        }*/
         android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
         SharedPreferencesMethod.setString(context,SharedPreferencesMethod.DEVICE_ID,android_id);
         languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
-        //StartAnimations();
-        /*if (Utility.isConnectingToInternet(context)) {
-            API.sendRequestToServerGET(context, API.GET_APK_VERSION);
-        } else {
-            // show dialog
-        }
-*/
-
     }
 
 
@@ -176,8 +110,6 @@ public class SplashActivity extends AppCompatActivity {
                 stop();
 
             }
-
-
             super.handleMessage(msg);
         }
     };
@@ -205,19 +137,9 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 stop();
             }
-        }, 3000);
+        }, 2500);
 
         super.onResume();
-       /* LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(Config.REGISTRATION_COMPLETE));
-
-        // register new push message receiver
-        // by doing this, the activity will be notified each time a new message arrives
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(Config.PUSH_NOTIFICATION));
-
-        // clear the notification area when the app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());*/
     }
 
     @Override
@@ -229,62 +151,67 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onPostResume() {
-        //stop();
         super.onPostResume();
-
     }
-
-
-
 
     private void stop() {
         isFinish = true;
         if (t == 0) {
-            if (SharedPreferencesMethod.getBoolean(context, "Login")) {
+            languageset=SharedPreferencesMethod.getString(context,"lang");
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
 
-                Log.e("LoginStatus :","TRUE");
-                Log.e("Language set Data",languageset);
-                if(languageset!=null){
+                    if(languageset.equals("")){
+                Intent intent=new Intent(context,SetLanguageActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else{
+                if (SharedPreferencesMethod.getBoolean(context, "Login")) {
+                    Log.e("LoginStatus :","TRUE");
                     Log.e("Language set Data",languageset);
                     if(languageset.equals("English")){
                         Log.e("Language set Data",languageset);
-                        changeLang("en");
-                        startActivity(new Intent(context, LandingActivity.class));
-                        finish();
-                        // startActivity(new Intent(context, SignUpActivity.class));
+                            changeLang("en");
+                            startActivity(new Intent(context, LandingActivity.class));
+                            finish();
                         }
-                    else{
+                        else if(languageset.equals("Telgu")){
+                            Log.e("Language set Data",languageset);
+                            changeLang("te");
+                            startActivity(new Intent(context, LandingActivity.class));
+                            finish();
+                        }
+                         else{
                         Log.e("Language set Data",languageset);
                         changeLang("hi");
                         startActivity(new Intent(context, LandingActivity.class));
                         finish();
-                        // startActivity(new Intent(context, SignUpActivity.class));
-                        }
-                }else{
-                    Toast.makeText(SplashActivity.this, "Unknow Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-
-                Log.e("Language set Data",languageset);
-                Toast.makeText(context, languageset, Toast.LENGTH_SHORT).show();
-
-                if(!languageset.matches("")){
-                    if(languageset.equals("English")){
-                        changeLang("en");
-                        startActivity(new Intent(context, MainActivity.class));
-                    finish();}
-                else{
-                        changeLang("hi");
-                startActivity(new Intent(context, MainActivity.class));
-                    finish();}
-                }
+                    }
+                    }
                 else {
                     Log.e("Language set Data",languageset);
-                    startActivity(new Intent(context, SetLanguageActivity.class));
-                    finish();
+                     if(languageset.equals("English")){
+                            changeLang("en");
+                            startActivity(new Intent(context, MainActivity.class));
+                            finish();}
+                        else if(languageset.equals("Telgu")){
+                            changeLang("te");
+                            startActivity(new Intent(context, MainActivity.class));
+                            finish();
+                     }
+                     else{
+                         changeLang("hi");
+                         startActivity(new Intent(context, MainActivity.class));
+                         finish();
+                     }
                 }
+
             }
+
+                }
+            }, 1300);
         }
     }
 
@@ -298,7 +225,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            stop();
+            //stop();
         }
         return super.onTouchEvent(event);
     }

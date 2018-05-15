@@ -18,7 +18,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="140dp"
             android:scaleType="fitXY"
             android:id="@+id/img_view"
             />
@@ -48,7 +48,7 @@
                     android:text="Name"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     />
 
                 <TextView
@@ -58,13 +58,13 @@
                     android:layout_weight="0.5"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                     android:text="Date"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/reply_activity_date_value"
@@ -91,12 +91,12 @@
                     android:layout_weight="0.5"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                     android:text="Description"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/reply_activity_description_value"
@@ -124,13 +124,13 @@
                     android:inputType="textMultiLine"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                     android:layout_weight="0.5"
                     android:text="Compulsary"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:padding="2dp"
                     />
 
@@ -158,12 +158,12 @@
                     android:layout_weight="0.5"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                     android:text="Chemical"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/reply_activity_chemical_name_value"
@@ -191,12 +191,12 @@
                     android:padding="2dp"
                     android:inputType="textMultiLine"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -214,7 +214,7 @@
                     android:text="Chemical Qty"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     />
 
                 <TextView
@@ -224,18 +224,19 @@
                     android:layout_weight="0.5"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/greenColShade"
                 android:elevation="2dp"
+                android:id="@+id/linear_is_done_lay"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -247,7 +248,7 @@
                     android:layout_weight="0.5"
                     android:text="Is Done"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp" />
+                    android:textSize="19sp" />
 
                 <CheckBox
                     android:layout_width="0dp"
@@ -258,15 +259,17 @@
                     android:padding="2dp"
                     android:id="@+id/reply_done_status"
                     android:text=""
+                    android:onClick="checkbox1_clicked"
                     />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
+                android:id="@+id/linear_farmer_reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/logInBg"
@@ -281,7 +284,7 @@
                     android:layout_weight="0.5"
                     android:text="Text Comment"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:padding="2dp"
                     />
 
@@ -292,20 +295,21 @@
                     android:id="@+id/et_farmer_reply"
                     android:inputType="textMultiLine"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:padding="2dp"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:textSize="20dp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/greyInactive"
                     android:id="@+id/tv_farmer_reply"/>
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/linear_show_text_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/greenColShade"
@@ -333,9 +337,10 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp" />
+                android:layout_height="2.5dp" />
 
             <LinearLayout
+                android:id="@+id/linear_audio_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/logInBg"
@@ -351,7 +356,8 @@
                     android:text="Audio Comment"
                     android:padding="2dp"
                     android:textColor="@color/ettextbrown"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
+                    android:layout_gravity="center"
                     />
                 <LinearLayout
                     android:layout_width="0dp"
@@ -384,25 +390,203 @@
                 </LinearLayout>
 
                 <!--<TextView
-                    android:id="@+id/reply_audio_file"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:padding="2dp"
-                    android:textColor="@color/ettextbrown"
-                    android:textSize="20dp" />-->
+                             android:id="@+id/reply_audio_file"
+                             android:layout_width="0dp"
+                             android:layout_height="wrap_content"
+                             android:layout_weight="0.5"
+                             android:padding="2dp"
+                             android:textColor="@color/ettextbrown"
+                             android:textSize="20dp" />-->
             </LinearLayout>
 
+
+      <!--      <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum=".8">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                   &lt;!&ndash; <TextView
+                        android:id="@+id/capturefarmimage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Capture"/>&ndash;&gt;
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/capturefarmimage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/photo"/>
+                        <ImageView
+                            android:id="@+id/imgoncapture"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/photo"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/capturefarmimage2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/photo"/>
+                        <ImageView
+                            android:id="@+id/imgoncapture2"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/photo"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/capturefarmimage3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/photo"/>
+                        <ImageView
+                            android:id="@+id/imgoncapture3"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/photo"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/capturefarmimage4"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/photo"/>
+                        <ImageView
+                            android:id="@+id/imgoncapture4"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/photo"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+-->
+
+<!--
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                   &lt;!&ndash; <TextView
+                        android:id="@+id/capturefarmimage3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Capture"/>&ndash;&gt;
+
+                    <ImageView
+                        android:id="@+id/imgoncapture3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/capture_img"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                   &lt;!&ndash; <TextView
+                        android:id="@+id/capturefarmimage4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Capture"/>&ndash;&gt;
+
+                    <ImageView
+                        android:id="@+id/imgoncapture4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/capture_img"/>
+                </LinearLayout>
+            </LinearLayout>
+-->
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="5dp"
+                android:text="Next"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
             <Button
                 android:id="@+id/button_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
-                android:padding="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/colorPrimaryDark"
+                android:padding="5dp"
                 android:text="Submit"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

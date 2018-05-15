@@ -8,6 +8,16 @@ public class GetProfile {
     String notification;
     int _id;
     String noticationdescription;
+    int position;
+
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public String getNotidate() {
         return notidate;
@@ -44,6 +54,9 @@ public class GetProfile {
 
     public GetProfile(String notification){
         this.notification=notification;
+    }
+    public GetProfile(int position){
+       this.position=position;
     }
 
 

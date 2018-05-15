@@ -93,7 +93,7 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+           <!-- <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -106,10 +106,10 @@
                 android:singleLine="true"
                 android:textColor="@color/saddlebrown"
                 android:text="@string/role" />
-            </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>-->
 
 
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+          <!--  <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/radio_group"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                     />
 
             </RadioGroup>
-
+-->
 
 
 
@@ -196,20 +196,6 @@
                     app:drawable_show="@drawable/eye_hidden"
                     app:tint_color="@color/colorPrimaryDark"
                     android:inputType="textPassword"/>
-<!--
-
-                <EditText
-                    android:id="@+id/signuppassconfirm"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:singleLine="true"
-                    android:drawableLeft="@drawable/lock"
-                    android:drawableTint="#FF4081"
-                    android:hint="@string/confirm_password"
-                    android:inputType="textPassword" />
--->
-
             </android.support.design.widget.TextInputLayout>
 <!--
 
@@ -226,7 +212,23 @@
                 android:layout_gravity="right"
                 android:paddingTop="5dp"
                 android:text="Need Help?" />
+
 -->
+
+          <!--  <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/company_id"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/mobile_dark_green_24"
+                    android:singleLine="true"
+                    android:textColor="@color/ettextbrown"
+                    android:hint="Company Code"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>-->
 
 
             <Button
@@ -241,6 +243,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:visibility="gone"
                 android:id="@+id/admincalender"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"

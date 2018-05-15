@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -25,8 +25,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.CalendarPackage.DisplayCalendarActivity;
+import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,19 +56,26 @@ public class ShowTaskActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
     String[] eventmsgs;
     String date;
+    String farm_num;
+    String farm_cal_mast_num;
+    String type="";
+
 
     @Override
     public void onBackPressed() {
-       /* Intent intent=new Intent(context,LandingActivity.class);
+        Intent intent=new Intent(context,DisplayCalendarActivity.class);
         startActivity(intent);
-        finish();*/
-        super.onBackPressed();}
+        finish();
+        //super.onBackPressed();
+        }
 
-    private static final String REGISTER_URL_ALL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
-    private static final String REGISTER_URL_PENDING = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_calendar_pending_to_app";
-    private static final String REGISTER_URL_CALENDAR = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_task_list_by_date";
+    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
 
     final String TASK_DATE="task_date";
+    final String KEY_FARM_NUM="farm_num";
+    final String KEY_FARM_CAL_MAST_NUM="farm_cal_mast_num";
+    final  String KEY_TOKEN="token4";
+    String ct1="";
 
     //    public ToggleButton toggleButton;
 
@@ -75,7 +84,10 @@ public class ShowTaskActivity extends AppCompatActivity {
        /* Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
         finish();*/
-        super.onBackPressed();
+       /* Intent intent=new Intent(context,DisplayCalendarActivity.class);
+        startActivity(intent);
+        finish();*/
+       super.onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
@@ -85,7 +97,7 @@ public class ShowTaskActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_task_view);
@@ -105,37 +117,44 @@ public class ShowTaskActivity extends AppCompatActivity {
         }
 
         context=this;
-        Bundle extras = getIntent().getExtras();
-        String type = extras.getString("Type");
-        Log.e("type",type);
+
+        farm_num= SharedPreferencesMethod.getString(context,"farm_num");
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
+        farm_cal_mast_num = DataHandler.newInstance().getFarm_cal_mast_num();
+        date = DataHandler.newInstance().getEvent_date();
+        title.setText("Task List");
+
+        /*Bundle extras = getIntent().getExtras();
+        if(extras!=null) {
+            type = extras.getString("Type");
+        }*/
+
+        /*extras.getString("Type");*/
+        //Log.e("type",type);
 
 //        if(type=="all_activities")
-        if(type.equals("all_activities")){
+       /* if(type.equals("all_activities")){
             REGISTER_URL = REGISTER_URL_ALL;
             Log.e("enter","entered all");
             title.setText("My Activities");
 
-        }
+        }*/
 //        if(type=="pending_activities")
-        if(type.equals("pending_activities")){
+       /* if(type.equals("pending_activities")){
             REGISTER_URL = REGISTER_URL_PENDING;
             Log.e("enter","entered pending");
             title.setText("Pending Activities");
 
 //            relativeLayout.setBackgroundColor(Color.parseColor("#FF5333"));
         }
-
+*/
 
         if(type.equals("calendar_activity")){
             REGISTER_URL = REGISTER_URL_CALENDAR;
             Log.e("enter","entered calendar");
-            title.setText("Task List");
-            date = extras.getString("eventdate");
            /* SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-
             try {
-
                 String reformattedStr = myFormat.format(fromUser.parse(Dob));
                 Dob=reformattedStr;
                 // Toast.makeText(EditProfileActivity.this, "*"+sdobfill+"*", Toast.LENGTH_SHORT).show();
@@ -146,24 +165,9 @@ public class ShowTaskActivity extends AppCompatActivity {
             // Toast.makeText(context, date, Toast.LENGTH_SHORT).show();
 
 
-//            relativeLayout.setBackgroundColor(Color.parseColor("#FF5333"));
         }
-
-        //yyyyddmm
-
- /*       AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute();*/
 
         init();
-/*
-        myDataSet = new String[]{"Sow Seeds","Fertilizer Spray Dose 1","Remove weeds","Irrigation No.1","Fertilizer Spray Dose 2","Remove weeds","Irrigation No 2","Herbicide Sray dose 1","Fertilizer Spray Dose 3","Herbicide Sray Dose 2","Irrigation No 3","Herbicide Spray Dose 4","Remove Weeds","Irrigation No 4"};
-*/
-
-
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR_MR1) {
-            mRecyclerView.setHasFixedSize(true);
-        }
-*/
 
     }
 
@@ -186,7 +190,7 @@ public class ShowTaskActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL_CALENDAR,
                     new com.android.volley.Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -203,6 +207,7 @@ public class ShowTaskActivity extends AppCompatActivity {
                                     String date=jsonobject.getString("date");
                                     String activity_img = jsonobject.getString("img_link");
                                     String is_done = jsonobject.getString("is_done");
+                                    String farm_dwork_num=jsonobject.getString("farm_dwork_num");
 
                                     taskdatum = new Taskdata();
                                     taskdatum.setTaskDate(date);
@@ -211,6 +216,7 @@ public class ShowTaskActivity extends AppCompatActivity {
                                     taskdatum.setImgBgLink(activity_img);
                                     taskdatum.setIsDone(is_done);
                                     taskdatum.setTaskId(id);
+                                    taskdatum.setFarm_dwork_num(farm_dwork_num);
                                     taskdatums.add(taskdatum);
 
                                     Log.e("Date :",date+"activity"+activity+taskdatums.size());
@@ -229,13 +235,14 @@ public class ShowTaskActivity extends AppCompatActivity {
                                 mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
                                     @Override
                                     public void onClick(View view, int position) {
-                                        //Toast.makeText(getApplicationContext()," "+taskdatums.get(position), Toast.LENGTH_SHORT).show();
                                         Taskdata taskdata=taskdatums.get(position);
-//                                        Toast.makeText(getApplicationContext(),"Description ->"+taskdata.getTaskDescription()+", Id ->"+taskdata.getTaskId(),Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(context, FarmActionReplyActivity.class);
-                                        intent.putExtra("id",taskdata.getTaskId());
+                                        intent.putExtra("id",taskdata.getFarm_dwork_num());
                                         intent.putExtra("task_date",taskdata.getTaskDate());
+                                        intent.putExtra("farm_num",farm_num);
+                                        intent.putExtra("type","from_calendar");
                                         startActivity(intent);
+                                        finish();
                                     }
 
                                     @Override
@@ -259,6 +266,16 @@ public class ShowTaskActivity extends AppCompatActivity {
                     if(date!=null) {
                         params.put(TASK_DATE, date);
                     }
+                    if(farm_num!=null){
+                        params.put(KEY_FARM_NUM,farm_num);
+                    }
+
+                    if(farm_cal_mast_num!=null){
+                        params.put(KEY_FARM_CAL_MAST_NUM,farm_cal_mast_num);
+                    }
+                    if(ct1!=null){
+                        params.put(KEY_TOKEN,ct1);
+                    }
                     return params;
                 }
 
@@ -281,15 +298,6 @@ public class ShowTaskActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
-           /* mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-           Log.e("TaskDatum:",String.valueOf(taskdatums.size()));
-            mAdapter = new TaskRecyclerViewAdapter(taskdatums,context);
-
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-            mLayoutManager = new LinearLayoutManager(context);
-            mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            mRecyclerView.setLayoutManager(mLayoutManager);*/
         }
         @Override
         protected void onProgressUpdate(Void... values) {

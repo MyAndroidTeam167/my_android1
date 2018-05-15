@@ -58,7 +58,7 @@ public class OtpforpassActivity extends AppCompatActivity {
     Button subotpforpass;
     String otpforpasss;
     Context context;
-    String OTPVERIFY="https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/forget_password";
+    String OTPVERIFY="http://spade.farm/app/index.php/signUp/forget_password";
     String response,status,details,detailedsessionid;
     String finres;
     final String KEY_MOBILE="mobNo";
@@ -106,7 +106,7 @@ public class OtpforpassActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         resendotpforpass=(TextView)findViewById(R.id.resendotpforpass);
         otpforpass=(EditText)findViewById(R.id.otpforpass);

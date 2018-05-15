@@ -2,7 +2,8 @@ package com.example.hp.farmapp.Weather;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -24,8 +27,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.astuetz.PagerSlidingTabStrip;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_firstFragment;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_secondFragment;
 
@@ -33,13 +38,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class WeatherViewPagerActivity extends AppCompatActivity{
+public class WeatherViewPagerActivity extends BaseActivity{
 
-    private static final String REGISTER_URL_ALL = "http://api.wunderground.com/api/a10b55e3e39e060a/conditions/forecast/alert/q/23.1607078,75.78408.json";
+    private static String REGISTER_URL_ALL = "http://api.wunderground.com/api/a10b55e3e39e060a/conditions/forecast/alert/q/23.1607078,75.78408.json";
     Context context;
     ViewPager pager;
     String highstr,lowstr;
@@ -47,8 +55,16 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
     String[] hightemparr,lowtemparr,dayarr,conditionarr,iconarr,daynumarr,montharr,yeararr;
     String windstringtosend,tempinceltosend,relhumiditytosend,observaiontime_tosend,citystatecountry;
     Toolbar mActionBarToolbar;
-
-
+    String gps;
+    String[] gpscarr;
+    TextView titleweather;
+    TextView title_weather_date;
+    PagerSlidingTabStrip tabsStrip;
+    NestedScrollView scrollView;
+    ConnectivityManager connectivityManager;
+    boolean connected = false;
+    Boolean is_binded=false;
+    TextView no_gps_text;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         /*Intent intent=new Intent(context,LandingActivity.class);
@@ -68,16 +84,29 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_weather_view_pager);
             context=this;
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+        if (connected) {
+            is_binded = SharedPreferencesMethod.getBoolean(context, SharedPreferencesMethod.BINDED);
+            if (is_binded) {
+            setContentView(R.layout.activity_weather_view_pager);
+        tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
-        TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Weather Report");
-        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        //scrollView= (NestedScrollView) findViewById (R.id.nest_scrollview);
+        titleweather=(TextView)findViewById(R.id.title_weather);
+         title_weather_date=(TextView)findViewById(R.id.title_weather_city);
+         no_gps_text=(TextView)findViewById(R.id.no_gps_text);
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout_weather);
         setSupportActionBar(mActionBarToolbar);
 
 //        getSupportActionBar().setTitle("My Title");
@@ -88,27 +117,53 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        progressDialog = ProgressDialog.show(WeatherViewPagerActivity.this,
-                getString(R.string.dialog_please_wait),"");
-        AsyncTaskRunner runner=new AsyncTaskRunner();
-        runner.execute();
+        gps= SharedPreferencesMethod.getString(context,"GPS");
+
+
+
+
+        if(gps.equals("0")||gps.equals("null")||gps.equals("")){
+            no_gps_text.setVisibility(View.VISIBLE);
+        }
+        else{
+            gpscarr=gps.split("_");
+            REGISTER_URL_ALL="http://api.wunderground.com/api/a10b55e3e39e060a/conditions/forecast/alert/q/"+gpscarr[0]+","+gpscarr[1]+".json";
+            progressDialog = ProgressDialog.show(WeatherViewPagerActivity.this,
+                    getString(R.string.dialog_please_wait),"");
+            AsyncTaskRunner runner=new AsyncTaskRunner();
+            runner.execute();
+        }
+
             /*PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
             // Attach the view pager to the tab strip
             tabsStrip.setViewPager(pager);*/
+        }else
+        {
+            setContentView(R.layout.not_binded_layout);
+            basic_title();
         }
+    }else{
+            setContentView(R.layout.internet_not_connencted);
+            basic_title();
+        }
+    }
 
         private class MyPagerAdapter extends FragmentPagerAdapter {
 
             final int PAGE_COUNT = 3;
-            private String tabTitles[] = new String[] { "Tab1", "Tab2","Tab3","Tab4" };
+           // private String tabTitles[] = new String[] { "Tab1", "Tab2","Tab3","Tab4" };
+          // private String tabTitles[] = new String[4];
+           private String  tabTitles[]= new String[]{"Today", "Tommorow", dayarr[2], dayarr[3]};
 
             public MyPagerAdapter(FragmentManager fm) {
+
                 super(fm);
+
             }
 
             @Override
             public Fragment getItem(int pos) {
-                tabTitles= new String[]{"Today", "Tommorow", dayarr[2], dayarr[3]};
+               // tabTitles= new String[]{"Today", "Tommorow", dayarr[2], dayarr[3]};
                 switch(pos) {
                     case 0: return Weather_firstFragment.newInstance(hightemparr[0],lowtemparr[0],dayarr[0],conditionarr[0],iconarr[0],windstringtosend,tempinceltosend,relhumiditytosend,citystatecountry,observaiontime_tosend,pos+1,daynumarr[0],montharr[0],yeararr[0]);
                     case 1: return Weather_secondFragment.newInstance(hightemparr[1],lowtemparr[1],dayarr[1],conditionarr[1],iconarr[1],citystatecountry,observaiontime_tosend,pos+1,daynumarr[1],montharr[1],yeararr[1]);
@@ -158,6 +213,9 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
 
                             JSONObject forecast = null;
                             try {
+                                Date c = Calendar.getInstance().getTime();
+                                SimpleDateFormat df = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+                                String date_today=df.format(c);
                                 forecast = new JSONObject(response);
                                 String forcaststr = forecast.getString("forecast");
 
@@ -184,6 +242,9 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
                                 relhumiditytosend=relative_humiditystr;
                                 tempinceltosend=temp_cstr;
                                 observaiontime_tosend=observation_time;
+                                titleweather.setText(city);
+                                title_weather_date.setText(date_today);
+
 
 
 
@@ -292,9 +353,10 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
                                 }
 
                                 progressDialog.dismiss();
-
+                               // scrollView.setFillViewport (true);
                                 pager = (ViewPager) findViewById(R.id.viewPager);
                                 pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                                tabsStrip.setViewPager(pager);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -341,5 +403,16 @@ public class WeatherViewPagerActivity extends AppCompatActivity{
 
     }
 
+    void basic_title(){
+        TextView title=(TextView)findViewById(R.id.tittle);
+        title.setText("Weather");
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        setSupportActionBar(mActionBarToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
 
 }

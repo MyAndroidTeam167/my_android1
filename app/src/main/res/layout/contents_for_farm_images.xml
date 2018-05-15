@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_5sdp"
+        card_view:cardCornerRadius="4dp"
+        android:layout_margin="@dimen/_15sdp">
+        <RelativeLayout
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/activity_title_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity : Sowing"
+                android:textSize="@dimen/_17sdp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
+            <ImageView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@id/activity_title_image"
+                android:scaleType="fitXY"
+                android:src="@drawable/design_element"
+                android:id="@+id/activity_image"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:layout_marginRight="@dimen/_40sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_below="@id/activity_image"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Since Glide is going to perform a network request to load images via the internet, we need to include the permission INTERNET in our AndroidManifest.xml."
+                android:id="@+id/activity_desc_image"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_11ssp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="Assigned On : 16/04/2018"
+                android:layout_below="@id/activity_desc_image"
+                android:id="@+id/scheduleded_date_image"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_10ssp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:text="Completed On : 24/04/2018"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/activity_desc_image"
+                android:id="@+id/completed_date_image"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_10ssp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

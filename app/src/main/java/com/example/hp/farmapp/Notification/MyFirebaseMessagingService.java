@@ -205,7 +205,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title=msg.get("title");
         long time=sentTime;
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd HH:mm");
         String formattedDate = df.format(c.getTime());        //Bitmap icon = null;
 
 
@@ -253,12 +253,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context);
         //Notification notification =notificationBuilder.setSmallIcon(R.mipmap.alert)
 Notification notification;
-                notification=notificationBuilder.setSmallIcon(R.drawable.user).setStyle(new NotificationCompat.BigTextStyle().bigText(message+flowers))
+                notification=notificationBuilder.setSmallIcon(R.drawable.noti_32).setStyle(new NotificationCompat.BigTextStyle().bigText(message+flowers))
                 .setWhen(0).setContentTitle(title)
                 .setContentText(message)
                 .setContentInfo(formattedDate)
                 .setAutoCancel(true)
                         .setContentIntent(pendingIntent)
+                        .setColor(getResources().getColor(R.color.colorAccent))
                 .setSound(alarmSound)
                 .setContentIntent(pendingIntent).build();
 

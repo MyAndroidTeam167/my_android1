@@ -40,7 +40,10 @@ public class Weather_fourthFragment extends Fragment {
     private static final String ARG_ACTIVITY_DESCRIPTION = "ARG_ACTIVITY_DESCRIPTION";
     private static final String ARG_ACTIVITY_IMG = "ARG_ACTIVITY_IMG";
     private static final String ARG_ISDONE = "ARG_ISDONE";
+    private static final String ARG_FARM_DWORK_NUM = "ARG_FARM_DWORK_NUM";
+    public static final String ARG_PAGE = "ARG_PAGE";
 
+    private int mPage;
     private RecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
     TaskRecyclerViewAdapter mAdapter;
@@ -54,6 +57,8 @@ public class Weather_fourthFragment extends Fragment {
     private String[] mactivitydescription;
     private String[] mactivityimg;
     private String[] misdone;
+    private String[] farm_dwork_num;
+
 
 
     public Weather_fourthFragment() {
@@ -68,7 +73,8 @@ public class Weather_fourthFragment extends Fragment {
      * @return A new instance of fragment Wheather_thirdFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Weather_fourthFragment newInstance(String[] mdate,String[] mid,String[] mactivity,String[] mactivitydescription,String[] mactivityimg,String[] mis_done) {
+    public static Weather_fourthFragment newInstance(String[] mdate,String[] mid,String[] mactivity,String[] mactivitydescription,
+                                                     String[] mactivityimg,String[] mis_done,String[] farm_dwork_num,int page) {
         Weather_fourthFragment fragment = new Weather_fourthFragment();
         Bundle args = new Bundle();
         args.putStringArray(ARG_DATE,mdate);
@@ -77,6 +83,8 @@ public class Weather_fourthFragment extends Fragment {
         args.putStringArray(ARG_ACTIVITY_DESCRIPTION,mactivitydescription);
         args.putStringArray(ARG_ACTIVITY_IMG,mactivityimg);
         args.putStringArray(ARG_ISDONE,mis_done);
+        args.putStringArray(ARG_FARM_DWORK_NUM,farm_dwork_num);
+        args.putInt(ARG_PAGE, page);
 
         fragment.setArguments(args);
         return fragment;
@@ -93,7 +101,8 @@ public class Weather_fourthFragment extends Fragment {
             mactivitydescription=getArguments().getStringArray(ARG_ACTIVITY_DESCRIPTION);
             mactivityimg=getArguments().getStringArray(ARG_ACTIVITY_IMG);
             misdone=getArguments().getStringArray(ARG_ISDONE);
-
+            farm_dwork_num=getArguments().getStringArray(ARG_FARM_DWORK_NUM);
+            mPage = getArguments().getInt(ARG_PAGE);
         }
     }
 
@@ -115,6 +124,7 @@ public class Weather_fourthFragment extends Fragment {
                 taskdatum.setImgBgLink(mactivityimg[i]);
                 taskdatum.setIsDone(misdone[i]);
                 taskdatum.setTaskId(mid[i]);
+                taskdatum.setFarm_dwork_num(farm_dwork_num[i]);
                 taskdatums.add(taskdatum);
             }
         }
@@ -134,9 +144,11 @@ public class Weather_fourthFragment extends Fragment {
                 Taskdata taskdata=taskdatums.get(position);
 //                                        Toast.makeText(getApplicationContext(),"Description ->"+taskdata.getTaskDescription()+", Id ->"+taskdata.getTaskId(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, FarmActionReplyActivity.class);
-                intent.putExtra("id",taskdata.getTaskId());
+                intent.putExtra("id",taskdata.getFarm_dwork_num());
                 intent.putExtra("task_date",taskdata.getTaskDate());
+                intent.putExtra("type","pager");
                 startActivity(intent);
+                //getActivity().finish();
             }
 
             @Override

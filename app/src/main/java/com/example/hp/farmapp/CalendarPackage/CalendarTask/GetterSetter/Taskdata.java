@@ -11,6 +11,15 @@ public class Taskdata {
     String taskDescription;
     String taskStatus;
     String isDone;
+    String farm_dwork_num;
+
+    public String getFarm_dwork_num() {
+        return farm_dwork_num;
+    }
+
+    public void setFarm_dwork_num(String farm_dwork_num) {
+        this.farm_dwork_num = farm_dwork_num;
+    }
 
     public String getIsDone(){
         return isDone;

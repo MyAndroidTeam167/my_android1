@@ -1,8 +1,12 @@
 package com.example.hp.farmapp.CalendarPackage.CalendarTask;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -10,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,9 +32,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.astuetz.PagerSlidingTabStrip;
+import com.example.hp.farmapp.BroadCastReceiver.SampleBootReceiver;
 import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_firstFragment;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_fourthFragment;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_secondFragment;
@@ -49,9 +58,12 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
     Toolbar mActionBarToolbar;
     Context context;
-    private static final String REGISTER_URL_ALL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
-    private static final String REGISTER_URL_PENDING = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_farm_calendar_pending_to_app";
-    private static final String REGISTER_URL_CALENDAR = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/send_task_list_by_date";
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+
+    private static final String REGISTER_URL_ALL = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
+    private static final String REGISTER_URL_PENDING = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_pending_to_app";
+    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
    /* List<Taskdata> taskdatumsall=new ArrayList<>();
     List<Taskdata> taskdatumspending=new ArrayList<>();
     Taskdata taskdatumall=new Taskdata();
@@ -59,19 +71,28 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
     ProgressDialog mprogressDialog;
     private String REGISTER_URL;
     final String TASK_DATE="task_date";
-    String[] dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall;
-    String[] datepending,idpending,activitypending,activitydescriptionpending,activity_imgpending,is_donepending;
+    final String FARM_NUM="farm_num";
+    String[] dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall,farm_dwork_numall;
+    String[] datepending,idpending,activitypending,activitydescriptionpending,activity_imgpending,is_donepending,farm_dwork_numpend;
             String date;
     String url;
     ViewPager pager;
-
-
+    ConnectivityManager connectivityManager;
+    boolean connected = false;
+    Boolean is_binded=false;
+    String farm_num;
+    String type="";
+    String mytype="";
+    PagerSlidingTabStrip tabsStrip;
+    String ct1;
+    final  String KEY_TOKEN="token3";
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*Intent intent=new Intent(context,LandingActivity.class);
+       /* Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
         finish();*/
         super.onBackPressed();
@@ -90,16 +111,52 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_task_view_pager);
         context=this;
-        TextView title=(TextView)findViewById(R.id.tittle);
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+        if(connected){
+            is_binded = SharedPreferencesMethod.getBoolean(context, SharedPreferencesMethod.BINDED);
+            if (is_binded) {
+        setContentView(R.layout.activity_show_task_view_pager);
+
+                mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeToRefreshlanding);
+                mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+
+                mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Intent intent = new Intent(context, ShowTaskViewPagerActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+
+                TextView title=(TextView)findViewById(R.id.tittle);
         title.setText("Activities");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
+        tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
+
+
+        farm_num= SharedPreferencesMethod.getString(context,"farm_num");
+        alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, SampleBootReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        if (alarmMgr!= null) {
+            alarmMgr.cancel(alarmIntent);
+        }
 //        getSupportActionBar().setTitle("My Title");
 
         if (getSupportActionBar() != null){
@@ -122,13 +179,22 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
        /* url=REGISTER_URL_CALENDAR;
         AsyncTaskRunner runnercal=new AsyncTaskRunner();
         runnercal.execute(url);*/
+    }else
+        {
+            setContentView(R.layout.not_binded_layout);
+            basic_title();
+        }
+    }else{
+            setContentView(R.layout.internet_not_connencted);
+            basic_title();
+        }
     }
 
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
-        final int PAGE_COUNT = 3;
-        private String tabTitles[] = new String[]{"Tab1", "Tab2"};
+        final int PAGE_COUNT = 2;
+        private String tabTitles[] = new String[]{"All Activities", "Pending Activities"};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -136,12 +202,12 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int pos) {
-            tabTitles = new String[]{"All Activities", "Pending Activities"};
+            //tabTitles = new String[]{"All Activities", "Pending Activities"};
             switch (pos) {
 
-                case 0: return Weather_thirdFragment.newInstance(dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall);
-                case 1: return Weather_fourthFragment.newInstance(datepending,idpending,activitypending,activitydescriptionpending,activity_imgpending,is_donepending);
-                default: return Weather_thirdFragment.newInstance(dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall);
+                case 0: return Weather_thirdFragment.newInstance(dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall,farm_dwork_numall,pos+1);
+                case 1: return Weather_fourthFragment.newInstance(datepending,idpending,activitypending,activitydescriptionpending,activity_imgpending,is_donepending,farm_dwork_numpend,pos+1);
+                default: return Weather_thirdFragment.newInstance(dateall,idall,activityall,activitydescriptionall,activity_imgall,is_doneall,farm_dwork_numall,pos+1);
 
                 /*case 0: return Weather_firstFragment.newInstance(hightemparr[0],lowtemparr[0],dayarr[0],conditionarr[0],iconarr[0],windstringtosend,tempinceltosend,relhumiditytosend,citystatecountry,observaiontime_tosend,pos+1,daynumarr[0],montharr[0],yeararr[0]);
                 case 1: return Weather_secondFragment.newInstance(hightemparr[1],lowtemparr[1],dayarr[1],conditionarr[1],iconarr[1],citystatecountry,observaiontime_tosend,pos+1,daynumarr[1],montharr[1],yeararr[1]);
@@ -159,7 +225,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
         }
         @Override
         public int getCount() {
-            return 2;
+            return PAGE_COUNT;
         }
 
         @Override
@@ -191,28 +257,43 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
 
                             if(typeonrecieve.equals("All")){
+                                mytype="all";
                                 JSONArray jsonarray = null;
+                                JSONObject jsonObject=null;
                                 try {
-                                    jsonarray = new JSONArray(response);
 
-                                    dateall=new String[jsonarray.length()];
-                                    idall=new String[jsonarray.length()];
-                                    activityall=new String[jsonarray.length()];
-                                    activitydescriptionall=new String[jsonarray.length()];
-                                    activity_imgall=new String[jsonarray.length()];
-                                    is_doneall=new String[jsonarray.length()];
+                                    jsonObject=new JSONObject(response);
+                                    Log.e("Response full",jsonObject.toString());
+                                    String status=jsonObject.getString("status");
+                                    String status_msg=jsonObject.getString("status_msg");
+                                    Log.e("Response status",status.toString());
+
+                                    if(status.equals("1")) {
+
+                                        String result_set = jsonObject.getString("result");
+
+                                        jsonarray = new JSONArray(result_set);
+
+                                        dateall = new String[jsonarray.length()];
+                                        idall = new String[jsonarray.length()];
+                                        activityall = new String[jsonarray.length()];
+                                        activitydescriptionall = new String[jsonarray.length()];
+                                        activity_imgall = new String[jsonarray.length()];
+                                        is_doneall = new String[jsonarray.length()];
+                                        farm_dwork_numall = new String[jsonarray.length()];
 
 
-                                    for (int i = 0; i < jsonarray.length(); i++) {
-                                        JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                         idall[i] = jsonobject.getString("id");
-                                         activityall[i]=jsonobject.getString("activity");
-                                         activitydescriptionall[i]=jsonobject.getString("activity_description");
-                                         dateall[i]=jsonobject.getString("date");
-                                         activity_imgall[i] = jsonobject.getString("img_link");
-                                         is_doneall[i] = jsonobject.getString("is_done");
+                                        for (int i = 0; i < jsonarray.length(); i++) {
+                                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                            idall[i] = jsonobject.getString("id");
+                                            activityall[i] = jsonobject.getString("activity");
+                                            activitydescriptionall[i] = jsonobject.getString("activity_description");
+                                            dateall[i] = jsonobject.getString("date");
+                                            activity_imgall[i] = jsonobject.getString("img_link");
+                                            is_doneall[i] = jsonobject.getString("is_done");
+                                            farm_dwork_numall[i] = jsonobject.getString("farm_dwork_num");
 
-                                        Log.e("Date All :",dateall[i]+"activity All"+activityall[i]);
+                                            Log.e("Date All :", dateall[i] + "activity All" + activityall[i]);
 
                                    /*     taskdatumall = new Taskdata();
                                         taskdatumall.setTaskDate(date);
@@ -222,11 +303,15 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                                         taskdatumall.setIsDone(is_done);
                                         taskdatumall.setTaskId(id);
                                         taskdatumsall.add(taskdatumall);   */
-                                       // Log.e("Date :",date+"activity"+activity+taskdatumsall.size());
+                                            // Log.e("Date :",date+"activity"+activity+taskdatumsall.size());
+
+                                        }
+
+                                        mprogressDialog.dismiss();
+
+                                    }else{
 
                                     }
-
-                                    mprogressDialog.dismiss();
                                     //Log.e("TaskDatumall:",String.valueOf(taskdatumsall.size()));
 
                                 } catch (JSONException e) {
@@ -239,6 +324,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
 
                                 else if(typeonrecieve.equals("Pending")){
+                                type="pending";
                                 JSONArray jsonarray = null;
                                 try {
                                     jsonarray = new JSONArray(response);
@@ -248,6 +334,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                                     activitydescriptionpending=new String[jsonarray.length()];
                                     activity_imgpending=new String[jsonarray.length()];
                                     is_donepending=new String[jsonarray.length()];
+                                    farm_dwork_numpend=new String[jsonarray.length()];
 
 
                                     for (int i = 0; i < jsonarray.length(); i++) {
@@ -258,6 +345,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                                          datepending[i]=jsonobject.getString("date");
                                          activity_imgpending[i] = jsonobject.getString("img_link");
                                          is_donepending[i] = jsonobject.getString("is_done");
+                                        farm_dwork_numpend[i]=jsonobject.getString("farm_dwork_num");
 
                                         Log.e("Date Pending :",datepending[i]+"activity Pending"+activitypending[i]);
 
@@ -289,12 +377,15 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                             }
 
 
-                            if(datepending!=null && dateall!=null) {
+                            if(type.equals("pending")&&mytype.equals("all")){
+                            if(/*datepending!=null && */dateall!=null) {
                                     Log.e("coming here","in pager adapter");
                                 mprogressDialog.dismiss();
                                 pager = (ViewPager) findViewById(R.id.viewPager);
                                 pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                                tabsStrip.setViewPager(pager);
                             }
+                                }
 
 
                                 /*mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
@@ -338,6 +429,12 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                     if(date!=null) {
                         params.put(TASK_DATE, date);
                     }
+                    if(farm_num!=null){
+                        params.put(FARM_NUM,farm_num);
+                    }
+                    if(ct1!=null){
+                        params.put(KEY_TOKEN,ct1);
+                    }
                     return params;
                 }
 
@@ -378,5 +475,16 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
     }
 
+    void basic_title(){
+        TextView title=(TextView)findViewById(R.id.tittle);
+        title.setText("Activities");
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        setSupportActionBar(mActionBarToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
 
 }

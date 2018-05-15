@@ -1,36 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <include
         android:id="@+id/toolbar_actionbar"
         layout="@layout/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/capturefarmimage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="30dp"
-        android:text="Capture"/>
 
-    <ImageView
-        android:id="@+id/imgoncapture"
-        android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:src="@drawable/myfarmimage"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/capturefarmimage"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_grey_button"
+                android:text="Capture"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/imgoncapture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/photo_big" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/capturefarmimage2"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Capture"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_grey_button"
+                android:gravity="center"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/imgoncapture2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/photo_big" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/capturefarmimage3"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Capture"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_grey_button"
+                android:gravity="center"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/imgoncapture3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/photo_big" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/capturefarmimage4"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:text="Capture"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/rounded_grey_button"/>
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/imgoncapture4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/photo_big" />
+        </LinearLayout>
+    </LinearLayout>
+
+
     <Button
+        android:id="@+id/upload_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:textAlignment="center"
-        android:text="Upload"
         android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
         android:background="@drawable/box"
-        android:id="@+id/upload_button"/>
+        android:text="Upload"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+
+    <!-- <Button
+         android:id="@+id/demobutt"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="demoButton"/>-->
 
 </LinearLayout>

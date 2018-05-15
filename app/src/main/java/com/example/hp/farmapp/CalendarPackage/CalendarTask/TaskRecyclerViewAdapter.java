@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
@@ -66,7 +67,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
             if(isDone.equals("Y")){
                 holder.taskInnerLinearLayout.setBackgroundColor(Color.parseColor("#3CB371"));
             }else{
-                if(taskDate.compareTo(date_today)<0){
+                if(taskDate.compareTo(date_today)<=0){
                     holder.taskInnerLinearLayout.setBackgroundColor(Color.parseColor("#FF6347"));
                 }else{
                     holder.taskInnerLinearLayout.setBackgroundColor(Color.parseColor("#79CDCD"));
@@ -77,8 +78,12 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 //            Picasso.with(context).load(uri).into(holder.taskLinearLayout);
 
 
+            //Toast.makeText(context, image_link, Toast.LENGTH_SHORT).show();
 
-            Picasso.with(holder.imageView.getContext()).load(uri).into(holder.imageView);
+            if(image_link.toString().trim().equals("null")){
+                holder.task_recycler_adapter_relative.setBackgroundResource(R.drawable.blank_txtrue);
+            }else{
+            Picasso.with(holder.imageView.getContext()).load(uri).into(holder.imageView);}
            // holder.imageView.setAlpha(200);
            /* Picasso.with(context).load(uri).into(new Target() {
                 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -134,8 +139,9 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         public TextView tvtitle,tvdescripion,tvdate;
         public ToggleButton mtoggleButton;
         public LinearLayout taskLinearLayout,taskInnerLinearLayout;
-        public RelativeLayout task_recycler_single_view_relative;
+        public RelativeLayout task_recycler_adapter_relative;
         public ImageView imageView;
+
 
 
         public ViewHolder(View v){
@@ -146,7 +152,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
             taskInnerLinearLayout = (LinearLayout)v.findViewById(R.id.recycler_inner_linear);
 //            taskLinearLayout=(LinearLayout)v.findViewById(R.id.task_linear_layout);
-            //task_recycler_single_view_relative=(RelativeLayout)v.findViewById(R.id.recycler_single_view_relative);
+            task_recycler_adapter_relative=(RelativeLayout)v.findViewById(R.id.rel_lay_task_recycler_adapter);
             imageView=(ImageView)v.findViewById(R.id.recycler_single_view_relative);
 
            /* mtoggleButton = (ToggleButton)v.findViewById(R.id.toggleButton2);

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#238E68</color>
-    <color name="colorPrimaryDark">#238E68</color>
+    <color name="colorPrimaryDark">#007f00</color>
+    <color name="green_new">#004c00</color>
+
     <color name="colorAccent">#FF4081</color>
     <color name="black_overlay">#66000000</color>
-    <color name="logInBg">#8FBC8F </color>
+    <color name="logInBg">#C0D9AF </color>
     <color name="greenColShade">#C0D9AF</color>
     <color name="saddlebrown">#800000</color>
     <color name="lightbrown">#A52A2A</color>
@@ -24,6 +26,8 @@
     <color name="scondarytxt">#979797</color>
     <color name="primarytxt">#3F3F3F</color>
     <color name="white">#FFFFFF</color>
+    <color name="dark_grey">#383838</color>
+
     <color name="black">#000000</color>
     <color name="lightgreen">#ABD467</color>
     <color name="grey">#EEEEEE</color>
@@ -34,4 +38,7 @@
     <color name="lightGrey">#D3D3D3</color>
     <color name="textGrey">#808080</color>
     <color name="calMain">#FC6C55</color>
+    <color name="mid_grey">#939393</color>
+    <color name="grey_lil_dark">#545454</color>
+    <color name="new_check_color">#79CDCD</color>
 </resources>

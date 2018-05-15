@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyFarm</string>
+    <string name="app_name">Spade.Krashak</string>
     <string name="Accountlogin">Account Login</string>
     <string name="email">Email/Mobile</string>
     <string name="password">Password</string>
@@ -15,7 +15,7 @@
     <string name="login_successfull">login Successfull</string>
     <string name="dialog_please_wait">"Please Wait..."</string>
     <string name="password_er">Password must be 8-32 character</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_profile">Home</string>
     <string name="samepassword">Password must be same</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

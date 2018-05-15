@@ -95,6 +95,7 @@ public class Weather_secondFragment extends Fragment {
             mday_num=getArguments().getString(ARG_DAY_NUM);
             mmonth=getArguments().getString(ARG_MONTH);
             myear=getArguments().getString(ARG_YEAR);
+            mPage = getArguments().getInt(ARG_PAGE);
         }
     }
 
@@ -102,7 +103,6 @@ public class Weather_secondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_weather_second, container, false);
-
         ImageView imageView=(ImageView)view.findViewById(R.id.iconforwheatherfrag2);
         TextView location=(TextView)view.findViewById(R.id.locationfrag2);
         TextView last_updated=(TextView)view.findViewById(R.id.last_updatedfrag2);
@@ -110,6 +110,8 @@ public class Weather_secondFragment extends Fragment {
         TextView condition=(TextView)view.findViewById(R.id.tvconditionfrag2);
         TextView low_temp=(TextView)view.findViewById(R.id.temp_lowfrag2);
         TextView high_temp=(TextView)view.findViewById(R.id.temp_highfrag2);
+        TextView tv_title=(TextView)view.findViewById(R.id.tvTitlefrag2);
+
 
 
         location.setText(mcitystatecount);
@@ -118,6 +120,7 @@ public class Weather_secondFragment extends Fragment {
         condition.setText(mcondition);
         low_temp.setText(mtmplow+"°C");
         high_temp.setText(mtmphigh+"°C");
+        tv_title.setText(mtmphigh+"°C");
         Uri uri = Uri.parse(micon);
         Picasso.with(imageView.getContext()).load(uri).into(imageView);
 

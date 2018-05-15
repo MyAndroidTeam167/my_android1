@@ -1,6 +1,8 @@
 package com.example.hp.farmapp.FarmData;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -13,16 +15,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
-import com.example.hp.farmapp.Login.MainActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,13 +43,21 @@ public class FarmSoilTestActivity extends AppCompatActivity {
     TextView tvnValue,tvnRating,tvpValue,tvpRating,tvkValue,tvkRating;
     TextView tvsValue,tvsRating,tvznValue,tvznRating,tvbValue,tvbRating;
     TextView tvfeValue,tvfeRating,tvmnValue,tvmnRating,tvcuValue,tvcuRating;
-    final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/fetch_soil_card";
+    final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/fetch_soil_card";
+    String ct1;
+    final String TOKEN_key="token2";
+    final String PARAMS_FARM_NUM="farm_num";
+    String farm_num;
+    ConnectivityManager connectivityManager;
+    boolean connected = false;
+    Boolean is_binded=false;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent=new Intent(context,LandingActivity.class);
+       /* Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
+       super.onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
@@ -57,16 +66,32 @@ public class FarmSoilTestActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_soil_test);
         context=this;
+
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+
+        if (connected) {
+            is_binded = SharedPreferencesMethod.getBoolean(context, SharedPreferencesMethod.BINDED);
+            if (is_binded) {
+        setContentView(R.layout.activity_soil_test);
 
         TextView title=(TextView)findViewById(R.id.tittle);
         title.setText("Soil Test");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
+
+        ct1= SharedPreferencesMethod.getString(context,"cctt");
+        farm_num=SharedPreferencesMethod.getString(context,"farm_num");
 
         mButton=(Button)findViewById(R.id.button2);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +139,22 @@ public class FarmSoilTestActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+    }else
+            {
+                setContentView(R.layout.not_binded_layout);
+                basic_title();
+            }
+        }else{
+            setContentView(R.layout.internet_not_connencted);
+            basic_title();
+        }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     public  void  GetText()  throws JSONException{
         Log.e("checkArray","Reached GetText()");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
@@ -190,10 +230,23 @@ public class FarmSoilTestActivity extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
                 /*params.put(PARAMS_SAMPLE_NUM,strHealthCardNum);
                 params.put(PARAMS_FARM_NUM,"5");*/
+                params.put(PARAMS_FARM_NUM,farm_num);
+                params.put(TOKEN_key,ct1);
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+    void basic_title(){
+        TextView title=(TextView)findViewById(R.id.tittle);
+        title.setText("Soil Health Card");
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        setSupportActionBar(mActionBarToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
     }
 }

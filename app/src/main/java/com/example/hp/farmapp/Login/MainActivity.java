@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -18,8 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -28,7 +25,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +34,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.ForgetPass.FrgtPassActivity;
 import com.example.hp.farmapp.Alert.alertDialogManager;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -47,7 +44,6 @@ import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Signup.SignUpActivity;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,14 +57,14 @@ import java.util.regex.Pattern;
 import com.example.hp.farmapp.app.Config;
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity {
 
 
 
-    private static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/is_login_successful";
-    private static final String REGISTER_URL_CHECK_FILLED = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_app_registry_data";
-    private static final String REGISTER_URL_DATA_PROFILE = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_person_num";
-    private static final String REGISTER_URL_DATA_FARMADD = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL = "http://spade.farm/app/index.php/signUp/is_login_successful";
+    //private static final String REGISTER_URL_CHECK_FILLED = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_app_registry_data";
+    //private static final String REGISTER_URL_DATA_PROFILE = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_person_num";
+    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
 
 
     public static final String KEY_EMAIL = "email";
@@ -76,6 +72,8 @@ public class MainActivity extends AppCompatActivity  {
     String mobilefromsigup="",passwordfromsignup="";
     public static final String KEY_MOBILE = "mobNo";
     public static final String KEY_USER_NUM = "user_num";
+    public static final String KEY_TOKEN = "token1";
+
 
     public String[] parameternamearray,parametervaluearray;
 
@@ -104,6 +102,8 @@ public class MainActivity extends AppCompatActivity  {
     ShowHidePasswordEditText password;
     Toolbar mActionBarToolbar;
     public String usernumfinal;
+    Boolean lock=false;
+    String ct1;
 
     //SessionManager session;
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity  {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
 
         TextView title=(TextView)findViewById(R.id.tittle);
@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity  {
             }
         };
 */
-        FirebaseMessaging.getInstance().subscribeToTopic("foo-bar");
-        displayFirebaseRegId();
+       /* FirebaseMessaging.getInstance().subscribeToTopic("foo-bar");
+        displayFirebaseRegId();*/
 
         // final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         //login = sharedPref.getBoolean("login", false);
@@ -399,83 +399,99 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-                        Handler handler = new Handler();
+                      /*  Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                GetText(usernumfinal);
-                                AsyncTaskRunner runnerregistercheck = new AsyncTaskRunner();
+                                //GetText(usernumfinal);
+                               *//* AsyncTaskRunner runnerregistercheck = new AsyncTaskRunner();
                                 runnerregistercheck.execute(Emaillogin, mobilelogin, Passlogin, "regcheck", usernumfinal, REGISTER_URL_CHECK_FILLED);
-                                // progressDialog.dismiss();
+*//*                                // progressDialog.dismiss();
                             }
-                        }, 2700);
+                        }, 2700);*/
 
 
 
-                        Handler handlerparacheck = new Handler();
-                        handlerparacheck.postDelayed(new Runnable() {
-                            public void run() {
 
-                                if (parameternamearray != null) {
-                                    if (parameternamearray.length == 0) {
-                                        progressDialog.dismiss();
-                                        finish();
-                                        Intent intent = new Intent(context, OTPActivity.class);
-                                        startActivity(intent);
-                                    } else if (parameternamearray.length == 1) {
-                                        progressDialog.dismiss();
-                                        finish();
-                                        Intent intent = new Intent(context, FillProfileActivity.class);
-                                        startActivity(intent);
-                                    } else if (parameternamearray.length == 2) {
-                                      //  GetText(usernumfinal);
-                                      /*  AsyncTaskRunner runnerlengthtwo = new AsyncTaskRunner();
-                                        runnerlengthtwo.execute(Emaillogin, mobilelogin, Passlogin, "profile", usernumfinal, REGISTER_URL_DATA_PROFILE);*/
-                                        progressDialog.dismiss();
-                                        finish();
-                                        Intent intent = new Intent(context, FarmAddActivity.class);
-                                        DataHandler.newInstance().setFromActivty("loginvefification");
-                                        startActivity(intent);
+                            /*Handler handlerparacheck = new Handler();
+                            handlerparacheck.postDelayed(new Runnable() {
+                                public void run() {
+                                    if (lock) {
+                                        if (parameternamearray != null) {
+                                            if (parameternamearray.length == 0) {
+                                                progressDialog.dismiss();
+                                                finish();
+                                                Intent intent = new Intent(context, OTPActivity.class);
+                                                SharedPreferencesMethod.setString(context,"cctt","1");
 
-                                    } else if (parameternamearray.length == 3) {
-                                        if (parameternamearray[0].equals("is_otp_verified") && parametervaluearray[0].equals("1")) {
-
-                                            if (parameternamearray[1].equals("is_profile_set") && parametervaluearray[1].equals("1")) {
-
-                                                if (parameternamearray[2].equals("is_farm_set") && parametervaluearray[2].equals("1")) {
-
-                                                    //GetText(usernumfinal);
-                                                    /*AsyncTaskRunner runnerfarmdata = new AsyncTaskRunner();
-                                                    runnerfarmdata.execute(Emaillogin, mobilelogin, Passlogin, "farmadd", usernumfinal, REGISTER_URL_DATA_FARMADD);*/
-                                                    progressDialog.dismiss();
-                                                    finish();
-                                                    Intent intent = new Intent(context, LandingActivity.class);
-                                                    startActivity(intent);
-                                                    SharedPreferencesMethod.setBoolean(context, "Login", true);
-                                                } else {
-                                                    progressDialog.dismiss();
-                                                    finish();
-                                                    Intent intent = new Intent(context, FarmAddActivity.class);
-                                                    DataHandler.newInstance().setFromActivty("loginvefification");
-                                                    startActivity(intent);
-                                                }
-                                            } else {
+                                                startActivity(intent);
+                                            } else if (parameternamearray.length == 1) {
                                                 progressDialog.dismiss();
                                                 finish();
                                                 Intent intent = new Intent(context, FillProfileActivity.class);
+                                                SharedPreferencesMethod.setString(context,"cctt","1");
+
                                                 startActivity(intent);
+                                            } else if (parameternamearray.length == 2) {
+                                                //  GetText(usernumfinal);
+                                      *//*  AsyncTaskRunner runnerlengthtwo = new AsyncTaskRunner();
+                                        runnerlengthtwo.execute(Emaillogin, mobilelogin, Passlogin, "profile", usernumfinal, REGISTER_URL_DATA_PROFILE);*//*
+                                                progressDialog.dismiss();
+                                                finish();
+                                                Intent intent = new Intent(context, FarmAddActivity.class);
+                                                DataHandler.newInstance().setFromActivty("loginvefification");
+                                                startActivity(intent);
+
+                                            } else if (parameternamearray.length == 3) {
+                                                if (parameternamearray[0].equals("is_otp_verified") && parametervaluearray[0].equals("1")) {
+
+                                                    if (parameternamearray[1].equals("is_profile_set") && parametervaluearray[1].equals("1")) {
+
+                                                        if (parameternamearray[2].equals("is_farm_set") && parametervaluearray[2].equals("1")) {
+
+                                                            //GetText(usernumfinal);
+                                                    *//*AsyncTaskRunner runnerfarmdata = new AsyncTaskRunner();
+                                                    runnerfarmdata.execute(Emaillogin, mobilelogin, Passlogin, "farmadd", usernumfinal, REGISTER_URL_DATA_FARMADD);*//*
+                                                            progressDialog.dismiss();
+                                                            finish();
+                                                            Intent intent = new Intent(context, LandingActivity.class);
+                                                            SharedPreferencesMethod.setString(context,"cctt","1");
+
+                                                            startActivity(intent);
+                                                            SharedPreferencesMethod.setBoolean(context, "Login", true);
+
+                                                        } else {
+                                                            progressDialog.dismiss();
+                                                            finish();
+                                                            Intent intent = new Intent(context, FarmAddActivity.class);
+                                                            SharedPreferencesMethod.setString(context,"cctt","1");
+
+                                                            DataHandler.newInstance().setFromActivty("loginvefification");
+                                                            startActivity(intent);
+                                                        }
+                                                    } else {
+                                                        progressDialog.dismiss();
+                                                        finish();
+                                                        Intent intent = new Intent(context, FillProfileActivity.class);
+                                                        SharedPreferencesMethod.setString(context,"cctt","1");
+
+                                                        startActivity(intent);
+                                                    }
+                                                } else {
+                                                    progressDialog.dismiss();
+                                                    finish();
+                                                    Intent intent = new Intent(context, OTPActivity.class);
+                                                    SharedPreferencesMethod.setString(context,"cctt","1");
+
+                                                    startActivity(intent);
+                                                }
                                             }
                                         } else {
-                                            progressDialog.dismiss();
-                                            finish();
-                                            Intent intent = new Intent(context, OTPActivity.class);
-                                            startActivity(intent);
+                                                progressDialog.dismiss();
                                         }
                                     }
-                                }else{
-
                                 }
-                            }
-                        }, 4300);
+                            }, 4300);*/
+
                     }
 
             }
@@ -496,7 +512,10 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+/*
     public void GetText(final String usernumfinal){
+
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL_DATA_PROFILE,
 
@@ -536,6 +555,9 @@ public class MainActivity extends AppCompatActivity  {
                 if(usernumfinal!=null){
                     params.put(KEY_USER_NUM,usernumfinal);
                 }
+                if(ct1!=null){
+                    params.put(KEY_TOKEN,ct1);
+                }
 
                 return params;
             }
@@ -545,6 +567,7 @@ public class MainActivity extends AppCompatActivity  {
         requestQueue.add(stringRequest);
 
     }
+*/
 
 
 /*
@@ -688,12 +711,27 @@ public class MainActivity extends AppCompatActivity  {
                                         parameternamearray=null;
                                         password.setText("");
 
-                                    } else {
+                                    }else if(response.equals("\"000\"")){
+                                        alert.showAlertDialog(MainActivity.this, getString(R.string.dialog_password_incorrect), getString(R.string.dialog_password_incorrect_helper), false);
+                                        progressDialog.dismiss();
+                                        usernumfinal=null;
+                                        parameternamearray=null;
+                                        password.setText("");
+                                    }
+                                    else {
                                         try {
                                             JSONObject jobject = new JSONObject(response);
                                             String emaillogin = jobject.getString("email");
                                             String mobilelogin = jobject.getString("mobNo");
                                             String usernum = jobject.getString("user_num");
+                                            String is_farmer=jobject.getString("is_farmer");
+                                            String is_inspector=jobject.getString("is_inspector");
+                                            String is_admin=jobject.getString("is_admin");
+                                            String is_verified=jobject.getString("is_verified");
+                                            String is_active=jobject.getString("is_active");
+                                            String comp_num=jobject.getString("comp_num");
+
+                                            DataHandler.newInstance().setIs_active_otp(is_active);
                                             usernumfinal = usernum;
                                             DataHandler.newInstance().setLoginEmail(emaillogin);
                                             DataHandler.newInstance().setLoginmobileno(mobilelogin);
@@ -704,10 +742,42 @@ public class MainActivity extends AppCompatActivity  {
                                             SharedPreferencesMethod.setString(context, "UserNum", usernum);
                                             SharedPreferencesMethod.setString(context, "Mobile", mobilelogin);
                                             SharedPreferencesMethod.setString(context, "Email", emaillogin);
+
+                                            if(comp_num!=null) {
+                                                if(comp_num.equals("0")) {
+                                                    SharedPreferencesMethod.setBoolean(context, SharedPreferencesMethod.BINDED, false);
+                                                }else{
+                                                    SharedPreferencesMethod.setBoolean(context, SharedPreferencesMethod.BINDED, true);
+                                                }
+                                            }
+
                                             //Toast.makeText(MainActivity.this, getString(R.string.login_successfull), Toast.LENGTH_SHORT).show();
                                             //Toast.makeText(MainActivity.this, usernum, Toast.LENGTH_SHORT).show();
                                                 Log.e("MainAct","Came here");
 
+
+
+
+                                            if(is_farmer.equals("Y")){
+                                                                lock=true;
+                                                                if(is_active.equals("Y")){
+                                                                    Intent intent=new Intent(context,LandingActivity.class);
+                                                                    SharedPreferencesMethod.setString(context,"cctt",comp_num);
+                                                                    SharedPreferencesMethod.setBoolean(context, "Login", true);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }else{
+
+                                                                    Intent intent=new Intent(context,OTPActivity.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }
+                                            }else{
+                                                password.setText("");
+                                                alert.showAlertDialog(MainActivity.this, "Incorrect User","Please Login with Farmer Login id", false);
+                                                progressDialog.dismiss();
+
+                                            }
                                            /* Intent intent = new Intent(context, LoginVerificationActivity.class);
                                             startActivity(intent);
                                             finish();*/
@@ -720,7 +790,7 @@ public class MainActivity extends AppCompatActivity  {
                                 }
 
 
-                                else if(flagonrec.equals("regcheck")&&usernumonrec!=null){
+                                /*else if(flagonrec.equals("regcheck")&&usernumonrec!=null){
                                     JSONArray jsonarray = null;
                                     try {
                                         jsonarray = new JSONArray(response);
@@ -741,10 +811,10 @@ public class MainActivity extends AppCompatActivity  {
                                             Log.e("Date :",parametername+"Parameter value"+parametervalue);
                                         }
 
-                            /*DataHandler.newInstance().setDatefarmcal(datefarmcal);
+                            *//*DataHandler.newInstance().setDatefarmcal(datefarmcal);
                             DataHandler.newInstance().setActivityfarmcal(activityfarmcal);
                             DataHandler.newInstance().setActivitydescriptionfarmcal(activitydescriptionfarmal);
-*/
+*//*
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         progressDialog.dismiss();
@@ -767,7 +837,7 @@ public class MainActivity extends AppCompatActivity  {
                                         e.printStackTrace();
                                     }
                                     // Toast.makeText(LoginVerificationActivity.this, firstname, Toast.LENGTH_SHORT).show();
-                                }
+                                }*/
 
 
                                 else if(flagonrec.equals("farmadd")&&usernumonrec!=null){

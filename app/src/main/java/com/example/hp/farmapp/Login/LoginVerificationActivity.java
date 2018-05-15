@@ -15,10 +15,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
-import com.example.hp.farmapp.CalendarPackage.ListViewActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
@@ -33,9 +32,9 @@ import java.util.Map;
 public class LoginVerificationActivity extends AppCompatActivity {
 
     Context context;
-    private static final String REGISTER_URL_CHECK_FILLED = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_app_registry_data";
-    private static final String REGISTER_URL_DATA_PROFILE = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/fetch_profile";
-    private static final String REGISTER_URL_DATA_FARMADD = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL_CHECK_FILLED = "http://spade.farm/app/index.php/signUp/get_app_registry_data";
+    private static final String REGISTER_URL_DATA_PROFILE = "http://spade.farm/app/index.php/signUp/fetch_profile";
+    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
 
     public static final String KEY_USER_NUM = "user_num";
     String profiledataregisterurl,farmdaddregisterurl;

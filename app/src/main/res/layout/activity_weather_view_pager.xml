@@ -1,32 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
+
     <include
         android:id="@+id/toolbar_actionbar"
-        layout="@layout/my_title_bar"
+        layout="@layout/title_bar_for_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_below="@id/toolbar_actionbar"
         android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:textColor="#000000"
+        android:textSize="@dimen/_10ssp"
+        app:pstsDividerColor="@color/green"
+        app:pstsIndicatorColor="@color/saddlebrown"
+        app:pstsUnderlineColor="@color/green_new" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/no_gps_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-       >
-        <android.support.v4.view.PagerTabStrip
-            android:id="@+id/tabs"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Please Contact Inspector to verify This Farm"
+        android:textColor="@color/colorAccent"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="center"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textSize="@dimen/_20sdp"/>
+
+    <ScrollView
+        android:layout_below="@id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="#FFFFFF" />
+            android:orientation="vertical">
 
-    </android.support.v4.view.ViewPager>
 
-</LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"></android.support.v4.view.ViewPager>
+
+
+        </LinearLayout>
+
+
+        <!-- <android.support.v4.view.PagerTabStrip
+             android:id="@+id/tabs"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="top"
+             android:paddingBottom="10dp"
+             android:paddingTop="10dp"
+             android:background="#f1f1f1"
+             android:textColor="@color/black" />-->
+
+
+    </ScrollView>
+</RelativeLayout>

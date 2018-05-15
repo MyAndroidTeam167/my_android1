@@ -48,25 +48,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NOTIFICATION + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NOTIFICATION + " TEXT,"
-                +KEY_NOTIFICATION_DESCRIPTION+" TEXT,"+KEY_NOTIFICATION_DATE+" TEXT);";
+                +KEY_NOTIFICATION_DESCRIPTION+" TEXT,"+KEY_NOTIFICATION_DATE+" DATE);";
         db.execSQL(CREATE_CONTACTS_TABLE);
-
-
-/*
-        String TABLE= "DESCRIBE "+TABLE_NOTIFICATION;
-         String query=TABLE;
-        Cursor cursor=db.rawQuery(query,null);
-        while (cursor.moveToNext()) {
-            String result_0=cursor.getString(0);
-            String result_1=cursor.getString(1);
-
-            Log.e("Table :","This is data"+result_0+"  "+result_1);
-
-            //and so on
-        }
-        cursor.close();
-*/
-      //  db.close();
 
     }
 
@@ -96,24 +79,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_NOTIFICATION, null, values);
 
-/*
-        String TABLE= "DESCRIBE "+TABLE_NOTIFICATION;
+        db.close();
+    }
 
+    // Deleting single contact
+    public void deleteContact(GetProfile contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NOTIFICATION, KEY_ID + " = ?",
+                new String[] { String.valueOf(contact.getPosition()) });
+        db.close();
+    }
 
-
-        String query=TABLE;
-        Cursor cursor=db.rawQuery(query,null);
-        while (cursor.moveToNext()) {
-            String result_0=cursor.getString(0);
-            String result_1=cursor.getString(1);
-
-            Log.e("Table :","This is data"+result_0+"  "+result_1);
-
-            //and so on
-        }
-        cursor.close(); //2nd argument is String containing nullColumnHack
-*/
-        db.close(); // Closing database connection
+    public void deleteOldNotifications(String formattedString) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NOTIFICATION, KEY_NOTIFICATION_DATE + " < ?", new String[] { String.valueOf(formattedString.trim()) });
+        db.close();
     }
 
     // Getting single contact
@@ -170,13 +150,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(contact.get_id()) });
     }
 
-    // Deleting single contact
-    public void deleteContact(GetProfile contact) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NOTIFICATION, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.get_id()) });
-        db.close();
-    }
+
 
     // Getting contacts Count
     public int getContactsCount() {

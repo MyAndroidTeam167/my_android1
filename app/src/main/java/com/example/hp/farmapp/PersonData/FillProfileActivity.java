@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +33,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
@@ -52,9 +56,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class FillProfileActivity extends AppCompatActivity {
+public class FillProfileActivity extends BaseActivity {
 
-    private static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/insert_new_data_in_person";
+    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/insert_new_data_in_person";
     ProgressDialog progressDialog;
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_MIDDLE_NAME = "middleName";
@@ -78,6 +82,11 @@ public class FillProfileActivity extends AppCompatActivity {
     private static final String DEFAULT_LOCAL = "India";
     private static final String DEFAULT_LOCAL_STATE = "Madhya Pradesh";
     private static final String DEFAULT_LOCAL_CITY = "Indore";
+    private static final String KEY_TOKEN = "token1";
+    ConnectivityManager connectivityManager;
+    boolean connected = false;
+    Boolean is_binded=false;
+    String ct1="";
 
     Calendar myCalendar = Calendar.getInstance();
 
@@ -102,13 +111,15 @@ public class FillProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*Intent intent=new Intent(context,MainActivity.class);
+        Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
-        finish();*/
+        finish();
         return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {
+        Intent intent=new Intent(context,LandingActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -118,14 +129,29 @@ public class FillProfileActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
+        context=this;
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+
+        if (connected) {
+            is_binded = SharedPreferencesMethod.getBoolean(context, SharedPreferencesMethod.BINDED);
+            if (is_binded) {
         setContentView(R.layout.activity_fill_profile);
 
         Email= DataHandler.newInstance().getLoginEmail();
         mobileno=DataHandler.newInstance().getLoginmobileno();
-        Log.e("TAG:",mobileno);
+
+        if(mobileno!=null){
+        Log.e("TAG:",mobileno);}
         emailfill=(EditText)findViewById(R.id.emailfillprofile);
         mobilefill=(EditText)findViewById(R.id.mobilenoprofile);
         frstnamefill=(EditText)findViewById(R.id.firstnameprofile);
@@ -147,10 +173,14 @@ public class FillProfileActivity extends AppCompatActivity {
         mobtwofill=(EditText)findViewById(R.id.alternatemobprofile);
         landlinefill=(EditText)findViewById(R.id.landlinenoprofile);
         saveprofile=(Button)findViewById(R.id.Saveprofile);
+
         //accountSignup=(TextView)findViewById(R.id.login_title_registor);
         // testtt=(Button)findViewById(R.id.testprofile);
-        context=this;
+        //context=this;
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
         usernum=SharedPreferencesMethod.getString(context,"UserNum");
+        Email=SharedPreferencesMethod.getString(context,"Email");
+        mobileno=SharedPreferencesMethod.getString(context,"Mobile");
 
         TextView title=(TextView)findViewById(R.id.tittle);
         title.setText("Fill Profile");
@@ -160,8 +190,8 @@ public class FillProfileActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle("My Title");
 
         if (getSupportActionBar() != null){
-          /*  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);*/
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
@@ -340,9 +370,9 @@ public class FillProfileActivity extends AppCompatActivity {
                 else if (!isValidaadhar(adharnofill.getText().toString().trim())) {
                     adharnofill.setError("Invalid Aadhar Number");
                 }
-                else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
+               /* else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
                     pannofill.setError("Invalid Panno.");
-                }
+                }*/
                 else if(!isValiddob(sdobfill))
                 {
                     dobfill.setError("Please Enter Date of birth");
@@ -376,10 +406,12 @@ public class FillProfileActivity extends AppCompatActivity {
             }
         });
 
-        emailfill.setText(Email);
-        emailfill.setEnabled(false);
-        mobilefill.setText(mobileno);
-        mobilefill.setEnabled(false);
+        if(Email!=null && mobileno!=null) {
+            emailfill.setText(Email);
+            emailfill.setEnabled(false);
+            mobilefill.setText(mobileno);
+            mobilefill.setEnabled(false);
+        }
 
 
         JSONObject objcount = null;
@@ -546,6 +578,15 @@ public class FillProfileActivity extends AppCompatActivity {
 
 
 
+    }else
+        {
+            setContentView(R.layout.not_binded_layout);
+            basic_title();
+        }
+    }else{
+            setContentView(R.layout.internet_not_connencted);
+            basic_title();
+        }
     }
 
 
@@ -634,11 +675,9 @@ public class FillProfileActivity extends AppCompatActivity {
                             SharedPreferencesMethod.setString(context,"person_num",response);
                             DataHandler.newInstance().setFromActivty("fillprofile");
                             Toast.makeText(FillProfileActivity.this, response, Toast.LENGTH_LONG).show();
-                            Intent intent =new Intent(context,FarmAddActivity.class);
+                            Intent intent =new Intent(context,LandingActivity.class);
                             startActivity(intent);
                             finish();
-
-
                         }
                     }
                 },
@@ -663,7 +702,9 @@ public class FillProfileActivity extends AppCompatActivity {
                 params.put(KEY_PAN_NO, spannofill);
                 params.put(KEY_DOB, sdobfill);
                 params.put(KEY_ADDRESSID, saddressidfill);
-                params.put(KEY_MOBNO1, mobileno);
+                if(mobileno!=null) {
+                    params.put(KEY_MOBNO1,mobileno);
+                }
                 params.put(KEY_MOBNO2, smobno2fill);
                 params.put(KEY_LANDLINE, slandlineNofill);
                 params.put(KEY_ADDL1,saddl1profileadd);
@@ -672,10 +713,15 @@ public class FillProfileActivity extends AppCompatActivity {
                 params.put(KEY_COUNTRY,scitizenship);
                 params.put(KEY_STATE,sstateprofileadd);
                 params.put(KEY_CITY,scityprofileadd);
-                params.put(KEY_EMAIL, Email);
+                params.put("is_inspector","N");
+                params.put("is_admin","N");
+                params.put("is_farmer","Y");
+                if(Email!=null) {
+                    params.put(KEY_EMAIL, Email);
+                }
+                params.put(KEY_TOKEN,ct1);
                 if(usernum!=null){
-                    params.put(KEY_USERNUM, usernum);
-
+                    params.put(KEY_USERNUM, /*usernum*/usernum);
                 }
 
                 return params;
@@ -767,6 +813,16 @@ public class FillProfileActivity extends AppCompatActivity {
 
         return pan;
     }
-
+    void basic_title(){
+        TextView title=(TextView)findViewById(R.id.tittle);
+        title.setText("Soil Health Card List");
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        setSupportActionBar(mActionBarToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
 
 }

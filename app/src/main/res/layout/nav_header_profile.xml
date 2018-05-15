@@ -4,19 +4,43 @@
     android:layout_height="@dimen/nav_header_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    android:background="@drawable/new_grapes_6"
+    android:background="@color/green_new"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/header_comp_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="App Name"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:text="@string/company_name"
+        android:textSize="@dimen/_16ssp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <ImageView
+
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_35sdp"
+        android:layout_below="@id/header_comp_name"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/comp_banner"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_landing"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/ic_person_white_24dp"
+        android:elevation="4dp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/rounded_lay_for_farmer_profile"
+        />
    <!-- <include
         layout="@layout/spinner"
         android:layout_width="match_parent"

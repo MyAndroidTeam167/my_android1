@@ -59,19 +59,20 @@ public class SpinnerAdapter extends BaseAdapter{
    /* @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
       //  TextView txt = new TextView(MainActivity.this);
-       *//* TextView txt = (TextView) convertView.findViewById(R.id.text11);
+        TextView txt = (TextView) convertView.findViewById(R.id.text11);
         txt.setPadding(16, 16, 16, 16);
         txt.setTextSize(18);
         txt.setGravity(Gravity.CENTER_VERTICAL);
         txt.setTextColor(Color.parseColor("#000000"));
         SpinnerData spinnerData = SpinnerDatums.get(position);
         txt.setText(spinnerData.getItem_name());
-        return  txt;*//*
+        return  txt;
 
     }*/
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = flater.inflate(R.layout.spinner_item, null);
+        Log.e("check_i_value",String.valueOf(i));
         TextView names = (TextView) view.findViewById(R.id.text11);
         names.setGravity(Gravity.CENTER);
         names.setPadding(16, 16, 16, 16);

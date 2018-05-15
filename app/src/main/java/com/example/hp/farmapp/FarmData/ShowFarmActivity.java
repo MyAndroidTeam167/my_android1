@@ -3,13 +3,14 @@ package com.example.hp.farmapp.FarmData;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -24,19 +25,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.FarmData.FarmPackage.EditFarmActivity;
-import com.example.hp.farmapp.Login.MainActivity;
-import com.example.hp.farmapp.PersonData.EditProfileActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
-import com.example.hp.farmapp.app.Config;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,13 +46,27 @@ public class ShowFarmActivity extends AppCompatActivity {
     TextView mFarmName,mCropName,mGrowingRegion,mGrowingSeason,mArea,mSoilType,mIrrigationType,mSowingDate,mHarvestDate,mSpecialNote,mFarmAddress;
     String AREA, FARM_GPSC1,FARM_GPSC2,FARM_GPSC3, FARM_GPSC4, FARM_GPSC5, FARM_GPSC6,SOIL_TYPE,IRRIGATION_TYPE,AddL1,AddL2,AddL3,City,State,Country,FarmNum,UserNum;
     String Growing_Season,Growing_Region,Sowing_date,Harvest_date,Special_Comment,Crop_name,Address;
-    private static final String REGISTER_URL_DATA_FARMADD = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
     public static final String KEY_USER_NUM = "user_num";
     public static final String KEY_FARM_NUM = "farm_num";
+    public static final String KEY_TOKEN = "token1";
+
     ProgressDialog progressDialog;
+    ConnectivityManager connectivityManager;
+    boolean connected=false;
+    Boolean is_binded=false;
     ImageButton editshowfarm;
     ImageView goback;
+    String ct1;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /*Intent intent=new Intent(context,MainActivity.class);
+        startActivity(intent);
+        finish();*/
+        super.onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onBackPressed() {
@@ -69,6 +78,7 @@ public class ShowFarmActivity extends AppCompatActivity {
         *//*Intent intent=new Intent(context,LandingActivity.class);
         startActivity(intent);
         finish();*//*
+
         super.onBackPressed();
         //return super.onOptionsItemSelected(item);
     }*/
@@ -78,11 +88,24 @@ public class ShowFarmActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_farm);
         context=this;
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+
+        if (connected) {
+            is_binded = SharedPreferencesMethod.getBoolean(context, SharedPreferencesMethod.BINDED);
+            if (is_binded) {
+        setContentView(R.layout.activity_show_farm);
+
 
         /*TextView title=(TextView)findViewById(R.id.tittle);
         title.setText("My Farm");
@@ -99,20 +122,16 @@ public class ShowFarmActivity extends AppCompatActivity {
 
 
         FarmNum=SharedPreferencesMethod.getString(context,"farm_num");
-        UserNum=SharedPreferencesMethod.getString(context,"UserNum");
+        //UserNum=SharedPreferencesMethod.getString(context,"UserNum");
         mFarmName=(TextView)findViewById(R.id.farm_name_tv);
-        mCropName=(TextView)findViewById(R.id.crop_name_tv);
         mArea=(TextView)findViewById(R.id.area_tv);
-        mGrowingRegion=(TextView)findViewById(R.id.growing_region_tv);
-        mGrowingSeason=(TextView)findViewById(R.id.growing_season_tv);
         mSoilType=(TextView)findViewById(R.id.soil_type_tv);
         mIrrigationType=(TextView)findViewById(R.id.irrigation_type_tv);
-        mSowingDate=(TextView)findViewById(R.id.sowing_date_tv);
-        mHarvestDate=(TextView)findViewById(R.id.harvest_date_tv);
         mSpecialNote=(TextView)findViewById(R.id.special_note_tv);
         mFarmAddress=(TextView)findViewById(R.id.farm_address_tv);
         editshowfarm=(ImageButton)findViewById(R.id.editoptionforfarm);
         goback=(ImageView)findViewById(R.id.gobackbuttfarm);
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
 
 
 
@@ -122,7 +141,7 @@ public class ShowFarmActivity extends AppCompatActivity {
                 /*Intent intent=new Intent(context,LandingActivity.class);
                 startActivity(intent);
                 finish();*/
-                onBackPressed();
+                ShowFarmActivity.super.onBackPressed();
             }
         });
 
@@ -141,27 +160,15 @@ public class ShowFarmActivity extends AppCompatActivity {
                 getString(R.string.dialog_please_wait),"");
         AsyncTaskRunner asyncTask=new AsyncTaskRunner();
         asyncTask.execute();
-
-     /*   AREA= SharedPreferencesMethod.getString(context,"farm_area");
-        SOIL_TYPE=SharedPreferencesMethod.getString(context,"farm_soil_type");
-        IRRIGATION_TYPE=SharedPreferencesMethod.getString(context,"farm_irrigation_type");
-        AddL1=SharedPreferencesMethod.getString(context,"farm_addl1");
-        AddL2=SharedPreferencesMethod.getString(context,"farm_addl2");
-        AddL3=SharedPreferencesMethod.getString(context,"farm_addl3");
-        City=SharedPreferencesMethod.getString(context,"farm_city");
-        State=SharedPreferencesMethod.getString(context,"farm_state");
-        Country=SharedPreferencesMethod.getString(context,"farm_country");
-        Special_Comment = SharedPreferencesMethod.getString(context,"farm_spec_comment");
-        Growing_Season = SharedPreferencesMethod.getString(context,"farm_growing_season");
-        Growing_Region = SharedPreferencesMethod.getString(context,"farm_growing_region");
-        Sowing_date = SharedPreferencesMethod.getString(context,"farm_sowing_date");
-        Harvest_date = SharedPreferencesMethod.getString(context,"farm_harvest_date");
-        Crop_name=SharedPreferencesMethod.getString(context,"farm_crop_name");*/
-       /* Log.e("shared",SOIL_TYPE);
-        Log.e("shared",AddL1 + IRRIGATION_TYPE+","+ City+","+Special_Comment);
-*/
-
-
+    }else
+        {
+            setContentView(R.layout.not_binded_layout);
+            basic_title();
+        }
+    }else{
+            setContentView(R.layout.internet_not_connencted);
+            basic_title();
+        }
     }
 
 
@@ -169,8 +176,6 @@ public class ShowFarmActivity extends AppCompatActivity {
         public AsyncTaskRunner() {
             super();
         }
-
-
         @Override
         protected String doInBackground(final String... params) {
             try {
@@ -196,12 +201,12 @@ public class ShowFarmActivity extends AppCompatActivity {
                                     String farm_city = null;
                                     String farm_state = null;
                                     String farm_country = null;
-                                    String growing_region=null;
-                                    String growing_season=null;
-                                    String sowing_date=null;
-                                    String harvest_date=null;
-                                    String crop_name = null;
+                                    String address_num=null;
                                     String pet_name=null;
+                                    String farm_num=null;
+                                    String is_crop_assigned=null;
+                                    String is_verified=null;
+                                    String person_num=null;
                                     try {
                                         JSONObject jobject = new JSONObject(response);
                                         area = jobject.getString("area");
@@ -220,12 +225,13 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         farm_city = jobject.getString("city");
                                         farm_state = jobject.getString("state");
                                         farm_country = jobject.getString("country");
-                                        growing_region=jobject.getString("growing_region");
-                                        growing_season = jobject.getString("growing_season");
-                                        sowing_date=jobject.getString("date_of_sowing");
-                                        harvest_date=jobject.getString("expct_dateof_harvest");
-                                        crop_name=jobject.getString("crop_name");
                                         pet_name=jobject.getString("farm_pet_name");
+                                        farm_num=jobject.getString("farm_num");
+                                        address_num=jobject.getString("address_num");
+                                        is_crop_assigned=jobject.getString("is_crop_assigned");
+                                        is_verified=jobject.getString("is_verified");
+                                        person_num=jobject.getString("person_num");
+
 
 
                                         DataHandler.newInstance().setFardmaddsoiltype(soiltype);
@@ -239,30 +245,19 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         DataHandler.newInstance().setFarmdaddstate(farm_state);
                                         DataHandler.newInstance().setFarmaddspclcmnt(speccomment);
                                         DataHandler.newInstance().setFarmaddpetname(pet_name);
+                                        DataHandler.newInstance().setShowfarmaddressnum(address_num);
+                                        DataHandler.newInstance().setShowfarmfarmnum(farm_num);
+                                        DataHandler.newInstance().setShowfarmgpsc1(gpsc1);
+                                        DataHandler.newInstance().setShowfarmgpsc2(gpsc2);
+                                        DataHandler.newInstance().setShowfarmgpsc3(gpsc3);
+                                        DataHandler.newInstance().setShowfarmgpsc4(gpsc4);
+                                        DataHandler.newInstance().setShowfarmgpsc5(gpsc5);
+                                        DataHandler.newInstance().setShowfarmgpsc6(gpsc6);
+                                        DataHandler.newInstance().setShowfarmiscropassigned(is_crop_assigned);
+                                        DataHandler.newInstance().setShowfarmisverified(is_verified);
+                                        DataHandler.newInstance().setShowfarmpersonnum(person_num);
 
 
-
-                                    /*    SharedPreferencesMethod.setString(context,"farm_area",area);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc1",gpsc1);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc2",gpsc2);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc3",gpsc3);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc4",gpsc4);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc5",gpsc5);
-                                        SharedPreferencesMethod.setString(context,"farm_gpsc6",gpsc6);
-                                        SharedPreferencesMethod.setString(context,"farm_soil_type",soiltype);
-                                        SharedPreferencesMethod.setString(context,"farm_irrigation_type",irrigationtype);
-                                        SharedPreferencesMethod.setString(context,"farm_addl1",addl1);
-                                        SharedPreferencesMethod.setString(context,"farm_addl2",addl2);
-                                        SharedPreferencesMethod.setString(context,"farm_addl3",addl3);
-                                        SharedPreferencesMethod.setString(context,"farm_city",farm_city);
-                                        SharedPreferencesMethod.setString(context,"farm_state",farm_state);
-                                        SharedPreferencesMethod.setString(context,"farm_country",farm_country);
-                                        SharedPreferencesMethod.setString(context,"farm_spec_comment",speccomment);
-                                        SharedPreferencesMethod.setString(context,"farm_growing_region",growing_region);
-                                        SharedPreferencesMethod.setString(context,"farm_growing_season",growing_season);
-                                        SharedPreferencesMethod.setString(context,"farm_sowing_date",sowing_date);
-                                        SharedPreferencesMethod.setString(context,"farm_harvest_date",harvest_date);
-                                        SharedPreferencesMethod.setString(context,"farm_crop_name",crop_name);*/
 
                                         SOIL_TYPE=soiltype;
                                         IRRIGATION_TYPE=irrigationtype;
@@ -274,11 +269,7 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         State=farm_state;
                                         Country=farm_country;
                                         Special_Comment =speccomment;
-                                        Growing_Season = growing_season;
-                                        Growing_Region = growing_region;
-                                        Sowing_date = sowing_date;
-                                        Harvest_date = harvest_date;
-                                        Crop_name=crop_name;
+
                                         if(AddL2.matches("")){
                                         }
                                         else{
@@ -289,20 +280,14 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         else{
                                             AddL3=", "+AddL3;
                                         }
-
                                         Address=AddL1 + AddL2 + AddL3+", "+City+", "+State+", "+Country;
 
                                         mFarmName.setText(pet_name);
                                         mArea.setText(AREA);
-                                        mCropName.setText(Crop_name);
-                                        mGrowingRegion.setText(Growing_Region);
-                                        mGrowingSeason.setText(Growing_Season);
                                         mSoilType.setText(SOIL_TYPE);
                                         mIrrigationType.setText(IRRIGATION_TYPE);
-                                        mSowingDate.setText(Sowing_date);
-                                        mHarvestDate.setText(Harvest_date);
-                                        mSpecialNote.setText(Special_Comment);
                                         mFarmAddress.setText(Address);
+                                        mSpecialNote.setText(Special_Comment);
                                         progressDialog.dismiss();
 
                                     } catch (JSONException e) {
@@ -310,9 +295,7 @@ public class ShowFarmActivity extends AppCompatActivity {
                                         progressDialog.dismiss();
                                         e.printStackTrace();
                                     }
-
-                                    //  Toast.makeText(LoginVerificationActivity.this, soiltype, Toast.LENGTH_SHORT).show();
-                                }
+                             }
 
                         },
                         new com.android.volley.Response.ErrorListener() {
@@ -326,11 +309,12 @@ public class ShowFarmActivity extends AppCompatActivity {
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
 
-                        if(UserNum!=null){
-                            params.put(KEY_USER_NUM,UserNum);
-                        }
+
                         if(FarmNum!=null){
                             params.put(KEY_FARM_NUM,FarmNum);
+                        }
+                        if(ct1!=null){
+                            params.put(KEY_TOKEN,ct1);
                         }
                         return params;
                     }
@@ -370,4 +354,15 @@ public class ShowFarmActivity extends AppCompatActivity {
 
     }
 
+    void basic_title(){
+        TextView title=(TextView)findViewById(R.id.tittle);
+        title.setText("Farm Activity");
+        mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
+        setSupportActionBar(mActionBarToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
 }

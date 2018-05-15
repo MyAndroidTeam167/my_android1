@@ -32,9 +32,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +63,7 @@ public class OTPActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
     String charset = "UTF-8";
     String mobileno;
-     String OTPVERIFY="https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/do_is_active_1";
+     String OTPVERIFY="http://spade.farm/app/index.php/signUp/do_is_active_1";
     String usernum="";
     String response,finres,status,details,detailssessionid,otppp;
     TextView otpsent,otpreposne;
@@ -79,6 +81,8 @@ public class OTPActivity extends AppCompatActivity {
     TextView resendotp;
     String Ipaddress;
     final String authkey = "996859f5-9935-11e7-94da-0200cd936042";
+    /*final String KEY_TOKEN="token1";
+    String ct1;*/
 
 
     @Override
@@ -134,7 +138,7 @@ public class OTPActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
@@ -274,7 +278,8 @@ public class OTPActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             if (response.equals("\"Successful\"")) {
-                                                Intent intent = new Intent(context, FillProfileActivity.class);
+                                                Intent intent = new Intent(context, LandingActivity.class);
+                                                SharedPreferencesMethod.setBoolean(context, "Login", true);
                                                 startActivity(intent);
                                                 finish();
                                             } else {

@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.hp.farmapp.CalendarPackage.Adapter.CalendarAdapter;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.R;
 import java.util.GregorianCalendar;
 
@@ -33,10 +34,9 @@ public class DisplayCalendarActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       /* Intent intent=new Intent(context,LandingActivity.class);
-        startActivity(intent);*/
-        //finish();
-        super.onBackPressed();
+        Intent intent=new Intent(context,LandingActivity.class);
+        startActivity(intent);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
@@ -46,7 +46,7 @@ public class DisplayCalendarActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_calendar);
@@ -145,7 +145,9 @@ public class DisplayCalendarActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent=new Intent(context,LandingActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     protected void setPreviousMonth() {

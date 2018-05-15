@@ -34,11 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
-import com.example.hp.farmapp.DataHandler.DataHandler;
-import com.example.hp.farmapp.FarmData.FarmAddActivity;
-import com.example.hp.farmapp.Login.LoginVerificationActivity;
-import com.example.hp.farmapp.Login.MainActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -60,7 +56,7 @@ import java.util.regex.Pattern;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    public static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/edit_user_profile_data";
+    public static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/edit_user_profile_data";
     ProgressDialog progressDialog;
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_MIDDLE_NAME = "middleName";
@@ -85,6 +81,11 @@ public class EditProfileActivity extends AppCompatActivity {
     private static String DEFAULT_LOCAL_STATE = "Madhya Pradesh";
     private static String DEFAULT_LOCAL_CITY = "Indore";
     public static final String KEY_PERSON_NUM = "person_num";
+    public static final String KEY_PROFILE_IMG = "profile_img";
+    public static final String KEY_TOKEN = "token1";
+
+    String ct1;
+
 
     Calendar myCalendar = Calendar.getInstance();
     Toolbar mActionBarToolbar;
@@ -103,14 +104,21 @@ public class EditProfileActivity extends AppCompatActivity {
     TextView accountSignup;
     String Countryidonclick = "";
     String stateidonclick = "";
+    String Profileimage;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(context, LandingActivity.class);
+        Intent intent = new Intent(context, ShowProfileActivity.class);
         startActivity(intent);
         finish();
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(context, ShowProfileActivity.class);
+        startActivity(intent);
+        finish();    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +126,7 @@ public class EditProfileActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
@@ -147,6 +155,7 @@ public class EditProfileActivity extends AppCompatActivity {
         //accountSignup=(TextView)findViewById(R.id.Edit_title_registor);
         TextView title = (TextView) findViewById(R.id.tittle);
         title.setText("Edit Profile");
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null) {
@@ -155,6 +164,8 @@ public class EditProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
+        progressDialog = ProgressDialog.show(EditProfileActivity.this,
+                "Please Wait...", "");
 
         First_Name = SharedPreferencesMethod.getString(context, "first_name");
         Middle_Name = SharedPreferencesMethod.getString(context, "middle_name");
@@ -174,6 +185,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Country = SharedPreferencesMethod.getString(context, "profilecountry");
         usernum = SharedPreferencesMethod.getString(context, "UserNum");
         Personnum = SharedPreferencesMethod.getString(context, "person_num");
+        Profileimage=SharedPreferencesMethod.getString(context,"profile_img_farmer");
 
 
         SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd");
@@ -183,7 +195,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             String reformattedStr = myFormat.format(fromUser.parse(Dob));
             Dob=reformattedStr;
-           // Toast.makeText(EditProfileActivity.this, "*"+sdobfill+"*", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(EditProfileActivity.this, "*"+sdobfill+"*", Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -209,6 +221,8 @@ public class EditProfileActivity extends AppCompatActivity {
         DEFAULT_LOCAL = Country;
         DEFAULT_LOCAL_STATE = State;
         DEFAULT_LOCAL_CITY = City;
+
+        progressDialog.dismiss();
 
         //getSupportActionBar().setTitle("My Title");
 
@@ -333,9 +347,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     lastnamefill.setError("Last Name Should not be null");
                 } else if (!isValidaadhar(adharnofill.getText().toString().trim())) {
                     adharnofill.setError("Invalid Aadhar Number");
-                } else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
+                }/* else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
                     pannofill.setError("Invalid Panno.");
-                } else if (!isValiddob(sdobfill)) {
+                }*/ else if (!isValiddob(sdobfill)) {
                     dobfill.setError("Please Enter Date of birth");
                 } else if (!isValidMobile(mobtwofill.getText().toString().trim())) {
                     mobtwofill.setError("Invalid Mobile Number");
@@ -656,6 +670,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 params.put(KEY_STATE, sstateprofileadd);
                 params.put(KEY_CITY, scityprofileadd);
                 params.put(KEY_EMAIL, Email);
+                params.put(KEY_TOKEN,ct1);
+                params.put("is_inspector","N");
+                params.put("is_admin","N");
+                params.put("is_farmer","Y");
                 if (usernum != null) {
                     params.put(KEY_USERNUM, usernum);
 
@@ -663,6 +681,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (Personnum != null) {
                     params.put(KEY_PERSON_NUM, Personnum);
                 }
+
 
                 return params;
             }
@@ -704,7 +723,6 @@ public class EditProfileActivity extends AppCompatActivity {
             slastnamefill = lastnamefill.getText().toString();
             sadharnofill = adharnofill.getText().toString();
             spannofill = pannofill.getText().toString();
-            //  saddressidfill="";
             smobno2fill = mobtwofill.getText().toString();
             slandlineNofill = landlinefill.getText().toString();
             saddl1profileadd = addl1profileadd.getText().toString();
@@ -731,7 +749,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(context, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
-                                    Intent intent = new Intent(context, LandingActivity.class);
+                                    Intent intent = new Intent(context, ShowProfileActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -793,7 +811,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         if (saddl3profileadd != null) {
                             params.put(KEY_ADDL3, saddl3profileadd);
                         }
-                            params.put(KEY_COUNTRY, DEFAULT_LOCAL);
+                        params.put(KEY_COUNTRY, DEFAULT_LOCAL);
 
                         if (sstateprofileadd != null) {
                             params.put(KEY_STATE, sstateprofileadd);
@@ -812,6 +830,13 @@ public class EditProfileActivity extends AppCompatActivity {
                         if (Personnum != null) {
                             params.put(KEY_PERSON_NUM, Personnum);
                         }
+                        params.put(KEY_TOKEN,ct1);
+                        if(Profileimage!=null){
+                            params.put(KEY_PROFILE_IMG,Profileimage);
+                        }
+                        params.put("is_inspector","N");
+                        params.put("is_admin","N");
+                        params.put("is_farmer","Y");
                         return params;
                     }
                 };

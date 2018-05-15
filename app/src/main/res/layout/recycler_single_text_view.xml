@@ -23,6 +23,7 @@
             android:layout_margin="3dp">
 
             <RelativeLayout
+                android:id="@+id/rel_lay_task_recycler_adapter"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 >

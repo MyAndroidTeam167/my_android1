@@ -17,8 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
@@ -30,6 +28,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,16 +44,12 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
-import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
 import com.example.hp.farmapp.CalendarPackage.ChatBox.ChatActivity;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
-import com.example.hp.farmapp.Notification.NotificationActivity;
+import com.example.hp.farmapp.FarmData.FarmPackage.FarmImagesActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,6 +58,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,7 +70,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     Context context;
     ImageView imgView;
     CheckBox mCheckBox;
-    Button mButton;
+    Button mButton,next_button;
     EditText mEditText;
     String sTaskStatus;
     TextView allMessagesLink;
@@ -81,10 +78,12 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     final String DATA_TASK_DATE = "data_task_date";
     final String DATA_TASK_STATUS = "task_done_status";
     final String FARMER_REPLY = "farmer_reply";
-    String fetch_id, description,farmerReply, chemical, chemical_qty, compulsary, activity, img_link, done, date_of_task;
-    String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/fetch_farm_day_data_by_id";
-    String SAVE_FARMER_RESPONSE_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmCalendar/set_farmer_reponse";
-//    String SAVE_FARMER_RESPONSE_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_audio_response";
+    final String KEY_TOKEN="token4";
+    String ct1="";
+
+    String fetch_id, description,farmerReply, chemical, chemical_qty, compulsary, activity, img_link, done, date_of_task,imgs_quantity;
+    String REGISTER_URL = "http://spade.farm/app/index.php/farmCalendar/fetch_farm_day_data_by_id";
+    String SAVE_FARMER_RESPONSE_URL = "http://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
 
     TextView tvFarmerReply, tvactivityName, tvactivityDescription, tvactivityDate, tvchemical, tvqtychemical, tvCompulsary;
 
@@ -93,7 +92,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     private static String mFileName = null;
     private MediaRecorder mRecorder = null;
     private MediaPlayer mPlayer = null;
-    String encoded;
+    String encoded="";
     private String farm_num;
     private String user_num;
 
@@ -105,14 +104,39 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private int flag = 0;
     File file;
-
+    String type;
+    String id,task_date;
+    LinearLayout audio_linear,farmer_reply_linear,farmer_reply_edit_text_linear,linear_is_done;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 //        Intent intent=new Intent(context,LandingActivity.class);
 //        startActivity(intent);
 //        finish();
-        super.onBackPressed();
+       /* if(type.equals("from_calendar")){
+            Intent intent=new Intent(context,ShowTaskActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
+       super.onBackPressed();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+       /* if(type.equals("from_calendar")){
+            Intent intent=new Intent(context,ShowTaskActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
+            startActivity(intent);
+            finish();
+        }*/
+        super.onBackPressed();
     }
 
     @Override
@@ -124,7 +148,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         context = this;
 
@@ -133,6 +157,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
         tvactivityName = (TextView) findViewById(R.id.reply_activity_name_value);
         tvactivityDescription = (TextView) findViewById(R.id.reply_activity_description_value);
         tvactivityDate = (TextView) findViewById(R.id.reply_activity_date_value);
@@ -145,6 +170,13 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         mEditText = (EditText) findViewById(R.id.et_farmer_reply);
         tvFarmerReply = (TextView) findViewById(R.id.tv_farmer_reply);
         allMessagesLink=(TextView)findViewById(R.id.view_all_messages);
+        next_button=(Button)findViewById(R.id.button_next);
+        linear_is_done=(LinearLayout)findViewById(R.id.linear_is_done_lay);
+        audio_linear=(LinearLayout)findViewById(R.id.linear_audio_lay);
+        farmer_reply_edit_text_linear=(LinearLayout)findViewById(R.id.linear_farmer_reply);
+        farmer_reply_linear=(LinearLayout)findViewById(R.id.linear_show_text_msg);
+
+        next_button.setVisibility(View.GONE);
 
         //getSupportActionBar().setTitle("My Title");
 
@@ -156,8 +188,13 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         user_num = SharedPreferencesMethod.getString(context,"UserNum");
         farm_num=SharedPreferencesMethod.getString(context,"farm_num");
         Bundle extras = getIntent().getExtras();
-        final String id = extras.getString("id");
-        final String task_date = extras.getString("task_date");
+        if(extras!=null) {
+              id = extras.getString("id");
+              task_date = extras.getString("task_date");
+              type=extras.getString("type");
+        }
+
+        Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
 
         mFileName = getExternalCacheDir().getAbsolutePath();
         mFileName += "/audiorecordtest.3gp";
@@ -214,9 +251,11 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                         try {
                             //Log.e("check","got response");
                             JSONObject jobject = null;
+                            String date_today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
                             Log.e("check", "reached try block");
                             jobject = new JSONObject(response);
-                            fetch_id = jobject.getString("id");
+                            fetch_id = jobject.getString("farm_dwork_num");
                             activity = jobject.getString("activity");
                             compulsary = jobject.getString("is_compulsary");
                             img_link = jobject.getString("img_link");
@@ -225,6 +264,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                             done = jobject.getString("is_done");
                             date_of_task = jobject.getString("date");
                             description = jobject.getString("activity_description");
+                            imgs_quantity=jobject.getString("images_qty");
                             farmerReply = jobject.getString("farmer_reply");
                             Log.e("Check", "id" + id + " " + "img_link" + " " + img_link);
                             tvactivityName.setText(activity);
@@ -243,13 +283,23 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                 mCheckBox.setChecked(true);
                                 mCheckBox.setClickable(false);
                                 mButton.setClickable(false);
-                                mButton.setEnabled(false);
+                                mButton.setVisibility(View.GONE);
+                                next_button.setVisibility(View.GONE);
                                 mButton.setBackgroundColor(Color.parseColor("#808080"));
                                 mEditText.setVisibility(View.GONE);
                                 tvFarmerReply.setText(farmerReply);
                             } else {
                                 mCheckBox.setChecked(false);
                                 tvFarmerReply.setVisibility(View.GONE);
+                                if(date_of_task.compareTo(date_today)<=0){
+                                }else{
+                                    mButton.setVisibility(View.GONE);
+                                    next_button.setVisibility(View.GONE);
+                                    linear_is_done.setVisibility(View.GONE);
+                                    audio_linear.setVisibility(View.GONE);
+                                    farmer_reply_edit_text_linear.setVisibility(View.GONE);
+                                    farmer_reply_linear.setVisibility(View.GONE);
+                                }
                             }
                         }catch (JSONException e) {
                             e.printStackTrace();
@@ -272,6 +322,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                     params.put(DATA_TASK_DATE, task_date);
                     Log.e("check", "date passed" + " " + task_date);
                 }
+                if(ct1!=null){
+                    params.put(KEY_TOKEN,ct1);
+                }
                 return params;
             }
         };
@@ -279,6 +332,55 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
+
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                file = new File(mFileName);
+                int size = (int)file.length();
+                Log.e("checkArray","Size of audio byte file = "+size);
+                byte[] bytes = new byte[size];
+                try {
+                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                    buf.read(bytes, 0, bytes.length);
+                    buf.close();
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                encoded = Base64.encodeToString(bytes, 0);
+                final String response = mEditText.getText().toString().trim();
+                if(!isResponseFilled(response)){
+//                            Toast.makeText(context,"Please Enter Comment",Toast.LENGTH_LONG).show();
+                    mEditText.setError("Enter Reponse");
+
+                }else {
+                    if(mCheckBox.isChecked()){
+                        sTaskStatus = "Y";
+
+                    }else{
+                        sTaskStatus = "N";
+
+                    }
+                    Intent intent=new Intent(context, FarmImagesActivity.class);
+                        intent.putExtra("user_num",user_num);
+                        intent.putExtra("farm_num",farm_num);
+                        intent.putExtra("audio_file",encoded);
+                        intent.putExtra("fetch_id",fetch_id);
+                        intent.putExtra("date_of_task",date_of_task);
+                        intent.putExtra("s_task_status",sTaskStatus);
+                        intent.putExtra("farmer_reply",response);
+                        intent.putExtra("imgs_quntatity",imgs_quantity);
+                        startActivity(intent);
+                        finish();
+
+                }
+
+                }
+        });
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -306,8 +408,10 @@ public class FarmActionReplyActivity extends AppCompatActivity {
 
                         if(mCheckBox.isChecked()){
                             sTaskStatus = "Y";
+
                         }else{
                             sTaskStatus = "N";
+
                         }
 
                         final String response = mEditText.getText().toString().trim();
@@ -322,7 +426,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             Log.e("check","This is resp"+response);
-                                            Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "Action Submitted"+response, Toast.LENGTH_SHORT).show();
                                             boolean deleted = file.delete();
                                             Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
                                             //intent.putExtra("Type","all_activities");
@@ -382,6 +486,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                     params.put(BYADMIN,"N");
                                     params.put(BYFARMER,"Y");
                                     params.put(BYINSPECTOR,"N");
+                                    params.put(KEY_TOKEN,ct1);
                                     Log.e("check","Reached Params");
                                     if(user_num!=null){
                                         params.put(USERNUM,user_num);
@@ -412,13 +517,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                             RequestQueue requestQueueNew = Volley.newRequestQueue(context);
                             requestQueueNew.add(stringRequestNew);
 
-                            /*Toast.makeText(context, "Action Submitted", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(context,LandingActivity.class);
-                            startActivity(intent);
-                            Intent intent=new Intent(context,ShowTaskActivity.class);
-                            intent.putExtra("Type","all_activities");
-                            startActivity(intent);
-                            finish();*/
+
                         }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -441,16 +540,14 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                 Intent intent=new Intent(context,ChatActivity.class);
                 intent.putExtra("fetchId",fetch_id);
                 startActivity(intent);
+                //finish();
             }
         });
        /* Uri uri = Uri.parse();
         Picasso.with(context).load(uri).into(imgView);*/
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 
     public boolean isResponseFilled(String text){
         boolean flag = true;
@@ -535,5 +632,24 @@ public class FarmActionReplyActivity extends AppCompatActivity {
             mPlayer.release();
             mPlayer = null;
         }
+    }
+
+    public void checkbox1_clicked(View v) {
+        if (mCheckBox.isChecked()) {
+            //mButton.setVisibility(View.GONE);
+            if(imgs_quantity.equals("0")){
+                mButton.setVisibility(View.VISIBLE);
+                next_button.setVisibility(View.GONE);
+            }else{
+                mButton.setVisibility(View.GONE);
+                next_button.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+            mButton.setVisibility(View.VISIBLE);
+            next_button.setVisibility(View.GONE);
+        }
+
+
     }
 }

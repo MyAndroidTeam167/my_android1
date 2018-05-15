@@ -45,6 +45,12 @@
                 android:paddingTop="5dp">
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Field marked with * are compulsory"
+                    android:textSize="8sp"
+                    android:textColor="@color/black"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -56,10 +62,10 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/name_dark_24"
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-                        android:inputType="textPersonName|textCapWords"
+                        android:inputType="textPersonName|textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown"
-                        android:hint="FirstName"
+                        android:hint="FirstName*"
                         />
                 </android.support.design.widget.TextInputLayout>
 
@@ -87,10 +93,10 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/name_dark_24"
-                        android:hint="LastName"
+                        android:hint="LastName*"
                         android:textColor="@color/ettextbrown"
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-                        android:inputType="textPersonName|textCapWords"/>
+                        android:inputType="textPersonName|textCapSentences"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -101,7 +107,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/card_dark_24"
-                        android:hint="Aadhar number"
+                        android:hint="Aadhar number*"
                         android:textColor="@color/ettextbrown"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
@@ -131,7 +137,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/calendar_date_24_dark"
-                        android:hint="Date of Birth"
+                        android:hint="Date of Birth*"
                         android:textColor="@color/ettextbrown"
                         android:clickable="true"
                         android:inputType="date"
@@ -167,7 +173,7 @@
                         android:drawableLeft="@drawable/mobile_dark_green_24"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown"
-                        android:hint="Mobile No"
+                        android:hint="Mobile No*"
                         android:inputType="phone" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -214,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/email_dark_24"
                         android:textColor="@color/ettextbrown"
-                        android:hint="Email"
+                        android:hint="Email*"
                         android:inputType="textEmailAddress" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -228,8 +234,8 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
                         android:textColor="@color/ettextbrown"
-                        android:hint="Address Line 1"
-                        android:inputType="text" />
+                        android:hint="Address Line 1*"
+                        android:inputType="textCapSentences" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -242,7 +248,7 @@
                         android:drawableLeft="@drawable/address_dark_24"
                         android:textColor="@color/ettextbrown"
                         android:hint="Address Line 2"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -255,7 +261,7 @@
                         android:drawableLeft="@drawable/address_dark_24"
                         android:textColor="@color/ettextbrown"
                         android:hint="Address Line 3"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout

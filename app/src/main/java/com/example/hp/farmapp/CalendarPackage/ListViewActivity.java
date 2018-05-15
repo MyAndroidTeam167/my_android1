@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.hp.farmapp.CalendarPackage.Adapter.AndroidListAdapter;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.R;
 
 import java.util.ArrayList;
@@ -33,9 +34,9 @@ public class ListViewActivity extends Activity implements OnClickListener {
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+			window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
 		}
-		CalendarCollection.date_collection_arr=new ArrayList<CalendarCollection>();
+		/*CalendarCollection.date_collection_arr=new ArrayList<CalendarCollection>();
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-01","Seed sowing"));
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-10","Basel dose"));
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-15","Herbicide spray"));
@@ -44,7 +45,7 @@ public class ListViewActivity extends Activity implements OnClickListener {
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-21","Pesticide spray"));
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-12-03","4th Dose fertilizer"));
 		CalendarCollection.date_collection_arr.add(new CalendarCollection("2017-11-10","5th Dose fertilizer"));
-		getWidget();
+		getWidget();*/
 	}
 
 	

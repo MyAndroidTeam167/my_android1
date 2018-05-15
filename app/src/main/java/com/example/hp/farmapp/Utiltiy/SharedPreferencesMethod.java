@@ -18,8 +18,10 @@ public class SharedPreferencesMethod {
     public static final String USER_ID = "user_id";
     public static final String USER_TOKEN = "USER_TOKEN";
     public static final String THEME_FLAG = "THEME_FLAG";
+    public static final String BINDED = "USER_BINDED";
     public static final String LANGUAGE = "LANGUAGE";
     public static final String DEVICE_ID="DEVICE_ID";
+    public static final String SETAPCHECK="SETAPCHECK";
 
 
 

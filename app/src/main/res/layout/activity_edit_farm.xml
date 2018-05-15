@@ -43,6 +43,13 @@
                 android:orientation="vertical"
                 android:paddingTop="5dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Field marked with * are compulsory"
+                    android:textSize="8sp"
+                    android:textColor="@color/black"/>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -52,8 +59,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Farm Pet Name"
-                        android:inputType="text"
+                        android:hint="Farm Pet Name*"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -67,8 +74,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Address Line 1"
-                        android:inputType="text"
+                        android:hint="Address Line 1*"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -83,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
                         android:hint="Address Line 2"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -98,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
                         android:hint="Address Line 3"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -232,7 +239,7 @@
 
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/area_dark_1_24"
-                        android:hint="Area in acres"
+                        android:hint="Area in acres*"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -333,15 +340,30 @@
 
 
 
-                <Spinner
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/spinner_soil_type_edit"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
-                    />
+                    android:weightSum="1"
+                    android:layout_marginTop="10dp"
+                    >
 
+                    <TextView
+                        android:layout_weight=".3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Soil Type"
+                        android:textSize="@dimen/_14ssp"
+                        android:gravity="left"
+                        android:textColor="@color/saddlebrown"/>
+                    <Spinner
+                        android:layout_weight=".7"
+                        android:id="@+id/spinner_soil_type_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        />
+                </LinearLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -352,8 +374,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/soli_1_dark_24"
-                        android:hint="Specify Soil type"
-                        android:inputType="text"
+                        android:hint="Specify Soil type*"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
 
@@ -368,8 +390,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/irrigation_dark_24"
-                        android:hint="Irrigation Type"
-                        android:inputType="text"
+                        android:hint="Irrigation Type*"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -385,7 +407,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/special_note_24"
                         android:hint="Special Comment"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>

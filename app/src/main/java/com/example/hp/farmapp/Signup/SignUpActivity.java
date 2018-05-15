@@ -1,6 +1,5 @@
 package com.example.hp.farmapp.Signup;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,14 +25,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
-import com.example.hp.farmapp.FarmData.FarmAddActivity;
-import com.example.hp.farmapp.Login.ForgetPass.Confirm.CnfrmPassActivity;
-import com.example.hp.farmapp.Login.ForgetPass.OtpforpassActivity;
-import com.example.hp.farmapp.Login.OTPActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
-import com.example.hp.farmapp.PersonData.ShowProfileActivity;
-import com.example.hp.farmapp.TestPackage.Activity.CalenderInfoActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
@@ -59,7 +50,7 @@ Intent intent=new Intent(context,MainActivity.class);
     startActivity(intent);
     finish();}
 
-    private static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/insert_new_user";
+    private static final String REGISTER_URL = "http://spade.farm/app/index.php/signUp/insert_new_user";
 
     public static final String KEY_MOBILE = "mobNo";
     public static final String KEY_PASSWORD = "password";
@@ -68,6 +59,8 @@ Intent intent=new Intent(context,MainActivity.class);
     ProgressDialog progressDialog;
     public static final String KEY_FARMER = "is_farmer";
     public static final String KEY_ADMIN = "is_admin";
+    public static final String KEY_COMPANY_NUM = "token1"; //ctocken==>>company_num
+
 
 
     EditText namesignup, emailsignup, mobilesignup;
@@ -75,8 +68,8 @@ Intent intent=new Intent(context,MainActivity.class);
     Button registor,foradmin;
     TextView olduser;
     Context context;
-    int isinspector = 0, isadmin = 0, isfarmer = 0;
-    String radiobuttontext,EmailSign,MobileSign,PassSign,Passsignconfirm,isadminsign,isinspectorsign,isfarmersign,rd11,rd22,rd33;
+    String isinspector = "N", isadmin = "N", isfarmer = "Y";
+    String radiobuttontext,EmailSign,MobileSign,PassSign,Passsignconfirm,isadminsign="N",isinspectorsign,isfarmersign,rd11,rd22,rd33;
     String FinalEmail,finalmobile;
     RadioGroup radioGroup;
     Boolean smspermission=false;
@@ -103,7 +96,7 @@ Intent intent=new Intent(context,MainActivity.class);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
@@ -135,7 +128,7 @@ Intent intent=new Intent(context,MainActivity.class);
             passsignup = (ShowHidePasswordEditText) findViewById(R.id.signuppass);
             registor = (Button) findViewById(R.id.registerbutt);
             olduser = (TextView) findViewById(R.id.olduser);
-            radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+           // radioGroup = (RadioGroup) findViewById(R.id.radio_group);
             passsignupconfirm = (ShowHidePasswordEditText) findViewById(R.id.signuppassconfirm);
             foradmin=(Button)findViewById(R.id.admincalender);
 
@@ -167,14 +160,14 @@ Intent intent=new Intent(context,MainActivity.class);
                 public void onClick(View v) {
 
 
-                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                   /* int selectedId = radioGroup.getCheckedRadioButtonId();
                     rabioButton = (RadioButton) findViewById(selectedId);
                     RadioButton rd1 = (RadioButton) findViewById(R.id.radio_inspector);
                     RadioButton rd2 = (RadioButton) findViewById(R.id.radio_admin);
                     RadioButton rd3 = (RadioButton) findViewById(R.id.radio_farmer);
-                    PassSign = passsignup.getText().toString();
+                   */ PassSign = passsignup.getText().toString();
                     Passsignconfirm = passsignupconfirm.getText().toString();
-                    rd11 = rd1.getText().toString();
+                    /*rd11 = rd1.getText().toString();
                     rd22 = rd2.getText().toString();
                     rd33 = rd3.getText().toString();
                     radiobuttontext = rabioButton.getText().toString();
@@ -185,7 +178,7 @@ Intent intent=new Intent(context,MainActivity.class);
                     } else if (radiobuttontext == rd22) {
                         isadmin = 1;
                     }
-
+*/
                     //Toast.makeText(SignUpActivity.this, Integer.toString(isinspector), Toast.LENGTH_SHORT).show();
 
                     int length = passsignup.getText().toString().trim().length();
@@ -303,10 +296,10 @@ Intent intent=new Intent(context,MainActivity.class);
         EmailSign = emailsignup.getText().toString().trim();
         MobileSign   = mobilesignup.getText().toString().trim();
         PassSign   = passsignup.getText().toString().trim();
-        isadminsign   = Integer.toString(isadmin);
+      /*  isadminsign   = Integer.toString(isadmin);
         isfarmersign   = Integer.toString(isfarmer);
         isinspectorsign   = Integer.toString(isinspector);
-
+*/
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
@@ -318,17 +311,12 @@ Intent intent=new Intent(context,MainActivity.class);
                         if(response.equals("\"Password And User added Successfully\""))
                         {
 
-                            /*if(isadminsign.equals("1"))
-                            {
-                                Intent intent=new Intent(context,CalenderInfoActivity.class);
-                                startActivity(intent);
-                            }*/
+
                             DataHandler.newInstance().setSignupMobile(MobileSign);
                             DataHandler.newInstance().setSignUpmail(EmailSign);
                             DataHandler.newInstance().setSignUpPassword(PassSign);
                             DataHandler.newInstance().setSignUp(true);
                             progressDialog.dismiss();
-                           // Toast.makeText(SignUpActivity.this,"Please Enter Otp",Toast.LENGTH_LONG).show();
 
                             Intent intent=new Intent(context,MainActivity.class);
                             startActivity(intent);
@@ -365,9 +353,10 @@ Intent intent=new Intent(context,MainActivity.class);
                 params.put(KEY_MOBILE,MobileSign);
                 params.put(KEY_PASSWORD,PassSign);
                 params.put(KEY_EMAIL, EmailSign);
-                params.put(KEY_INSPECTOR, isinspectorsign);
-                params.put(KEY_FARMER, isfarmersign);
-                params.put(KEY_ADMIN, isadminsign);
+                params.put(KEY_INSPECTOR, "N");
+                params.put(KEY_FARMER, "Y");
+                params.put(KEY_ADMIN, "N");
+                params.put(KEY_COMPANY_NUM,"1");
 
                 return params;
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyFarm</string>
+    <string name="app_name">SpadeKrashak</string>
     <string name="Accountlogin">Account Login</string>
     <string name="email">Email/Mobile</string>
     <string name="password">Password</string>
@@ -15,11 +15,12 @@
     <string name="login_successfull">login Successfull</string>
     <string name="dialog_please_wait">"Please Wait..."</string>
     <string name="password_er">Password must be 8-32 character</string>
-    <string name="title_activity_profile">MyFarm Calendar</string>
+    <string name="title_activity_profile">Home</string>
     <string name="samepassword">Password must be same</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="internet_not_connected">Please check your internet Connection &amp; Try again</string>
 
     <string name="RegisterAccount">Register New Account</string>
     <string name="email_signup">Email</string>
@@ -37,5 +38,32 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="setting">Settings</string>
+
+
+    <string name="profile">PROFILE</string>
+    <string name="my_farm">MY FARM</string>
+    <string name="activities">ACTIVITIES</string>
+    <string name="settings">SETTINGS</string>
+    <string name="weather">WEATHER</string>
+    <string name="calendar">Calendar</string>
+    <string name="soil_health_card">Soil Health Card</string>
+    <string name="notification">Notifications</string>
+    <string name="farm_images">Farm Images</string>
+    <string name="farm_contract">Farm Contract</string>
+    <string name="company_name">Company Name</string>
+    <string name="sowing_date">Sowing Date : </string>
+    <string name="crop_name">Crop Name : </string>
+    <string name="harvest_date">Harvest Date : </string>
+    <string name="task_completed">Task Completed</string>
+    <string name="task_pending">Task Pending</string>
+    <string name="inspector_name">Inspector</string>
+    <string name="rating">Rating</string>
+    <string name="insp_name">Bhagwan Ram</string>
+    <string name="welcome">Welcome</string>
+    <string name="sure_exit_text">Are you sure you want to exit ?</string>
+    <string name="fill_profile">Fill Profile</string>
+    <string name="logout">Logout</string>
+
+
 
 </resources>

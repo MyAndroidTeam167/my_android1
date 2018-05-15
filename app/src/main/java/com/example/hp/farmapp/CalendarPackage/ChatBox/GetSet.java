@@ -10,6 +10,24 @@ public class GetSet {
     private String byFarmer;
     private String byAdmin;
     private String byInspector;
+    private String msgType;
+    private String audioReply;
+
+    public String getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
+
+    public String getAudioReply() {
+        return audioReply;
+    }
+
+    public void setAudioReply(String audioReply) {
+        this.audioReply = audioReply;
+    }
 
     public void setMessage(String message) {
         this.message = message;

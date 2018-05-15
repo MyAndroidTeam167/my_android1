@@ -6,13 +6,21 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 
 import com.example.hp.farmapp.Notification.MyFirebaseMessagingService;
+import com.example.hp.farmapp.Utiltiy.LocaleUtils;
+import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
 import java.util.Calendar;
+import java.util.Locale;
+
+import static com.example.hp.farmapp.LangBaseActivity.BaseActivity.getLocale;
 
 /**
  * Created by hp on 9/12/2017.
@@ -24,10 +32,31 @@ public  class YourApplication extends Application implements Application.Activit
     PendingIntent alarmIntent;
     Calendar rightNow;
     int currentHour,currentminitue;
+    String lang;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate() {
-        super.onCreate();
         context=this;
+        super.onCreate();
+        setLocale();
+      lang= SharedPreferencesMethod.getString(context,"lang");
+
+        if(lang.equals("")){
+            LocaleUtils.setLocale(new Locale("en"));
+            LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
+        }
+        else if(lang.equals("English")){
+            LocaleUtils.setLocale(new Locale("en"));
+            LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
+        }else if(lang.equals("Telgu")){
+            LocaleUtils.setLocale(new Locale("te"));
+            LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
+        }else{
+            LocaleUtils.setLocale(new Locale("hi"));
+            LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
+        }
+
+        //LocaleUtility.initialize(this);
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -112,6 +141,14 @@ public  class YourApplication extends Application implements Application.Activit
 */
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LocaleUtils.updateConfig(this, newConfig);
+    }
+
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
 /*
@@ -165,4 +202,16 @@ public  class YourApplication extends Application implements Application.Activit
         AlarmManager alarmManagercustom = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManagercustom.set(AlarmManager.ELAPSED_REALTIME,5000,pendingIntentcustom);*/
     }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void setLocale() {
+
+        final Resources resources = getResources();
+        final Configuration configuration = resources.getConfiguration();
+        final Locale locale = getLocale(this);
+        if (!configuration.locale.equals(locale)) {
+            configuration.setLocale(locale);
+            resources.updateConfiguration(configuration, null);
+        }
+    }
+
 }

@@ -11,18 +11,18 @@
         <item
             android:id="@+id/nav_calendar"
             android:icon="@drawable/calendar_col_50"
-            android:title="Calendar" />
-        <item android:id="@+id/nav_my_farm"
+            android:title="@string/calendar" />
+       <!-- <item android:id="@+id/nav_my_farm"
             android:icon="@drawable/farm_images_50"
-            android:title="My Farm"/>
-        <item android:id="@+id/nav_weather_report"
+            android:title="My Farm"/>-->
+        <!--<item android:id="@+id/nav_weather_report"
             android:icon="@drawable/weather_50"
             android:title="Weather Report"/>
         <item
             android:id="@+id/nav_my_activities"
             android:icon="@drawable/pending"
             android:title="Activities">
-        </item>
+        </item>-->
        <!-- <item
             android:id="@+id/nav_completed_activities"
             android:icon="@drawable/all_activity_40"
@@ -30,43 +30,51 @@
         <item
             android:id="@+id/nav_soil_test"
             android:icon="@drawable/soil_test_50"
-            android:title="Soil Health Card" />
+            android:title="@string/soil_health_card" />
         <item
             android:id="@+id/nav_notification"
             android:icon="@drawable/notifications_50"
-            android:title="Notifications" />
+            android:title="@string/notification" />
 
         <item android:id="@+id/nav_farm_images"
             android:icon="@drawable/farm_img_green_24"
-            android:title="Farm Images"/>
+            android:title="@string/farm_images"/>
 
         <item android:id="@+id/nav_farm_contract"
             android:icon="@drawable/contract_40"
-            android:title="Farm Contract"/>
+            android:title="@string/farm_contract"/>
+
+       <!-- <item android:id="@+id/nav_farm_fill_profile"
+            android:icon="@drawable/contract_40"
+            android:title="@string/fill_profile"/>-->
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/logout" />
     </group>
 
 
-    <item android:title="My Account">
+    <!--<item android:title="My Account">
         <menu>
             <item
                 android:id="@+id/nav_my_profile"
                 android:icon="@drawable/profile_40"
                 android:title="My Profile"/>
 
-           <!-- <item
+           &lt;!&ndash; <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/share_50"
-                android:title="Share" />-->
+                android:title="Share" />&ndash;&gt;
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/settings_50"
                 android:title="Settings" />
-            <!--<item
+            &lt;!&ndash;<item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout_50"
-                android:title="Logout" />-->
+                android:title="Logout" />&ndash;&gt;
         </menu>
     </item>
-
+-->
 
 </menu>

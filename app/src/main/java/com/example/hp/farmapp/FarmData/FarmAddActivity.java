@@ -8,11 +8,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -28,8 +27,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp.farmapp.CalendarPackage.LandingActivity;
-import com.example.hp.farmapp.CalendarPackage.ListViewActivity;
+import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
@@ -49,7 +47,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
     private static final String DEFAULT_LOCAL = "India";
     private static final String DEFAULT_LOCAL_STATE = "Madhya Pradesh";
     private static final String DEFAULT_LOCAL_CITY = "Indore";
-    private static final String REGISTER_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/insert_new_farm";
+    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/insert_new_farm";
     public static final String AREA = "area";
     public static final String GPSC1 = "GPSc1";
     public static final String GPSC2 = "GPSc2";
@@ -58,6 +56,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
     public static final String GPSC5 = "GPSc5";
     public static final String GPSC6 = "GPSc6";
     public static final String SOILTYPE = "soilType";
+    public static final String KEY_TOKEN = "token3";
     public static final String IRRIGATIONTYPE = "irrigationType";
     public static final String SEPCCOMMENT = "specComment";
     public static final String ADDL1 = "addL1";
@@ -73,7 +72,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
 
     Context context;
     ProgressDialog progressDialog;
-
+    String ct1="";
 
     EditText addl1farmadd, addl2farmadd, addl3farmadd, farmpetname;
     EditText areafarmadd, gpsc1farmadd, gpsc2farmadd, gpsc3farmadd, gpsc4farmadd, gpsc5farmadd, gpsc6farmadd;
@@ -127,7 +126,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.green_new));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm_add);
@@ -139,12 +138,14 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
         addl2farmadd = (EditText) findViewById(R.id.addl2farmadd);
         addl3farmadd = (EditText) findViewById(R.id.addl3farmadd);
         farmpetname = (EditText) findViewById(R.id.farm_pet_name);
+        farmpetname.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         cityfarmadd = (Spinner) findViewById(R.id.cityfarmadd);
         statefarmadd = (Spinner) findViewById(R.id.satefarmadd);
         citizenship = (Spinner) findViewById(R.id.countryfarmadd);
         areafarmadd = (EditText) findViewById(R.id.areafarmadd);
         spin_soil_type = (Spinner) findViewById(R.id.spinner_soil_type);
-      /*  gpsc1farmadd = (EditText) findViewById(R.id.gpsc1farmadd);
+        ct1=SharedPreferencesMethod.getString(context,"cctt");
+        /*  gpsc1farmadd = (EditText) findViewById(R.id.gpsc1farmadd);
         gpsc2farmadd = (EditText) findViewById(R.id.gpsc2farmadd);
         gpsc3farmadd = (EditText) findViewById(R.id.gpsc3farmadd);
         gpsc4farmadd = (EditText) findViewById(R.id.gpsc4farmadd);
@@ -539,6 +540,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
                 params.put(PERSONNUM, personnumfromfillprofile);
                 params.put(USERNUM, usernumfrommainact);
                 params.put(FARM_PET_NAME, strfarmpetname);
+                params.put(KEY_TOKEN,ct1);
 
                 return params;
             }
