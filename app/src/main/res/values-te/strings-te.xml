@@ -112,5 +112,6 @@
     <string name="avlb_copper">అందుబాటులో రాగి</string>
     <string name="yes_text">అవును</string>
     <string name="no_text">తోబుట్టువుల</string>
+    <string name="sure_exit_text">మీరు నిష్క్రమించాలనుకుంటున్నారా?</string>
     <string name="fill_profile">ప్రొఫైల్ను పూరించండి</string>
 </resources>

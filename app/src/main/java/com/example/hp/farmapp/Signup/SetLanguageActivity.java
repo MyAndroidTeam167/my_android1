@@ -2,6 +2,7 @@ package com.example.hp.farmapp.Signup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -90,7 +91,8 @@ public class SetLanguageActivity extends BaseActivity implements View.OnClickLis
         if (v.getId() == R.id.lang_hindi) {
             changeLang("hi");
             languageselected = "Hindi";
-            SharedPreferencesMethod.setString(context, "lang", "Hindi");
+            Set_id_for_future(languageselected);
+            //SharedPreferencesMethod.setString(context, "lang", "Hindi");
             Intent intent = new Intent(context, MainActivity.class);
             Toast.makeText(context, R.string.welcome, Toast.LENGTH_SHORT).show();
             startActivity(intent);
@@ -98,7 +100,9 @@ public class SetLanguageActivity extends BaseActivity implements View.OnClickLis
         } else if (v.getId() == R.id.lang_english) {
             changeLang("en");
             languageselected = "English";
-            SharedPreferencesMethod.setString(context, "lang", "English");
+            Set_id_for_future(languageselected);
+
+            //SharedPreferencesMethod.setString(context, "lang", "English");
             Toast.makeText(context, R.string.welcome, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
@@ -108,7 +112,8 @@ public class SetLanguageActivity extends BaseActivity implements View.OnClickLis
         else if (v.getId() == R.id.lang_telgu) {
             changeLang("te");
             languageselected = "Telgu";
-            SharedPreferencesMethod.setString(context, "lang", "Telgu");
+            Set_id_for_future(languageselected);
+            //SharedPreferencesMethod.setString(context, "lang", "Telgu");
             Toast.makeText(context, R.string.welcome, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
@@ -117,5 +122,11 @@ public class SetLanguageActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    private void Set_id_for_future(String language) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefLang", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("key_lang",language.trim()); // Storing string
+        editor.commit();
+    }
 
 }

@@ -6,6 +6,7 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -39,7 +40,10 @@ public  class YourApplication extends Application implements Application.Activit
         context=this;
         super.onCreate();
         setLocale();
-      lang= SharedPreferencesMethod.getString(context,"lang");
+      //lang= SharedPreferencesMethod.getString(context,"lang");
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefLang", 0);
+        lang=pref.getString("key_lang","");
+
 
         if(lang.equals("")){
             LocaleUtils.setLocale(new Locale("en"));

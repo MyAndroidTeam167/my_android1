@@ -3,6 +3,7 @@ package com.example.hp.farmapp.Settings;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -144,7 +145,7 @@ AdapterView.OnItemSelectedListener  {
             final Spinner spinner = (Spinner) dialogView.findViewById(R.id.mySpinnersetlang);
             spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) context);
             ArrayAdapter aa = new ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,country);
-            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            aa.setDropDownViewResource(R.layout.spinner_item);
             spinner.setAdapter(aa);
 
             /*AlertDialog alertDialog = dialogBuilder.create();
@@ -160,7 +161,8 @@ AdapterView.OnItemSelectedListener  {
                         changeLang("hi");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,"lang","Hindi");
+                        //SharedPreferencesMethod.setString(context,"lang","Hindi");
+                        Set_id_for_future("Hindi");
                         Intent intent=getIntent();
                         finish();
                         startActivity(intent);
@@ -173,7 +175,8 @@ AdapterView.OnItemSelectedListener  {
                         changeLang("en");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,"lang","English");
+                        Set_id_for_future("English");
+                        //SharedPreferencesMethod.setString(context,"lang","English");
                         Intent intent=getIntent();
                         finish();
                         startActivity(intent);
@@ -182,11 +185,12 @@ AdapterView.OnItemSelectedListener  {
                         finish();*/
                        // dialog.cancel();
                     }
-                    else if(setlanguage.equals("Telgu")){
+                    else if(setlanguage.equals("Telugu")){
                         changeLang("te");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,"lang","Telgu");
+                        Set_id_for_future("Telgu");
+                        //SharedPreferencesMethod.setString(context,"lang","Telgu");
                         Intent intent=getIntent();
                         finish();
                         startActivity(intent);
@@ -195,7 +199,8 @@ AdapterView.OnItemSelectedListener  {
                         changeLang("en");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
-                        SharedPreferencesMethod.setString(context,"lang","English");
+                        Set_id_for_future("English");
+                        //SharedPreferencesMethod.setString(context,"lang","English");
                         Intent intent=getIntent();
                         finish();
                         startActivity(intent);
@@ -260,5 +265,10 @@ AdapterView.OnItemSelectedListener  {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
-
+    private void Set_id_for_future(String language) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefLang", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("key_lang",language.trim()); // Storing string
+        editor.commit();
+    }
 }

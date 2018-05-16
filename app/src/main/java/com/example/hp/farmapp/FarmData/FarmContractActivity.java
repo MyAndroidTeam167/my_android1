@@ -130,6 +130,7 @@ public class FarmContractActivity extends AppCompatActivity {
                                 String status = jobject.getString("status");
                                String msg=jobject.getString("msg");
                                 if (status.equals("0")) {
+                                    progressDialog.dismiss();
                                     wv_contract_form.setVisibility(View.GONE);
                                     no_conract_farm.setVisibility(View.VISIBLE);
 
