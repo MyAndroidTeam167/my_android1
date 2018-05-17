@@ -79,7 +79,6 @@
     <string name="update_profile">प्रोफ़ाइल अपडेट करें</string>
 
 
-    <string name="change_language">भाषा बदलो</string>
     <string name="change_password">पासवर्ड बदलें</string>
     <string name="privacy_policy">गोपनीय नीति </string>
     <string name="terms_of_use">उपयोग की शर्तें</string>
@@ -119,9 +118,79 @@
     <string name="avlb_iron">उपलब्ध आयरन</string>
     <string name="avlb_manganese">उपलब्ध मैंगनीज</string>
     <string name="avlb_copper">उपलब्ध कॉपर</string>
+
+    <string name="record_player">रिकॉर्ड</string>
+    <string name="play_player">प्ले</string>
+    <string name="stop_player">रुकें</string>
     <string name="yes_text">हाँ</string>
-    <string name="no_text">नहीं</string>
-    <string name="fill_profile">प्रोफाइल भरें</string>
+    <string name="no_text"> नहीं </string>
+    <string name="error_enter_response"> प्रतिक्रिया दर्ज करें </string>
+    <string name="submit_response"> अपनी प्रतिक्रिया जमा करना चाहते हैं?</string>
+    <string name="submit_option"> जमा करें </string>
+    <string name="action_submitted"> कार्य सबमिट </string>
+    <string name="error_text"> नेटवर्क त्रुटि कृपया पुनः प्रयास करें।.</string>
+    <string name="activity"> गतिविधि </string>
+    <string name="activities_title"> क्रियाएँ </string>
+    <string name="task_list"> कार्य सूची </string>
+    <string name="loading_text"> लोड हो रहा है....</string>
+    <string name="all_activities_pager"> सभी गतिविधियां </string>
+    <string name="pending_activities_pager"> लंबित गतिविधियां </string>
+    <string name="calendar_title"> कैलेंडर कार्य </string>
+    <string name="no_inspector_text"> अभी तक कोई इंस्पेक्टर नहीं </string>
+    <string name="select_a_farm_first_text"> पहले एक फार्म का चयन करें </string>
+    <string name="please_login"> कृपया फिर भाग लें....</string>
+    <string name="back_press"> बाहर निकलने के लिए फिर से दबाएं.</string>
+    <string name="not_assigned_text"> सौंपा नहीं गया है </string>
+    <string name="edit_farm_title"> कृषि सूचना </string>
+    <string name="address_error"> पता खाली नहीं हो सकता है </string>
+    <string name="area_error"> क्षेत्र खाली नहीं हो सकता है </string>
+    <string name="error_irrigation"> सिंचाई प्रकार खाली हो सकता है </string>
+    <string name="edit_farm_successfull"> फार्म डेटा सफलतापूर्वक अपडेट किया गया </string>
+    <string name="edit_farm_failure"> इस समय खेत डेटा अपडेट करने में असमर्थ </string>
+    <string name="capture_farm_images_title"> फार्म छवियों को कैप्चर करें </string>
+    <string name="uploading_image"> छवि अपलोड कर रहा है..</string>
+    <string name="please_upload_all_images"> कृपया सभी छवियां अपलोड करें </string>
+    <string name="server_error"> असुविधा के लिए खेद है कृपया बाद में पुनः प्रयास करें </string>
+    <string name="succefull_farm_addition"> सफलतापूर्वक खेत और पता जोड़ा गया
+ </string>
+    <string name="farm_contract_title"> फार्म अनुबंध </string>
+    <string name="soil_test_title">सोइल कार्ड</string>
+    <string name="enter_soil_card"> मृदा कार्ड दर्ज करें </string>
+    <string name="farm_data_title"> फार्म डेटा </string>
+    <string name="activities_images_title"> गतिविधि छवियां </string>
+    <string name="reset_password_title"> पासवर्ड रीसेट </string>
+    <string name="forget_pass_title"> पासवर्ड भूल गए </string>
+    <string name="change_pass_title"> पासवर्ड बदलें </string>
+    <string name="enter_otp_title"> ओटीपी दर्ज करें </string>
+    <string name="please_wait_fetchig_otp"> कृपया Otp लाने की प्रतीक्षा करें </string>
+    <string name="dissmiss_otp_text"> खारिज करने के लिए कहीं भी क्लिक करें </string>
+    <string name="password_changed"> पासवर्ड सफलतापूर्वक बदला गया </string>
+    <string name="password_not_changed"> इस समय पासवर्ड बदलने में असमर्थ </string>
+    <string name="resend_otp_error"> कृपया ओटीपी सर्वर त्रुटि पुनः भेजें </string>
+    <string name="help_title"> मदद </string>
+    <string name="incorrect_user"> गलत उपयोगकर्ता </string>
+    <string name="farmer_login_id"> कृपया किसान लॉगिन आईडी के साथ लॉगिन करें </string>
+    <string name="user_not_found"> उपयोगकर्ता नहीं मिला </string>
+    <string name="please_enter_correct_otp"> कृपया सही ओटीपी दर्ज करें </string>
+    <string name="notification_title"> अधिसूचना </string>
+    <string name="remove_noti"> क्या आप वाकई इस अधिसूचना को हटाना चाहते हैं?</string>
+    <string name="noti_removed"> अधिसूचना हटा दी गई </string>
+    <string name="edit_profile_title"> प्रोफाइल एडिट करें </string>
+    <string name="first_name_error"> पहला नाम खाली नहीं होना चाहिए </string>
+    <string name="last_name_error"> अंतिम नाम खाली नहीं होना चाहिए </string>
+    <string name="aadhar_error"> अमान्य आधार संख्या </string>
+    <string name="dob_error">" जन्म तिथि दर्ज करें "</string>
+    <string name="mobile_error"> अमान्य मोबाइल नंबर </string>
+    <string name="profile_updated"> प्रोफाइल को सफलतापूर्वक अपडेट किया गया </string>
+    <string name="profile_data_submitted"> प्रोफाइल डेटा सफलतापूर्वक सबमिट किया गया </string>
+    <string name="capture_image_first"> पहले छवि कैप्चर करें </string>
+    <string name="fill_profile"> प्रोफाइल भरें </string>
+    <string name="profile_title"> प्रोफाइल </string>
+    <string name="change_language"> भाषा बदलो </string>
+    <string name="cancel_text"> रद्द करना </string>
+    <string name="register_new_account_title">रेजीटर नया खाता</string>
+    <string name="weather_title">मौसम</string>
+
 
 
 </resources>

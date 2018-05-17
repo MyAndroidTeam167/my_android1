@@ -1,4 +1,5 @@
 package com.example.hp.farmapp.FarmData;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -51,6 +53,7 @@ public class FarmSoilTestActivity extends AppCompatActivity {
     ConnectivityManager connectivityManager;
     boolean connected = false;
     Boolean is_binded=false;
+    ProgressDialog progressDialog;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,7 +89,7 @@ public class FarmSoilTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_soil_test);
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Soil Test");
+        title.setText(R.string.soil_test_title);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -129,6 +132,8 @@ public class FarmSoilTestActivity extends AppCompatActivity {
         tvcuRating = (TextView)findViewById(R.id.cuRating);
         try{
             Log.e("checkArray","About to call GetText");
+            progressDialog = ProgressDialog.show(FarmSoilTestActivity.this,
+                    getString(R.string.dialog_please_wait), "");
             GetText();
         }catch (JSONException e){
             e.printStackTrace();
@@ -209,11 +214,13 @@ public class FarmSoilTestActivity extends AppCompatActivity {
                             tvmnRating.setText(rating[10]);
                             tvcuValue.setText(value[11]+" "+unit[11]);
                             tvcuRating.setText(rating[11]);
-
+                            progressDialog.dismiss();
                             Log.e("checkArray","This is response "+response);
 //                           Log.e("checkArray","Reached End");
                         }catch (Exception e){
                             e.printStackTrace();
+                            progressDialog.dismiss();
+
                         }
                     }
                 },
@@ -222,6 +229,8 @@ public class FarmSoilTestActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error){
                         // Log.e(TAG,error.toString());
                         Log.e("ERROR:",error.toString());
+                        Toast.makeText(context, R.string.error_text, Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
 
                     }
                 }){
@@ -240,7 +249,7 @@ public class FarmSoilTestActivity extends AppCompatActivity {
     }
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Soil Health Card");
+        title.setText(R.string.soil_test_title);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

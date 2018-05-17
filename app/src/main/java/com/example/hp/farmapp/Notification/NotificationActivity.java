@@ -79,7 +79,7 @@ public class NotificationActivity extends AppCompatActivity {
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Notifications");
+        title.setText(getString(R.string.notification_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -139,7 +139,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 GetProfile getProfile = getProfiles.get(position);
-                Toast.makeText(getApplicationContext(), getProfile.get_id() + " is selected!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getProfile.get_id() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -149,9 +149,9 @@ public class NotificationActivity extends AppCompatActivity {
 
 
                 new AlertDialog.Builder(context)
-                        .setMessage("Are you sure you want to remove this Notification?")
+                        .setMessage(getString(R.string.remove_noti))
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.yes_text), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 GetProfile getProfile = getProfiles.get(position);
                                 //int id=getProfile.get_id();
@@ -160,7 +160,7 @@ public class NotificationActivity extends AppCompatActivity {
                                     db.deleteContact(new GetProfile(getProfile.get_id()));
                                     getProfiles.remove(position);
                                     mAdapter.notifyDataSetChanged();
-                                    Toast.makeText(NotificationActivity.this, "Notification Removed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(NotificationActivity.this, getString(R.string.noti_removed), Toast.LENGTH_SHORT).show();
                                     Intent intent =new Intent(context,NotificationActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -170,12 +170,12 @@ public class NotificationActivity extends AppCompatActivity {
                                     db.deleteContact(new GetProfile(getProfile.get_id()));
                                     getProfiles.remove(position);
                                     mAdapter.notifyDataSetChanged();
-                                    Toast.makeText(NotificationActivity.this, "Notification Removed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(NotificationActivity.this, getString(R.string.noti_removed), Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         })
-                        .setNegativeButton("No", null)
+                        .setNegativeButton(getString(R.string.no_text), null)
                         .show();
 
 

@@ -20,6 +20,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="sure_exit_text">Are you sure you want to exit ?</string>
 
     <string name="RegisterAccount">Register New Account</string>
     <string name="email_signup">Email</string>
@@ -40,4 +41,79 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+
+
+    <string name="record_player">Record</string>
+    <string name="play_player">Play</string>
+    <string name="stop_player">Stop</string>
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+    <string name="error_enter_response">Enter Reponse</string>
+    <string name="submit_response">Want to submit your response?</string>
+    <string name="submit_option">Submit</string>
+    <string name="action_submitted">Action Submitted</string>
+    <string name="error_text">Network error Please Try again..</string>
+    <string name="activity">Activity</string>
+    <string name="activities_title">Activities</string>
+    <string name="task_list">Task List</string>
+    <string name="loading_text">Loading....</string>
+    <string name="all_activities_pager">All Activities</string>
+    <string name="pending_activities_pager">Pending Activities</string>
+    <string name="calendar_title">Calendar Task</string>
+    <string name="no_inspector_text">No Inspector yet</string>
+    <string name="select_a_farm_first_text">Select a Farm First</string>
+    <string name="please_login">Please login again....</string>
+    <string name="back_press">Press Back again to Exit.</string>
+    <string name="not_assigned_text">Not Assigned</string>
+    <string name="edit_farm_title">Farm Information</string>
+    <string name="address_error">Address cannot be null</string>
+    <string name="area_error">Area can't be null</string>
+    <string name="error_irrigation">Irrigation type can't be null</string>
+    <string name="edit_farm_successfull">Farm Data Updated Successfully</string>
+    <string name="edit_farm_failure">Unable to Update farm Data at the moment</string>
+    <string name="capture_farm_images_title">Capture Farm Images</string>
+    <string name="uploading_image">Uploading Image..</string>
+    <string name="please_upload_all_images">Please Upload All Images</string>
+    <string name="server_error">Sorry for the inconvinience please try again later</string>
+    <string name="succefull_farm_addition">Successfully added Farm and Address</string>
+    <string name="farm_contract_title">Farm Contract</string>
+    <string name="soil_test_title">Soil Card</string>
+    <string name="enter_soil_card">Enter Soil Card</string>
+    <string name="farm_data_title">Farm Data</string>
+    <string name="activities_images_title">Activity Images</string>
+    <string name="reset_password_title">Reset Password</string>
+    <string name="forget_pass_title">Forgot Password</string>
+    <string name="change_pass_title">Change Password</string>
+    <string name="enter_otp_title">Enter Otp</string>
+    <string name="please_wait_fetchig_otp">Please Wait Fetching Otp</string>
+    <string name="dissmiss_otp_text">To dismiss click anywhere</string>
+    <string name="password_changed">Password changed Successfully</string>
+    <string name="password_not_changed">Unable to Change Password at the moment</string>
+    <string name="resend_otp_error">Please Resend Otp Server Error</string>
+    <string name="help_title">Help</string>
+    <string name="incorrect_user">Incorrect User</string>
+    <string name="farmer_login_id">Please Login with Farmer Login id</string>
+    <string name="user_not_found">User Not Found</string>
+    <string name="please_enter_correct_otp">Please Enter Correct Otp</string>
+    <string name="notification_title">Notification</string>
+    <string name="remove_noti">Are you sure you want to remove this Notification?</string>
+    <string name="noti_removed">Notification Removed</string>
+    <string name="edit_profile_title">Edit Profile</string>
+
+    <string name="first_name_error">First Name Should not be null</string>
+    <string name="last_name_error">Last Name Should not be null</string>
+    <string name="aadhar_error">Invalid Aadhar Number</string>
+    <string name="dob_error">"Please Enter Date of birth"</string>
+    <string name="mobile_error">Invalid Mobile Number</string>
+    <string name="profile_updated">Profile Updated Successfully</string>
+    <string name="profile_data_submitted">Profile Data Submitted Successfully</string>
+    <string name="capture_image_first">Capture Image First</string>
+    <string name="fill_profile">Fill Profile</string>
+    <string name="profile_title">Profile</string>
+    <string name="change_language">Chnage Language</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="register_new_account_title">Regiter New Account</string>
+    <string name="weather_title">Weather</string>
+    <string name="soil_health_card_for">"Soil health Card for \"Shanu ka Khet\""</string>
 </resources>

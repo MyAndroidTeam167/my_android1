@@ -53,7 +53,7 @@ public class HelpActivity extends AppCompatActivity {
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Help");
+        title.setText(getString(R.string.help_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -71,7 +71,7 @@ public class HelpActivity extends AppCompatActivity {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         wv1=(WebView)findViewById(R.id.needhelp);
         pd = new ProgressDialog(HelpActivity.this);
-        pd.setMessage("Please wait Loading...");
+        pd.setMessage(getString(R.string.dialog_please_wait));
         pd.show();
         wv1.setWebViewClient(new MyBrowser());
 

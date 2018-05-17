@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -105,7 +106,7 @@ Intent intent=new Intent(context,MainActivity.class);
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Register New Account");
+        title.setText(getString(R.string.register_new_account_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -339,10 +340,10 @@ Intent intent=new Intent(context,MainActivity.class);
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       // Log.e(TAG,error.toString());
+                        Log.e("Error",error.toString());
                         progressDialog.dismiss();
 
-                        Toast.makeText(SignUpActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this,getString(R.string.error_text),Toast.LENGTH_LONG).show();
 
 
                     }

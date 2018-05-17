@@ -96,10 +96,10 @@ public class FrgtPassActivity extends AppCompatActivity {
         TextView title=(TextView)findViewById(R.id.tittle);
         if(from_activity!=null) {
             if (from_activity.equals("from_setting")) {
-                title.setText("Change Password");
+                title.setText(getString(R.string.change_pass_title));
             }
         }else{
-            title.setText("Forgot Password");
+            title.setText(getString(R.string.forget_pass_title));
         }
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);

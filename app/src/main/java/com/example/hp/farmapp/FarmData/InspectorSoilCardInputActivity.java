@@ -1,5 +1,6 @@
 package com.example.hp.farmapp.FarmData;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -80,7 +81,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
     final String PARAMS_UNIT = "unit";
     final String PARAMS_RATING = "rating";
     final String REGISTER_URL="http://spade.farm/app/index.php/farmApp/inspector_soil_card_input";
-
+    ProgressDialog progressDialog;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(context, FarmSoilTestActivity.class);
@@ -101,7 +102,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
         context = this;
 
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Enter Soil Card");
+        title.setText(R.string.enter_soil_card);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -151,6 +152,8 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
                     alertDialogBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             try{
+                                progressDialog = ProgressDialog.show(InspectorSoilCardInputActivity.this,
+                                        getString(R.string.dialog_please_wait), "");
                                 GetText(TestValue);
                             }catch (JSONException e){
                                 e.printStackTrace();
@@ -195,6 +198,8 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
                         try{
 //                            response = response.replace("\"","").trim();
                             Log.e("checkArray","This is response "+response);
+                            Toast.makeText(context, R.string.action_submitted, Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
 //                           Log.e("checkArray","Reached End");
                         }catch (Exception e){
                             e.printStackTrace();
@@ -205,7 +210,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         // Log.e(TAG,error.toString());
-                        Toast.makeText(InspectorSoilCardInputActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(InspectorSoilCardInputActivity.this,R.string.error_text,Toast.LENGTH_LONG).show();
                         Log.e("ERROR:",error.toString());
 
                     }

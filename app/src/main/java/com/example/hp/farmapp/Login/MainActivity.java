@@ -62,11 +62,6 @@ public class MainActivity extends BaseActivity {
 
 
     private static final String REGISTER_URL = "http://spade.farm/app/index.php/signUp/is_login_successful";
-    //private static final String REGISTER_URL_CHECK_FILLED = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_app_registry_data";
-    //private static final String REGISTER_URL_DATA_PROFILE = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/signUp/get_person_num";
-    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
-
-
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     String mobilefromsigup="",passwordfromsignup="";
@@ -104,6 +99,8 @@ public class MainActivity extends BaseActivity {
     public String usernumfinal;
     Boolean lock=false;
     String ct1;
+    private Boolean exit = false;
+
 
     //SessionManager session;
 
@@ -113,16 +110,37 @@ public class MainActivity extends BaseActivity {
         a.addCategory(Intent.CATEGORY_HOME);
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);*/
-        finish();
-        return super.onOptionsItemSelected(item);
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_LONG).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {
-        /*Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);*/
-        finish();
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_LONG).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
     }
 
     @Override
@@ -142,32 +160,21 @@ public class MainActivity extends BaseActivity {
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
-        //getSupportActionBar().setTitle("My Title");
         if (getSupportActionBar() != null){
             /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);*/
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
-       //scheduleAlarm();
-        //final EditText edittext= (EditText)findViewById(R.id.email);
         loginbutt=(Button)findViewById(R.id.loginbutt);
         emailtext= (EditText)findViewById(R.id.emaillogin);
          password = (ShowHidePasswordEditText) findViewById(R.id.pass);
-        //password=(EditText)findViewById(R.id.pass);
         newuser =(TextView)findViewById(R.id.newUser);
-        //chckshow=(CheckBox)findViewById(R.id.showcheck);
         forgetpass=(TextView)findViewById(R.id.forgetpass);
         helplogin=(TextView)findViewById(R.id.help);
         txtMessage=(TextView)findViewById(R.id.textmesage);
         txtRegId=(TextView)findViewById(R.id.textregid);
 
 
-
-        //testbutt=(Button)findViewById(R.id.testbuttonmain);
-
-       // setTitle(getString(R.string.app_name));
-//        session = new SessionManager(getApplicationContext());
 
 
         mobNofromsignup=DataHandler.newInstance().getSignupMobile();
@@ -181,141 +188,21 @@ public class MainActivity extends BaseActivity {
         emailtext.setText(mobNofromsignup);
         password.setText(passwordfromsignup);}}
 
-       /* if(fromsignUp){
-            mobNofromsignup=DataHandler.newInstance().getSignupMobile();
-            emailtext.setText(mobNofromsignup);
-        }
-*/
         txtMessage.setVisibility(View.GONE);
         txtRegId.setVisibility(View.GONE);
 
-        //showGooglePlayServicesStatus();
-       /* mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                // checking for type intent filter
-                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
-                    // gcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-
-                    displayFirebaseRegId();
-
-                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
-                    // new push notification is received
-
-                    String message = intent.getStringExtra("message");
-
-                    //Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
-
-                    txtMessage.setText(message);
-                    FirebaseCrash.report(new Exception("My first Android non-fatal error"));
-                }
-            }
-        };
-*/
-       /* FirebaseMessaging.getInstance().subscribeToTopic("foo-bar");
-        displayFirebaseRegId();*/
-
-        // final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        //login = sharedPref.getBoolean("login", false);
-
-
-
-      /*  if (login) {
-
-            Intent intent = new Intent(context, ImageActivity.class);
-            startActivity(intent);
-
-            // Loginbutton.setVisibility(View.GONE);
-            // RegisterButton.setVisibility(View.VISIBLE);
-
-            // If the user is registered already.
-        } else {}
-*/
 
 
 
 
-
-     /*   BroadcastReceiver pushBroadcastreceiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-               // String message = intent.getStringExtra(“body”);
-                String from = intent.getStringExtra("from");
-                Log.i(TAG, "Receiving message: " + *//*message*//* ", from " + from);
-
-            }
-        };
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(pushBroadcastreceiver,
-                new IntentFilter("new-push-event"));
-*/
-
-/*String newv = null;
-        if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                Object token = getIntent().getExtras().get(key);
-                 //newv=value.toString();
-                System.out.println("========== KEY ID ========" + key);
-
-                Log.e(TAG, "Key: " + key + " Value: " + token);
-            }
-        }*/
-
-        /*String token = FirebaseInstanceId.getInstance().getToken();
-        System.out.println("========== PUSH ID ========" + token);
-        Log.e(TAG,token);
-        //Toast.makeText(MainActivity.this,"PUSH ID :::" + token,Toast.LENGTH_SHORT).show();
-*/
 
         if(locationpermission==checkLocationPermission()) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
-
-
-
-        //else{}
-
-
-
-
-            //  mobile =(EditText)findViewById(R.id.mobile);
-
-      //  password.setTr
-
-        /*password.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-
-
-
-
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (password.getRight() - password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        // your action here
-                        password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        Toast.makeText(MainActivity.this, "its working", Toast.LENGTH_SHORT).show();
-
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });*/
-
-
          forgetpass.setOnClickListener(new View.OnClickListener() {
         @Override
                public void onClick(View v) {
-            //Toast.makeText(MainActivity.this, "Forget Password? Yet to Impliment", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, FrgtPassActivity.class);
             startActivity(intent);
             finish();
@@ -333,28 +220,6 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
-
-
-
-/*
-        chckshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // checkbox status is changed from uncheck to checked.
-                if (!isChecked) {
-                    // show password
-                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    // hide password
-                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-            }
-        });
-*/
-
-
-
 
 
         loginbutt.setOnClickListener(new View.OnClickListener() {
@@ -388,110 +253,10 @@ public class MainActivity extends BaseActivity {
 
                     progressDialog = ProgressDialog.show(MainActivity.this,
                             getString(R.string.dialog_please_wait),"");
-               /* if(usernumfinal==null) {
-                                    }*/
-
-
 
 
                     AsyncTaskRunner runnermainact = new AsyncTaskRunner();
                     runnermainact.execute(Emaillogin, mobilelogin, Passlogin, "mainact", usernumfinal, REGISTER_URL);
-
-
-
-                      /*  Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                //GetText(usernumfinal);
-                               *//* AsyncTaskRunner runnerregistercheck = new AsyncTaskRunner();
-                                runnerregistercheck.execute(Emaillogin, mobilelogin, Passlogin, "regcheck", usernumfinal, REGISTER_URL_CHECK_FILLED);
-*//*                                // progressDialog.dismiss();
-                            }
-                        }, 2700);*/
-
-
-
-
-                            /*Handler handlerparacheck = new Handler();
-                            handlerparacheck.postDelayed(new Runnable() {
-                                public void run() {
-                                    if (lock) {
-                                        if (parameternamearray != null) {
-                                            if (parameternamearray.length == 0) {
-                                                progressDialog.dismiss();
-                                                finish();
-                                                Intent intent = new Intent(context, OTPActivity.class);
-                                                SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                startActivity(intent);
-                                            } else if (parameternamearray.length == 1) {
-                                                progressDialog.dismiss();
-                                                finish();
-                                                Intent intent = new Intent(context, FillProfileActivity.class);
-                                                SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                startActivity(intent);
-                                            } else if (parameternamearray.length == 2) {
-                                                //  GetText(usernumfinal);
-                                      *//*  AsyncTaskRunner runnerlengthtwo = new AsyncTaskRunner();
-                                        runnerlengthtwo.execute(Emaillogin, mobilelogin, Passlogin, "profile", usernumfinal, REGISTER_URL_DATA_PROFILE);*//*
-                                                progressDialog.dismiss();
-                                                finish();
-                                                Intent intent = new Intent(context, FarmAddActivity.class);
-                                                DataHandler.newInstance().setFromActivty("loginvefification");
-                                                startActivity(intent);
-
-                                            } else if (parameternamearray.length == 3) {
-                                                if (parameternamearray[0].equals("is_otp_verified") && parametervaluearray[0].equals("1")) {
-
-                                                    if (parameternamearray[1].equals("is_profile_set") && parametervaluearray[1].equals("1")) {
-
-                                                        if (parameternamearray[2].equals("is_farm_set") && parametervaluearray[2].equals("1")) {
-
-                                                            //GetText(usernumfinal);
-                                                    *//*AsyncTaskRunner runnerfarmdata = new AsyncTaskRunner();
-                                                    runnerfarmdata.execute(Emaillogin, mobilelogin, Passlogin, "farmadd", usernumfinal, REGISTER_URL_DATA_FARMADD);*//*
-                                                            progressDialog.dismiss();
-                                                            finish();
-                                                            Intent intent = new Intent(context, LandingActivity.class);
-                                                            SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                            startActivity(intent);
-                                                            SharedPreferencesMethod.setBoolean(context, "Login", true);
-
-                                                        } else {
-                                                            progressDialog.dismiss();
-                                                            finish();
-                                                            Intent intent = new Intent(context, FarmAddActivity.class);
-                                                            SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                            DataHandler.newInstance().setFromActivty("loginvefification");
-                                                            startActivity(intent);
-                                                        }
-                                                    } else {
-                                                        progressDialog.dismiss();
-                                                        finish();
-                                                        Intent intent = new Intent(context, FillProfileActivity.class);
-                                                        SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                        startActivity(intent);
-                                                    }
-                                                } else {
-                                                    progressDialog.dismiss();
-                                                    finish();
-                                                    Intent intent = new Intent(context, OTPActivity.class);
-                                                    SharedPreferencesMethod.setString(context,"cctt","1");
-
-                                                    startActivity(intent);
-                                                }
-                                            }
-                                        } else {
-                                                progressDialog.dismiss();
-                                        }
-                                    }
-                                }
-                            }, 4300);*/
-
                     }
 
             }
@@ -511,67 +276,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
-/*
-    public void GetText(final String usernumfinal){
-
-        ct1=SharedPreferencesMethod.getString(context,"cctt");
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL_DATA_PROFILE,
-
-
-
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-        String person_num=null;
-
-
-        try {
-            JSONObject jobject = new JSONObject(response);
-            person_num=jobject.getString("person_num");
-            SharedPreferencesMethod.setString(context,"person_num",person_num);
-            Log.e("PERSON_num:",person_num);
-        } catch (JSONException e) {
-            progressDialog.dismiss();
-            e.printStackTrace();
-        }
-
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-
-
-                if(usernumfinal!=null){
-                    params.put(KEY_USER_NUM,usernumfinal);
-                }
-                if(ct1!=null){
-                    params.put(KEY_TOKEN,ct1);
-                }
-
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-
-    }
-*/
-
-
-/*
-    private void scheduleAlarm() {
+/*    private void scheduleAlarm() {
 */
 /*
         Intent notifyIntent = new Intent(this,MyReceiver.class);
@@ -611,28 +316,12 @@ public class MainActivity extends BaseActivity {
         Log.e(TAG, "Firebase reg id: " + regId);
 
         String mess=DataHandler.newInstance().getMessage();
-        //txtMessage.setText(mess);
-        /*if (!TextUtils.isEmpty(regId))
-            txtRegId.setText("Firebase Reg Id: " + regId);
-        else
-            txtRegId.setText("Firebase Reg Id is not received yet!");*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-       /* // register GCM registration complete receiver
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(Config.REGISTRATION_COMPLETE));
-
-        // register new push message receiver
-        // by doing this, the activity will be notified each time a new message arrives
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(Config.PUSH_NOTIFICATION));
-
-        // clear the notification area when the app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());*/
     }
 
     @Override
@@ -737,7 +426,6 @@ public class MainActivity extends BaseActivity {
                                             DataHandler.newInstance().setLoginmobileno(mobilelogin);
                                             Log.e("TAG:",mobilelogin);
                                             DataHandler.newInstance().setUsernumber(usernum);
-                                            //progressDialog.dismiss();
                                             SharedPreferencesMethod.setString(context, "Password", passonrec);
                                             SharedPreferencesMethod.setString(context, "UserNum", usernum);
                                             SharedPreferencesMethod.setString(context, "Mobile", mobilelogin);
@@ -751,9 +439,7 @@ public class MainActivity extends BaseActivity {
                                                 }
                                             }
 
-                                            //Toast.makeText(MainActivity.this, getString(R.string.login_successfull), Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(MainActivity.this, usernum, Toast.LENGTH_SHORT).show();
-                                                Log.e("MainAct","Came here");
+                                            Log.e("MainAct","Came here");
 
 
 
@@ -767,77 +453,28 @@ public class MainActivity extends BaseActivity {
                                                                     startActivity(intent);
                                                                     finish();
                                                                 }else{
-
                                                                     Intent intent=new Intent(context,OTPActivity.class);
                                                                     startActivity(intent);
                                                                     finish();
                                                                 }
                                             }else{
                                                 password.setText("");
-                                                alert.showAlertDialog(MainActivity.this, "Incorrect User","Please Login with Farmer Login id", false);
+                                                alert.showAlertDialog(MainActivity.this, getString(R.string.incorrect_user),getString(R.string.farmer_login_id), false);
                                                 progressDialog.dismiss();
 
                                             }
-                                           /* Intent intent = new Intent(context, LoginVerificationActivity.class);
-                                            startActivity(intent);
-                                            finish();*/
+
                                         } catch (JSONException e) {
 
                                             progressDialog.dismiss();
                                             e.printStackTrace();
+                                            Toast.makeText(context, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
 
 
-                                /*else if(flagonrec.equals("regcheck")&&usernumonrec!=null){
-                                    JSONArray jsonarray = null;
-                                    try {
-                                        jsonarray = new JSONArray(response);
 
-                                        parameternamearray=new String[jsonarray.length()];
-                                        parametervaluearray=new String[jsonarray.length()];
-                                        //activitydescriptionfarmal=new String[jsonarray.length()];
-
-                                        for (int i = 0; i < jsonarray.length(); i++) {
-                                            JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                            String parametername = jsonobject.getString("parameter_name");
-                                            String parametervalue=jsonobject.getString("parameter_value");
-                                            // String activitydescription=jsonobject.getString("activity_description");
-
-                                            parameternamearray[i]=parametername;
-                                            parametervaluearray[i]=parametervalue;
-                                            // activitydescriptionfarmal[i]=activitydescription;
-                                            Log.e("Date :",parametername+"Parameter value"+parametervalue);
-                                        }
-
-                            *//*DataHandler.newInstance().setDatefarmcal(datefarmcal);
-                            DataHandler.newInstance().setActivityfarmcal(activityfarmcal);
-                            DataHandler.newInstance().setActivitydescriptionfarmcal(activitydescriptionfarmal);
-*//*
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                        progressDialog.dismiss();
-                                    }
-                                }
-
-
-                                else if(flagonrec.equals("profile")&&usernumonrec!=null) {
-
-                                    String person_num=null;
-
-
-                                    try {
-                                        JSONObject jobject = new JSONObject(response);
-                                        person_num=jobject.getString("person_num");
-                                        SharedPreferencesMethod.setString(context,"person_num",person_num);
-                                        Log.e("PERSON_num:",person_num);
-                                    } catch (JSONException e) {
-                                        progressDialog.dismiss();
-                                        e.printStackTrace();
-                                    }
-                                    // Toast.makeText(LoginVerificationActivity.this, firstname, Toast.LENGTH_SHORT).show();
-                                }*/
 
 
                                 else if(flagonrec.equals("farmadd")&&usernumonrec!=null){
@@ -912,9 +549,10 @@ public class MainActivity extends BaseActivity {
 
                                         progressDialog.dismiss();
                                         e.printStackTrace();
+                                        Toast.makeText(context, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
+
                                     }
 
-                                    //  Toast.makeText(LoginVerificationActivity.this, soiltype, Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -924,7 +562,8 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                Log.e("Error",error.toString());
+                                Toast.makeText(context, getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override
@@ -958,21 +597,10 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected void onPreExecute() {
-
-
         }
 
         @Override
         protected void onPostExecute(String s) {
-
-            //Toast.makeText(MainActivity.this, s+"Not Getting Response", Toast.LENGTH_SHORT).show();
-
-            /*if(s.equals("\"0\""))
-
-            {
-                progressDialog.dismiss();
-
-            }*/
         }
 
         @Override
@@ -990,14 +618,10 @@ public class MainActivity extends BaseActivity {
         switch (requestCode) {
 
             case 1:{
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
+                } else {}
                 return;
             }
         }
@@ -1009,17 +633,5 @@ public class MainActivity extends BaseActivity {
         int res = this.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
-
-
-/*
-
-    private void showGooglePlayServicesStatus() {
-        GoogleApiAvailability apiAvail = GoogleApiAvailability.getInstance();
-        int errorCode = apiAvail.isGooglePlayServicesAvailable(this);
-        String msg = "Play Services: " + apiAvail.getErrorString(errorCode);
-        Log.d(TAG, msg);
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-*/
 
 }

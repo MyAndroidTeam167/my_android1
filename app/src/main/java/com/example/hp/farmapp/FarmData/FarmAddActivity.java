@@ -186,7 +186,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
 
 
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Farm Information");
+        title.setText(getString(R.string.edit_farm_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -389,11 +389,11 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
                 strstate = statefarmadd.getSelectedItem().toString();
 
                 if (straddl1.matches("")) {
-                    addl1farmadd.setError("Address cannot be null");
+                    addl1farmadd.setError(getString(R.string.address_error));
                 } else if (strarea.matches("")) {
-                    areafarmadd.setError("Area can't be null");
+                    areafarmadd.setError(getString(R.string.area_error));
                 }  else if (strirrigationtype.matches("")) {
-                    irrigationtypefarmadd.setError("Irrigationtype can't be null");
+                    irrigationtypefarmadd.setError(getString(R.string.error_irrigation));
                 } else {
                     if (spin_soil_type.getSelectedItem().toString().equals("Other")) {
                         Log.e("Tag", "came here in Other category");
@@ -405,7 +405,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
                     }
 
                     progressDialog = ProgressDialog.show(FarmAddActivity.this,
-                            "Please Wait...", "");
+                            getString(R.string.loading_text), "");
                     try {
                         GetText();
                     } catch (JSONException e) {
@@ -498,7 +498,7 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
 
                         if (response.equals("\"Successfully added Farm and Address\"")) {
                             progressDialog.dismiss();
-                            Toast.makeText(FarmAddActivity.this, response, Toast.LENGTH_LONG).show();
+                            Toast.makeText(FarmAddActivity.this, R.string.succefull_farm_addition, Toast.LENGTH_LONG).show();
                             SharedPreferencesMethod.setBoolean(context, "Login", true);
                             Intent intent = new Intent(context, LandingActivity.class);
                             startActivity(intent);
@@ -509,9 +509,9 @@ public class FarmAddActivity extends AppCompatActivity implements AdapterView.On
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Log.e(TAG,error.toString());
+                         Log.e("error",error.toString());
                         progressDialog.dismiss();
-                        Toast.makeText(FarmAddActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FarmAddActivity.this,R.string.error_text, Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

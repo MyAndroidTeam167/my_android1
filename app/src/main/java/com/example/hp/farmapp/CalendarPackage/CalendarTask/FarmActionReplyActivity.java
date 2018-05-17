@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.net.rtp.RtpStream;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -39,6 +40,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
@@ -107,6 +109,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     String type;
     String id,task_date;
     LinearLayout audio_linear,farmer_reply_linear,farmer_reply_edit_text_linear,linear_is_done;
+    String is_audio_reply="";
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 //        Intent intent=new Intent(context,LandingActivity.class);
@@ -152,8 +155,11 @@ public class FarmActionReplyActivity extends AppCompatActivity {
         }
         context = this;
 
+
+        is_audio_reply=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.COMP_AUDIO_REPLY);
+
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Activity");
+        title.setText(R.string.activity);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -194,17 +200,23 @@ public class FarmActionReplyActivity extends AppCompatActivity {
               type=extras.getString("type");
         }
 
-        Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
 
         mFileName = getExternalCacheDir().getAbsolutePath();
         mFileName += "/audiorecordtest.3gp";
+
+        if(is_audio_reply.equals("1")){
+            audio_linear.setVisibility(View.VISIBLE);
+        }else{
+            audio_linear.setVisibility(View.GONE);
+        }
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         recordButton = (Button)findViewById(R.id.recordButton);
         playButton=(Button)findViewById(R.id.playButton);
-        recordButton.setText("Record");
-        playButton.setText("Play");
+        recordButton.setText(R.string.record_player);
+        playButton.setText(R.string.play_player);
         mStartRecording = TRUE;
         mStartPlaying = TRUE;
         if(flag==0){
@@ -222,9 +234,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                 playButton.setEnabled(true);
                 playButton.setBackgroundColor(Color.parseColor("#238E68"));
                 if(mStartRecording) {
-                    recordButton.setText("Stop");
+                    recordButton.setText(R.string.stop_player);
                 } else {
-                    recordButton.setText("Record");
+                    recordButton.setText(R.string.record_player);
                 }
                 mStartRecording = !mStartRecording;
             }
@@ -234,9 +246,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 onPlay(mStartPlaying);
                 if (mStartPlaying) {
-                    playButton.setText("Stop");
+                    playButton.setText(R.string.stop_player);
                 } else {
-                    playButton.setText("Play");
+                    playButton.setText(R.string.play_player);
                 }
                 mStartPlaying = !mStartPlaying;
             }
@@ -273,9 +285,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                             tvchemical.setText(chemical);
                             tvqtychemical.setText(chemical_qty + " lit/acre");
                             if (compulsary.equals("Y")) {
-                                tvCompulsary.setText("Yes");
+                                tvCompulsary.setText(R.string.yes_text);
                             } else {
-                                tvCompulsary.setText("No");
+                                tvCompulsary.setText(R.string.no_text);
                             }
                             Uri uri = Uri.parse(img_link);
                             Picasso.with(context).load(uri).into(imgView);
@@ -355,7 +367,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                 final String response = mEditText.getText().toString().trim();
                 if(!isResponseFilled(response)){
 //                            Toast.makeText(context,"Please Enter Comment",Toast.LENGTH_LONG).show();
-                    mEditText.setError("Enter Reponse");
+                    mEditText.setError(getString(R.string.error_enter_response));
 
                 }else {
                     if(mCheckBox.isChecked()){
@@ -402,8 +414,8 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                 encoded = Base64.encodeToString(bytes, 0);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.setMessage("Want to submit your response?");
-                alertDialogBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setMessage(R.string.submit_response);
+                alertDialogBuilder.setPositiveButton(R.string.submit_option, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
                         if(mCheckBox.isChecked()){
@@ -418,15 +430,15 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                         if(!isResponseFilled(response)){
                             dialog.cancel();
 //                            Toast.makeText(context,"Please Enter Comment",Toast.LENGTH_LONG).show();
-                            mEditText.setError("Enter Reponse");
+                            mEditText.setError(getString(R.string.error_enter_response));
 
                         }else {
                             StringRequest stringRequestNew = new StringRequest(Request.Method.POST, SAVE_FARMER_RESPONSE_URL,
-                                    new com.android.volley.Response.Listener<String>() {
+                                    new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
                                             Log.e("check","This is resp"+response);
-                                            Toast.makeText(context, "Action Submitted"+response, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, R.string.action_submitted, Toast.LENGTH_LONG).show();
                                             boolean deleted = file.delete();
                                             Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
                                             //intent.putExtra("Type","all_activities");
@@ -448,10 +460,11 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                                             }*/
                                         }
                                     },
-                                    new com.android.volley.Response.ErrorListener() {
+                                    new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
                                             Log.e("checkArray",error.toString());
+                                            Toast.makeText(context, R.string.error_text, Toast.LENGTH_LONG).show();
                                             NetworkResponse networkResponse = error.networkResponse;
                                             Log.e("checkArray",String.valueOf(networkResponse.statusCode));
                                             if (error instanceof TimeoutError || error instanceof NoConnectionError) {

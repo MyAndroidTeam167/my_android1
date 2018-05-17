@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:visibility="gone"
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -20,16 +21,24 @@
         android:padding="4dp">
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightGreen"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/soil_health_card_for"
+                android:layout_margin="@dimen/_10sdp"
+                android:textSize="@dimen/_15ssp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="2dp"
-                android:background="@color/ettextbrown"
+                android:background="@color/green_new"
                 android:elevation="2dp"
                 android:weightSum="1">
 
@@ -56,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text="Rating"
+                    android:gravity="center"
                     android:textColor="#ffffff"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -63,7 +73,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,6 +81,7 @@
                 android:orientation="horizontal"
                 android:padding="2dp"
                 android:elevation="2dp"
+                android:background="@color/white"
                 android:weightSum="1">
 
                 <TextView
@@ -78,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="pH"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -88,26 +99,28 @@
                     android:layout_weight="0.35"
                     android:gravity="center"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
                 <TextView
                     android:id="@+id/pHRating"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:text=""
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:elevation="2dp"
+                android:background="@color/light_grey_new"
                 android:padding="5dp"
                 android:weightSum="1">
                 <TextView
@@ -115,14 +128,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="EC"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
                 <TextView
                     android:id="@+id/ecTestValUnit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:text=" "
                     android:textSize="16sp" />
@@ -131,7 +144,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:text=" "
                     android:textSize="16sp" />
             </LinearLayout>
@@ -139,7 +153,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -152,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Organic Carbon (OC)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -161,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=""
-                    android:textColor="#8B4513"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -169,21 +183,23 @@
                     android:id="@+id/ocRating"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:layout_weight="0.30"
                     android:text=""
+                    android:gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_grey_new"
                 android:weightSum="1">
 
                 <TextView
@@ -191,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Nitrogen (N)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -201,7 +217,7 @@
                     android:layout_weight="0.35"
                     android:text=" "
                     android:gravity="center"
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
 
                 <TextView
@@ -210,14 +226,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -230,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Phosphorus (P)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -240,7 +257,7 @@
                     android:layout_weight="0.35"
                     android:gravity="center"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
 
                 <TextView
@@ -249,19 +266,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_grey_new"
                 android:weightSum="1">
 
                 <TextView
@@ -269,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Potassium (K)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -278,7 +297,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -288,14 +307,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -308,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Sulphur (S)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -318,7 +338,7 @@
                     android:layout_weight="0.35"
                     android:gravity="center"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
 
                 <TextView
@@ -327,19 +347,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_grey_new"
                 android:weightSum="1">
 
                 <TextView
@@ -347,7 +369,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Zinc (Zn)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -356,7 +378,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -366,14 +388,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -386,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Boron (B)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -395,7 +418,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -405,19 +428,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_grey_new"
                 android:weightSum="1">
 
                 <TextView
@@ -425,7 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Iron (Fe)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -435,7 +460,7 @@
                     android:layout_weight="0.35"
                     android:gravity="center"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
 
                 <TextView
@@ -443,7 +468,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:text=" "
                     android:textSize="16sp" />
             </LinearLayout>
@@ -451,7 +477,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -464,7 +490,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Manganese (Mn)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -473,7 +499,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -483,19 +509,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/new_light_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_grey_new"
                 android:weightSum="1">
 
                 <TextView
@@ -503,7 +531,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text="Available Copper (Cu)"
-                    android:textColor="@color/saddlebrown"
+                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
                 <TextView
@@ -512,7 +540,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:textColor="@color/calMain"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -522,13 +550,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
                     android:text=" "
-                    android:textColor="@color/ettextbrown"
+                    android:gravity="center"
+                    android:textColor="@color/calMain"
                     android:textSize="16sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/ettextbrown"/>
+                android:background="@color/new_light_black"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

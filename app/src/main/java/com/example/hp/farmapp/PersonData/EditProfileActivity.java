@@ -154,7 +154,7 @@ public class EditProfileActivity extends AppCompatActivity {
         saveprofile = (Button) findViewById(R.id.Saveprofileedit);
         //accountSignup=(TextView)findViewById(R.id.Edit_title_registor);
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Edit Profile");
+        title.setText(getString(R.string.edit_profile_title));
         ct1=SharedPreferencesMethod.getString(context,"cctt");
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
@@ -165,7 +165,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         progressDialog = ProgressDialog.show(EditProfileActivity.this,
-                "Please Wait...", "");
+                getString(R.string.dialog_please_wait), "");
 
         First_Name = SharedPreferencesMethod.getString(context, "first_name");
         Middle_Name = SharedPreferencesMethod.getString(context, "middle_name");
@@ -342,17 +342,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 slandlineNofill = landlinefill.getText().toString();
 
                 if (sfrstnamefill.matches("")) {
-                    frstnamefill.setError("First Name Should not be null");
+                    frstnamefill.setError(getString(R.string.first_name_error));
                 } else if (slastnamefill.matches("")) {
-                    lastnamefill.setError("Last Name Should not be null");
+                    lastnamefill.setError(getString(R.string.last_name_error));
                 } else if (!isValidaadhar(adharnofill.getText().toString().trim())) {
-                    adharnofill.setError("Invalid Aadhar Number");
+                    adharnofill.setError(getString(R.string.aadhar_error));
                 }/* else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
                     pannofill.setError("Invalid Panno.");
                 }*/ else if (!isValiddob(sdobfill)) {
-                    dobfill.setError("Please Enter Date of birth");
+                    dobfill.setError(getString(R.string.dob_error));
                 } else if (!isValidMobile(mobtwofill.getText().toString().trim())) {
-                    mobtwofill.setError("Invalid Mobile Number");
+                    mobtwofill.setError(getString(R.string.mobile_error));
                 } else {
                     SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
                     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -368,7 +368,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     progressDialog = ProgressDialog.show(EditProfileActivity.this,
-                            "Please Wait...", "");
+                            getString(R.string.dialog_please_wait), "");
 
 
                     AsyncTaskRunner runner = new AsyncTaskRunner();
@@ -600,113 +600,6 @@ public class EditProfileActivity extends AppCompatActivity {
         return json;
     }
 
-    public void GetText() throws JSONException {
-        // Get user defined values
-
-        sfrstnamefill = frstnamefill.getText().toString();
-        smiddlenamefill = middnamefill.getText().toString();
-        slastnamefill = lastnamefill.getText().toString();
-        sadharnofill = adharnofill.getText().toString();
-        spannofill = pannofill.getText().toString();
-        //  saddressidfill="";
-        smobno2fill = mobtwofill.getText().toString();
-        slandlineNofill = landlinefill.getText().toString();
-        saddl1profileadd = addl1profileadd.getText().toString();
-        saddl2profileadd = addl2profileadd.getText().toString();
-        saddl3profileadd = addl3profileadd.getText().toString();
-        scitizenship = citizenship.getSelectedItem().toString();
-        scityprofileadd = cityprofileadd.getSelectedItem().toString();
-        sstateprofileadd = stateprofileadd.getSelectedItem().toString();
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        if (!response.equals("")) {
-                            // DataHandler.newInstance().setPersonnum(response);
-                            progressDialog.dismiss();
-                            FILL_SUCESSFUL = true;
-                            SharedPreferencesMethod.setBoolean(context, "fillProfileSuccesfull", FILL_SUCESSFUL);
-                            Toast.makeText(EditProfileActivity.this, "Profile Updated Successfully", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(context, LandingActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                },
-
-
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("ERROR", error.toString());
-                        progressDialog.dismiss();
-                        Toast.makeText(EditProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-
-
-                    }
-
-
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_FIRST_NAME, sfrstnamefill);
-                params.put(KEY_MIDDLE_NAME, smiddlenamefill);
-                params.put(KEY_LAST_NAME, slastnamefill);
-                params.put(KEY_ADHAR_NO, sadharnofill);
-                params.put(KEY_PAN_NO, spannofill);
-                params.put(KEY_DOB, sdobfill);
-                // params.put(KEY_ADDRESSID, saddressidfill);
-                params.put(KEY_MOBNO1, mobileno);
-                params.put(KEY_MOBNO2, smobno2fill);
-                params.put(KEY_LANDLINE, slandlineNofill);
-                params.put(KEY_ADDL1, saddl1profileadd);
-                params.put(KEY_ADDL2, saddl2profileadd);
-                params.put(KEY_ADDL3, saddl3profileadd);
-                params.put(KEY_COUNTRY, scitizenship);
-                params.put(KEY_STATE, sstateprofileadd);
-                params.put(KEY_CITY, scityprofileadd);
-                params.put(KEY_EMAIL, Email);
-                params.put(KEY_TOKEN,ct1);
-                params.put("is_inspector","N");
-                params.put("is_admin","N");
-                params.put("is_farmer","Y");
-                if (usernum != null) {
-                    params.put(KEY_USERNUM, usernum);
-
-                }
-                if (Personnum != null) {
-                    params.put(KEY_PERSON_NUM, Personnum);
-                }
-
-
-                return params;
-            }
-
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                if (response.headers == null) {
-                    // cant just set a new empty map because the member is final.
-                    Log.d("Response Header = ", String.valueOf(response.headers));
-                    response = new NetworkResponse(
-                            response.statusCode,
-                            response.data,
-                            Collections.<String, String>emptyMap(), // this is the important line, set an empty but non-null map.
-                            response.notModified);
-
-
-                }
-                return super.parseNetworkResponse(response);
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
 
 
     private class AsyncTaskRunner extends AsyncTask<String, Void, String> {
@@ -747,7 +640,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     progressDialog.dismiss();
 
                                 } else {
-                                    Toast.makeText(context, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditProfileActivity.this, getString(R.string.profile_updated), Toast.LENGTH_LONG).show();
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(context, ShowProfileActivity.class);
                                     startActivity(intent);
@@ -759,7 +652,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(EditProfileActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileActivity.this, getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
 
                             }

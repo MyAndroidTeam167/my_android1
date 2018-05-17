@@ -33,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.Login.ForgetPass.OtpforpassActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
@@ -154,7 +155,7 @@ public class OTPActivity extends AppCompatActivity {
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Enter OTP");
+        title.setText(getString(R.string.enter_otp_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -206,7 +207,7 @@ public class OTPActivity extends AppCompatActivity {
     }
 
     private void submitotp() {
-        progressDialog = ProgressDialog.show(OTPActivity.this,"Please Wait...", "");
+        progressDialog = ProgressDialog.show(OTPActivity.this,getString(R.string.dialog_please_wait), "");
         otppp=actotp.getText().toString().trim();
         String verifyURL= "https://2factor.in/API/V1/"+authkey+"/SMS/VERIFY/"+detailssessionid+"/"+otppp;
         mobileno="";
@@ -237,7 +238,7 @@ public class OTPActivity extends AppCompatActivity {
         String mainUrl = "https://2factor.in/API/V1/" + authkey + "/SMS/" + mobileno + "/AUTOGEN";
         OtpAsynctaskrunner runner = new OtpAsynctaskrunner();
         runner.execute(mainUrl,mobileno,usernum);
-        progressDialog = ProgressDialog.show(OTPActivity.this,"Please Wait Fetching Otp","To dismiss click anywhere");
+        progressDialog = ProgressDialog.show(OTPActivity.this,getString(R.string.please_wait_fetchig_otp),getString(R.string.dissmiss_otp_text));
         progressDialog.setCancelable(true);
         progressDialog.setOnCancelListener(new Dialog.OnCancelListener(){
             @Override
@@ -269,7 +270,6 @@ public class OTPActivity extends AppCompatActivity {
             {
                 if(details.equals("OTP Matched")&& status.equals("Success"))
                 {
-                    progressDialog.dismiss();
                     if(!usernum.equals("")) {
 
                         try {
@@ -278,12 +278,14 @@ public class OTPActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             if (response.equals("\"Successful\"")) {
+                                                progressDialog.dismiss();
                                                 Intent intent = new Intent(context, LandingActivity.class);
                                                 SharedPreferencesMethod.setBoolean(context, "Login", true);
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Toast.makeText(OTPActivity.this, "User Not found", Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                Toast.makeText(OTPActivity.this, getString(R.string.user_not_found), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     },
@@ -291,7 +293,7 @@ public class OTPActivity extends AppCompatActivity {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
                                             progressDialog.dismiss();
-                                            Toast.makeText(OTPActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(OTPActivity.this, getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                                         }
                                     }) {
                                 @Override
@@ -304,9 +306,15 @@ public class OTPActivity extends AppCompatActivity {
                             RequestQueue requestQueue = Volley.newRequestQueue(context);
                             requestQueue.add(stringRequest);
                         } catch (Exception e) {
+                            progressDialog.dismiss();
+
                         }
 
-                    }else{}
+                    }else
+                        {
+                            progressDialog.dismiss();
+
+                        }
 
                     /*Intent intent=new Intent(context,ProfileActivity.class);
                     startActivity(intent);*/
@@ -315,12 +323,14 @@ public class OTPActivity extends AppCompatActivity {
 
                 else {
                     progressDialog.dismiss();
-                    Toast.makeText(OTPActivity.this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OTPActivity.this, getString(R.string.please_enter_correct_otp), Toast.LENGTH_SHORT).show();
                 }
 
             }
             else {
-              //  Toast.makeText(OTPActivity.this, "Not Possible", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+                //  Toast.makeText(OTPActivity.this, "Not Possible", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -388,7 +398,7 @@ public class OTPActivity extends AppCompatActivity {
                             public void run(){
                                 //update ui here
                                 // display toast here
-                                                  Toast.makeText(OTPActivity.this, "Please Resend Otp Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OTPActivity.this, getString(R.string.resend_otp_error), Toast.LENGTH_SHORT).show();
 
                             }
                         });

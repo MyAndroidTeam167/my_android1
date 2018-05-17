@@ -28,6 +28,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.CalendarPackage.CalendarTask.ShowTaskActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -94,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         context = this;
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading");
+        progressDialog.setMessage(getString(R.string.loading_text));
         listview = (ListView) findViewById(R.id.lvComments);
         ct1= SharedPreferencesMethod.getString(context,"cctt");
        /* commentButton=(Button)findViewById(R.id.commentButton);
@@ -199,6 +200,8 @@ public class ChatActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
                         Log.e("checkArray", error.toString());
+                        Toast.makeText(ChatActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
+
 //                        Toast.makeText(context,"Failed!! Image too large",Toast.LENGTH_LONG).show();
                         NetworkResponse networkResponse = error.networkResponse;
                         Log.e("checkArray", String.valueOf(networkResponse.statusCode));

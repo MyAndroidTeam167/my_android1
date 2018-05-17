@@ -37,7 +37,7 @@ AdapterView.OnItemSelectedListener  {
 
     Context context;
     Toolbar mActionBarToolbar;
-    String[] country = {"English","Hindi","Telugu"};
+    String[] country = {"English","हिंदी","తెలుగు"};
     String setlanguage;
     String user_num;
 
@@ -113,9 +113,9 @@ AdapterView.OnItemSelectedListener  {
         if (v.getId() == R.id.logout_setting) {
 
             new AlertDialog.Builder(this)
-                    .setMessage("Are you sure you want to exit?")
+                    .setMessage(getString(R.string.sure_exit_text))
                     .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.yes_text), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             FirebaseMessaging.getInstance().unsubscribeFromTopic("foo-bar");
                             FirebaseMessaging.getInstance().unsubscribeFromTopic("user_"+user_num);
@@ -125,7 +125,7 @@ AdapterView.OnItemSelectedListener  {
                             startActivity(intent);
                             finish();                       }
                     })
-                    .setNegativeButton("No", null)
+                    .setNegativeButton(getString(R.string.no_text), null)
                     .show();
 
 
@@ -152,12 +152,12 @@ AdapterView.OnItemSelectedListener  {
             alertDialog.show();*/
 
             dialogBuilder.setCancelable(true);
-            dialogBuilder.setMessage("Change Language");
-            dialogBuilder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            dialogBuilder.setMessage(getString(R.string.change_language));
+            dialogBuilder.setPositiveButton(getString(R.string.submit_option), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     setlanguage=spinner.getSelectedItem().toString();
 
-                    if(setlanguage.equals("Hindi")){
+                    if(setlanguage.equals("हिंदी")){
                         changeLang("hi");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
@@ -185,7 +185,7 @@ AdapterView.OnItemSelectedListener  {
                         finish();*/
                        // dialog.cancel();
                     }
-                    else if(setlanguage.equals("Telugu")){
+                    else if(setlanguage.equals("తెలుగు")){
                         changeLang("te");
                         Log.e("Lang :",setlanguage);
                         String languageselected = setlanguage;
@@ -208,7 +208,7 @@ AdapterView.OnItemSelectedListener  {
 
                 }
 
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            }).setNegativeButton(getString(R.string.cancel_text), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
 //                        finish();
                     dialog.cancel();

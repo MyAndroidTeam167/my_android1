@@ -15,9 +15,11 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.hp.farmapp.CalendarPackage.CalendarTask.ShowTaskViewPagerActivity;
 import com.example.hp.farmapp.Notification.AlarmReceiver;
 import com.example.hp.farmapp.Notification.NotificationActivity;
 import com.example.hp.farmapp.R;
@@ -33,6 +35,8 @@ public class SampleBootReceiver extends BroadcastReceiver {
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
     int MID=0;
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.e("Alarm", "Broadcast");
@@ -44,7 +48,7 @@ public class SampleBootReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent notificationIntent = new Intent(context, NotificationActivity.class);
+        Intent notificationIntent = new Intent(context, ShowTaskViewPagerActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
@@ -54,15 +58,21 @@ public class SampleBootReceiver extends BroadcastReceiver {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Notification notification;
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context);
-        notification = notificationBuilder.setSmallIcon(getNotificationIcon(notificationBuilder))
+        Notification/*Compat*/.Builder notificationBuilder = new Notification/*Compat*/.Builder(context);
+        notification = notificationBuilder.setSmallIcon(R.drawable.spade_launcher_background)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
-                        R.drawable.ic_stat_local_florist)).setContentTitle("Alarm Fired")
+                        R.drawable.image1)).setContentTitle("You Have Pending Notifications")
                 .setColor(context.getResources().getColor(R.color.colorPrimaryDark))
-                .setContentText("Auto Custom Notification").setSound(alarmSound)
+                .setContentText("Please Complete them on time").setSound(alarmSound)
                 .setAutoCancel(true).setWhen(when)
                 .setContentIntent(pendingIntent)
+                .setStyle(new Notification.BigTextStyle()
+                .bigText("Please Complete them on time to maintain Your Rating")
+                                .setSummaryText("to maintain Your Rating")
+                )
+/*
                 .addAction(R.drawable.ic_cloud_circle_mid_grey_24dp,"My Action",pendingIntent)
+*/
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000}).build();
         MID++;
 

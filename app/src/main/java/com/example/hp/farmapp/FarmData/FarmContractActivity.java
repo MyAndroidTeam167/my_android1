@@ -100,7 +100,7 @@ public class FarmContractActivity extends AppCompatActivity {
                 progressDialog = ProgressDialog.show(FarmContractActivity.this,
                         getString(R.string.dialog_please_wait), "");
                 CallApi();
-        title.setText("Farm Contract");
+        title.setText(getString(R.string.farm_contract_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){
@@ -163,7 +163,8 @@ public class FarmContractActivity extends AppCompatActivity {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Log.e(TAG,error.toString());
+                             Log.e("error",error.toString());
+                            Toast.makeText(context, R.string.error_text, Toast.LENGTH_SHORT).show();
                         }
                     }) {
                 @Override
@@ -186,7 +187,7 @@ public class FarmContractActivity extends AppCompatActivity {
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Farm Contract");
+        title.setText(getString(R.string.farm_contract_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

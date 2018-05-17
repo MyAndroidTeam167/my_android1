@@ -53,7 +53,7 @@ public class DisplayCalendarActivity extends AppCompatActivity {
         context=this;
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Task Calendar");
+        title.setText(R.string.calendar_title);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
