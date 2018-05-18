@@ -25,7 +25,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="No Farm Images Avialable"
+        android:text="@string/no_farm_image"
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/colorAccent"/>
 </RelativeLayout>

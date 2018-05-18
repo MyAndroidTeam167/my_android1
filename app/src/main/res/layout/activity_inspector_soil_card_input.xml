@@ -57,7 +57,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/email_dark_24"
-                        android:hint="Soil Health Card Number"
+                        android:hint="@string/soil_health_card_no"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -72,7 +72,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Sample Collection Date"
+                        android:hint="@string/sample_collec_date"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -86,7 +86,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Laboratory Name"
+                        android:hint="@string/laboratory_nm"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
                 </android.support.design.widget.TextInputLayout>
@@ -94,7 +94,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="pH Parameter"
+                    android:text="@string/ph_param"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -112,7 +112,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EC Parameter"
+                    android:text="@string/ec_param"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -139,7 +139,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -147,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Organic Carbon (OC)"
+                    android:text="@string/organic_carbon"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -165,7 +165,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -173,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Nitrogen (N)"
+                    android:text="@string/avl_carbon"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -191,7 +191,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -200,7 +200,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Phosphorus (P)"
+                    android:text="@string/avl_phosphorous"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -218,7 +218,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -226,7 +226,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Potassium (K)"
+                    android:text="@string/avlb_potassium"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -244,7 +244,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -253,7 +253,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Sulphur (S)"
+                    android:text="@string/avl_sulphur"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -271,7 +271,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -279,7 +279,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Zinc (Zn)"
+                    android:text="@string/aval_zinc"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -297,7 +297,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -305,7 +305,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Boron (B)"
+                    android:text="@string/avl_boron"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -323,7 +323,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -331,7 +331,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Iron (Fe)"
+                    android:text="@string/avl_iron"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -349,7 +349,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -357,7 +357,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Manganese (Mn)"
+                    android:text="@string/avl_maganese"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -375,7 +375,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -384,7 +384,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available Copper (Cu)"
+                    android:text="@string/avl_copper"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
@@ -402,7 +402,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/mobile_dark_green_24"
-                        android:hint="Test Value"
+                        android:hint="@string/test_value"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />

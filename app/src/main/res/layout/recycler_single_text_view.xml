@@ -37,7 +37,7 @@
                     android:scaleType="fitXY"
                     android:layout_height="150dp" />
                 <TextView
-                    android:text="TextView"
+                    android:text=""
                     android:textSize="25dp"
                     android:textColor="#FFF"
                     android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
-                    android:text="TextView"
+                    android:text=""
                     android:textSize="22dp"
                     android:layout_below="@+id/task_title"
                     android:textColor="#FFF"
@@ -59,7 +59,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
                 <TextView
-                    android:text="TextView"
+                    android:text=""
                     android:textSize="17dp"
                     android:textColor="#FFF"
                     android:layout_width="wrap_content"

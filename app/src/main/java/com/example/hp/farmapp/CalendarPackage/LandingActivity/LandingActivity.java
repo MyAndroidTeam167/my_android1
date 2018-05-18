@@ -1110,7 +1110,7 @@ public class LandingActivity extends BaseActivity
             runnercrop.execute(urlsend, "fetchcrop", farmnum);
             SharedPreferencesMethod.setInt(context, "spinner_postion", position);
             //SharedPreferencesMethod.getEditor(context).putInt("spinner_postion",position);
-            Toast.makeText(getApplicationContext(), spinDta.getItem_name() + "   " + spinDta.getItem_value() + "  " + position, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getApplicationContext(), spinDta.getItem_name() + "   " + spinDta.getItem_value() + "  " + position, Toast.LENGTH_SHORT).show();
         }
     }
 

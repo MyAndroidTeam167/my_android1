@@ -122,6 +122,13 @@
     <string name="yes_text">हाँ</string>
     <string name="no_text">नहीं</string>
     <string name="fill_profile">प्रोफाइल भरें</string>
+    <string name="name">नाम</string>
+    <string name="dob">जन्म तिथि</string>
+    <string name="address">पता</string>
+    <string name="change_lang">भाषा बदलें</string>
+    <string name="account">खाता</string>
+    <string name="my_fm">मेरा खेत</string>
+
 
 
 </resources>

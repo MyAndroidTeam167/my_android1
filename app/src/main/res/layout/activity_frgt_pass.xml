@@ -58,7 +58,7 @@
                     android:padding="10dp"
                     android:textColor="@color/saddlebrown"
                     android:textSize="17sp"
-                    android:text="Please Enter your Registered Email Id or Mobile Number bellow: "
+                    android:text="@string/plz_enter_your_valid_email_id_or_mob"
                      />
             </android.support.design.widget.TextInputLayout>
 
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:drawableLeft="@drawable/email_dark_24"
-                    android:hint="Email/Mobile"
+                    android:hint="@string/email"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
@@ -100,7 +100,7 @@
             android:layout_margin="22dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp" />
@@ -112,7 +112,7 @@
                 android:layout_margin="22dp"
                 android:background="@color/colorPrimaryDark"
                 android:layout_weight="1"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />

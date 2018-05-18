@@ -1,3 +1,4 @@
+/*
 package com.example.hp.farmapp.Company;
 
 import android.content.Context;
@@ -64,3 +65,4 @@ public class CompanyActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 }
+*/

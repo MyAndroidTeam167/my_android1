@@ -25,7 +25,7 @@
     <TextView
         android:layout_marginTop="15dp"
         android:layout_gravity="center"
-        android:text="No New Notifications"
+        android:text="@string/no_new_notifi"
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

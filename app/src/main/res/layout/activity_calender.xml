@@ -31,7 +31,7 @@
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_height="wrap_content"
-        android:text="Aw.... Snap No Internet Connection"/>
+        android:text="@string/internet_not_connected"/>
 
     <RelativeLayout
         android:background="#EEEEEE"
@@ -52,7 +52,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:textColor="#ff4500"
-            android:text="Please Fill Your Profile...  Please Fill Your Profile...   Please Fill Your Profile..."
+            android:text="@string/plz_fill_profile"
             />
 
 
@@ -226,9 +226,7 @@
                 android:drawablePadding="@dimen/_6sdp"
                 android:text="@string/sowing_date"
                 android:textColor="#000000"
-                android:textSize="@dimen/_12ssp"
-                android:tooltipText="Send an email"
-                />
+                android:textSize="@dimen/_12ssp" />
 
             <TextView
                 android:gravity="center"
@@ -536,7 +534,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Inspector For Binding Process"
+                android:text="@string/cont_inspector"
                 android:elevation="@dimen/_10sdp"
                 android:textColor="@color/new_check_color"
                 android:textSize="@dimen/_20ssp"

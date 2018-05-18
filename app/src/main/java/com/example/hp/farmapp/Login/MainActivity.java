@@ -924,7 +924,8 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Network error please try again", Toast.LENGTH_SHORT).show();
+                                Log.e("Error", error.toString());
                             }
                         }) {
                     @Override

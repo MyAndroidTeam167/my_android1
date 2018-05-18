@@ -30,6 +30,6 @@
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_height="wrap_content"
-        android:text="Aw.... Snap No Internet Connection"/>
+        android:text="@string/internet_not_connected"/>
 
 </RelativeLayout>

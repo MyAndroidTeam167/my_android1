@@ -24,7 +24,7 @@
         <com.example.hp.farmapp.PersonData.customfonts.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Farm"
+            android:text="@string/my_fm"
             android:textSize="@dimen/_16ssp"
             android:layout_marginLeft="@dimen/_25sdp"
             android:gravity="bottom"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Farm Name"
+                    android:text="@string/farm_name"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Area"
+                    android:text="@string/area"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Soil Type"
+                    android:text="@string/soil_type"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Irrigation Type"
+                    android:text="@string/irrigation_type"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Special Note"
+                    android:text="@string/special_note"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -258,7 +258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:fontFamily="casual"
-                    android:text="Farm Address"
+                    android:text="@string/farm_address"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />

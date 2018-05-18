@@ -27,7 +27,7 @@
         android:id="@+id/otpforpass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Otp"
+        android:hint="@string/enter_otp"
         android:textColorHint="@color/saddlebrown"
         android:textColor="@color/ettextbrown"
         android:layout_alignParentLeft="true"
@@ -48,7 +48,7 @@
         android:id="@+id/resendotpforpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resend Otp"
+        android:text="@string/resend_otp"
         android:textSize="14sp"
         android:layout_marginTop="10dp"
         android:textColor="@color/saddlebrown"
@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/sentforpass"
-        android:text="otp sent"
+        android:text="@string/otp_sent"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
     <TextView
         android:textSize="20dp"
         android:id="@+id/otpresponseforpass"
-        android:text="otp response"
+        android:text="@string/otp_response"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -72,7 +72,7 @@ public class Dialog {
                     ((Activity)context).startActivity(intent);
                 }
                 else {
-                    Toast.makeText((Activity)context, "Incorrect otp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((Activity)context, "Incorrect otp", Toast.LENGTH_LONG).show();
                 }
                 //((SignInActivity)context).callforgetAPI(email);
                 }

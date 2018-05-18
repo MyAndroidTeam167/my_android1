@@ -30,14 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/ettextbrown"
-        android:hint="Enter Otp"
+        android:hint="@string/enter_otp"
         />
 
         <TextView
             android:id="@+id/resendotp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resend Otp"
+            android:text="@string/resend_otp"
             android:textSize="14sp"
             android:layout_marginTop="10dp"
             android:textColor="@color/ettextbrown"
@@ -54,14 +54,14 @@
         android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="submit"/>
+        android:text="@string/submit"/>
 
 
 
     <TextView
         android:layout_below="@+id/submitotppp"
         android:id="@+id/sent"
-        android:text="otp sent"
+        android:text="@string/otp_sent"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -72,7 +72,7 @@
         android:textSize="20dp"
         android:layout_below="@id/sent"
         android:id="@+id/otpresponse"
-        android:text="otp response"
+        android:text="@string/otp_response"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

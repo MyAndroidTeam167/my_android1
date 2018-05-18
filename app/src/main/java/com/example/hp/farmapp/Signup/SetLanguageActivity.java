@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.hp.farmapp.Company.CompanyActivity;
 import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.R;

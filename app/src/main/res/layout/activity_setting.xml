@@ -45,7 +45,7 @@
                         android:gravity="center"
                         android:padding="16dp"
                         android:singleLine="true"
-                        android:text="Account"
+                        android:text="@string/account"
                         android:textColor="@color/saddlebrown"
                         android:textSize="20sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
@@ -69,7 +69,7 @@
                             android:background="@drawable/box"
                             android:padding="15dp"
                             android:textColor="#FFFFFF"
-                            android:text="Change Language"
+                            android:text="@string/change_lang"
                             app:edittextfont="ROBOTO-REGULAR.TTF"/>
 
                         <com.example.hp.farmapp.custom.CustomTextView
@@ -83,7 +83,7 @@
                             android:background="@drawable/box"
                             android:padding="15dp"
                             android:textColor="#FFFFFF"
-                            android:text="Change Password"
+                            android:text="@string/change_password"
                             app:edittextfont="ROBOTO-REGULAR.TTF"/>
 
 
@@ -98,7 +98,7 @@
                         android:gravity="center"
                         android:padding="16dp"
                         android:singleLine="true"
-                        android:text="Settings"
+                        android:text="@string/setting"
                         android:textColor="@color/saddlebrown"
                         android:textSize="20sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
@@ -153,7 +153,7 @@
                         android:drawableRight="@mipmap/dropdown"
                         android:padding="20dp"
                         android:singleLine="true"
-                        android:text="Privacy Policy"
+                        android:text="@string/privacy_policy"
                         android:textColor="@color/scondarytxt"
                         android:textSize="15sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
@@ -166,7 +166,7 @@
                         android:drawableRight="@mipmap/dropdown"
                         android:padding="20dp"
                         android:singleLine="true"
-                        android:text="Terms of Use"
+                        android:text="@string/terms_of_use"
                         android:textColor="@color/scondarytxt"
                         android:textSize="15sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
@@ -180,7 +180,7 @@
                         android:drawableRight="@mipmap/dropdown"
                         android:padding="20dp"
                         android:singleLine="true"
-                        android:text="Share"
+                        android:text="@string/share"
                         android:textColor="@color/scondarytxt"
                         android:textSize="15sp"
                         app:edittextfont="ROBOTO-REGULAR.TTF" />
@@ -198,7 +198,7 @@
                         android:background="@drawable/box"
                         android:padding="15dp"
                         android:textColor="#FFFFFF"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         app:edittextfont="ROBOTO-REGULAR.TTF"/>
 
                     <TextView

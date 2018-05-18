@@ -23,14 +23,14 @@
             android:id="@+id/buttimage"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="click for image"
+    android:text="@string/clk_for_img"
     />
         <Button
             android:layout_toRightOf="@+id/buttimage"
             android:id="@+id/testlogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/logout"
             />
         <Button
             android:layout_toRightOf="@+id/imgprvw"
@@ -38,7 +38,7 @@
             android:id="@+id/profiledemo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fillprofile"/>
+            android:text="@string/fill_profile"/>
 
         <Button
             android:layout_toRightOf="@+id/profiledemo"
@@ -46,14 +46,14 @@
             android:id="@+id/profileactivitydemo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ProfileActivity"/>
+            android:text="@string/profile_activity"/>
         <Button
             android:layout_toRightOf="@+id/imgprvw"
             android:layout_below="@+id/profiledemo"
             android:id="@+id/fillprofiledemo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FarmAddressActivity"/>
+            android:text="@string/farm_add_activity"/>
 
 </RelativeLayout>
 

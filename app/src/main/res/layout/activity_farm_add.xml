@@ -46,7 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Field marked with * are compulsory"
+                    android:text="@string/compulsary_field"
                     android:textSize="8sp"
                     android:textColor="@color/black"/>
 
@@ -59,7 +59,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Farm Pet Name*"
+                        android:hint="@string/farm_pet_name"
                         android:inputType="textCapWords|textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -74,7 +74,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Address Line 1*"
+                        android:hint="@string/address_line_1"
                         android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -89,7 +89,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Address Line 2"
+                        android:hint="@string/address_line_2"
                         android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -104,7 +104,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address_dark_24"
-                        android:hint="Address Line 3"
+                        android:hint="@string/address_line_3"
                         android:inputType="textCapSentences"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -137,7 +137,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Country"
+                        android:text="@string/country"
                         android:textColor="@color/saddlebrown"
                         android:textSize="17sp" />
 
@@ -151,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/mail"
-                            android:hint="Country"
+                            android:hint="@string/country"
                             android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/ettextbrown" />
@@ -171,7 +171,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="State"
+                        android:text="@string/state"
                         android:textColor="@color/saddlebrown"
                         android:textSize="17sp" />
 
@@ -185,7 +185,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/mail"
                             android:drawableTint="#FF4081"
-                            android:hint="State"
+                            android:hint="@string/state"
                             android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/ettextbrown" />
@@ -204,7 +204,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="City"
+                        android:text="@string/city"
                         android:textColor="@color/saddlebrown"
                         android:textSize="17sp" />
 
@@ -219,7 +219,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/mail"
                             android:drawableTint="#FF4081"
-                            android:hint="City"
+                            android:hint="@string/city"
                             android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/ettextbrown" />
@@ -239,7 +239,7 @@
 
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/area_dark_1_24"
-                        android:hint="Area in acres*"
+                        android:hint="@string/Area_in_acres"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />
@@ -350,7 +350,7 @@
                         android:layout_weight=".3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Soil Type"
+                        android:text="@string/soil_type"
                         android:textSize="@dimen/_14ssp"
                         android:gravity="left"
                         android:textColor="@color/saddlebrown"/>
@@ -377,7 +377,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:drawableLeft="@drawable/soli_1_dark_24"
-                  android:hint="Specify Soil type*"
+                  android:hint="@string/spec_soil_type"
                   android:inputType="textCapSentences"
                   android:singleLine="true"
                   android:textColor="@color/ettextbrown" />
@@ -393,7 +393,7 @@
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:drawableLeft="@drawable/irrigation_dark_24"
-                      android:hint="Irrigation Type*"
+                      android:hint="@string/irrigation_type"
                       android:inputType="textCapSentences"
                       android:singleLine="true"
                       android:textColor="@color/ettextbrown" />
@@ -409,7 +409,7 @@
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:drawableLeft="@drawable/special_note_24"
-                      android:hint="Special Comment"
+                      android:hint="@string/special_comment"
                       android:inputType="textCapSentences"
                       android:singleLine="true"
                       android:textColor="@color/ettextbrown" />
@@ -423,7 +423,7 @@
                   android:layout_gravity="center_horizontal"
                   android:layout_margin="22dp"
                   android:background="@color/colorPrimaryDark"
-                  android:text="Submit"
+                  android:text="@string/submit"
                   android:textAllCaps="false"
                   android:textColor="#fff"
                   android:textSize="18sp" />

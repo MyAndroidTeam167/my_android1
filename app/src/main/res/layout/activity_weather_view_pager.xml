@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Please Contact Inspector to verify This Farm"
+        android:text="@string/verify_farm_cont_inspector"
         android:textColor="@color/colorAccent"
         android:elevation="@dimen/_5sdp"
         android:gravity="center"

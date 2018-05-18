@@ -34,7 +34,7 @@
         <com.example.hp.farmapp.PersonData.customfonts.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Profile"
+            android:text="@string/my_profile"
             android:textSize="@dimen/_16ssp"
             android:gravity="bottom"
             android:layout_marginLeft="@dimen/_25sdp"
@@ -110,7 +110,7 @@
         <com.example.hp.farmapp.PersonData.customfonts.MyTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:layout_weight="0.30"
             android:textSize="14sp"
             android:layout_marginLeft="15dp"
@@ -170,7 +170,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.30"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email_signup"
             android:textSize="14dp"
             android:layout_marginLeft="15dp"
             android:padding="20dp"/>
@@ -201,7 +201,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="DOB"
+                android:text="@string/dob"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:padding="20dp"/>
@@ -231,7 +231,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.30"
             android:layout_height="wrap_content"
-            android:text="Mob No"
+            android:text="@string/mobile_no"
             android:textSize="14dp"
             android:layout_marginLeft="15dp"
             android:padding="20dp"/>
@@ -261,7 +261,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="Mob No(Alt)"
+                android:text="@string/alternate_mobile_no"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:padding="20dp"/>
@@ -291,7 +291,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="Landline No"
+                android:text="@string/landline_no"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:padding="20dp"/>
@@ -322,7 +322,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.30"
             android:layout_height="wrap_content"
-            android:text="Aadhaar No"
+            android:text="@string/aadhar_no"
             android:textSize="14dp"
             android:layout_marginLeft="15dp"
             android:padding="20dp"/>
@@ -355,7 +355,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="Pan No"
+                android:text="@string/pan_no"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:padding="20dp"/>
@@ -387,7 +387,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/address"
                 android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:padding="20dp"/>
@@ -456,7 +456,7 @@
             android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Capture Image"/>
+            android:text="@string/capture_img"/>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
