@@ -80,7 +80,7 @@ public class InspectorSoilCardInputActivity extends AppCompatActivity {
     final String PARAMS_TEST_VALUE = "test_value";
     final String PARAMS_UNIT = "unit";
     final String PARAMS_RATING = "rating";
-    final String REGISTER_URL="http://spade.farm/app/index.php/farmApp/inspector_soil_card_input";
+    final String REGISTER_URL="https://spade.farm/app/index.php/farmApp/inspector_soil_card_input";
     ProgressDialog progressDialog;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

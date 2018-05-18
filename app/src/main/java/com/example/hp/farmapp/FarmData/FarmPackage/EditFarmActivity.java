@@ -46,7 +46,7 @@ public class EditFarmActivity extends AppCompatActivity implements AdapterView.O
     private static final String DEFAULT_LOCAL = "India";
     private static final String DEFAULT_LOCAL_STATE = "Madhya Pradesh";
     private static final String DEFAULT_LOCAL_CITY = "Indore";
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/edit_farm";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/edit_farm";
     public static final String AREA = "area";
     public static final String SOILTYPE = "soilType";
     public static final String IRRIGATIONTYPE = "irrigationType";

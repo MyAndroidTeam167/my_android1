@@ -64,7 +64,7 @@ public class OTPActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
     String charset = "UTF-8";
     String mobileno;
-     String OTPVERIFY="http://spade.farm/app/index.php/signUp/do_is_active_1";
+     String OTPVERIFY="https://spade.farm/app/index.php/signUp/do_is_active_1";
     String usernum="";
     String response,finres,status,details,detailssessionid,otppp;
     TextView otpsent,otpreposne;

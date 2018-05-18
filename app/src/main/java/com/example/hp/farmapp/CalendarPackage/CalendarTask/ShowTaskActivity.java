@@ -70,7 +70,7 @@ public class ShowTaskActivity extends AppCompatActivity {
         //super.onBackPressed();
         }
 
-    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
+    private static final String REGISTER_URL_CALENDAR = "https://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
 
     final String TASK_DATE="task_date";
     final String KEY_FARM_NUM="farm_num";

@@ -154,13 +154,13 @@ public class LandingActivity extends BaseActivity
 */
 
 
-    private static final String REGISTER_URL_ALL = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
-    private static final String FETCH_FARM_COUNT = "http://spade.farm/app/index.php/farmApp/count_farm_num";
-    private static final String FETCH_FARM_NUM_NAME = "http://spade.farm/app/index.php/farmApp/fetch_farm_num_and_name";
-    private static final String FETCH_CROP_DETAILS = "http://spade.farm/app/index.php/farmCalendar/send_farm_crop_details";
-    private static final String REGISTER_URL_DATA_PROFILE = "http://spade.farm/app/index.php/signUp/fetch_profile";
-    private static final String URL_CHECK_COMPANY_NUM = "http://spade.farm/app/index.php/farmApp/is_binded";
-    private static final String URL_CHCECK_APP_REGISTORY = "http://spade.farm/app/index.php/signUp/send_comp_registry";
+    private static final String REGISTER_URL_ALL = "https://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
+    private static final String FETCH_FARM_COUNT = "https://spade.farm/app/index.php/farmApp/count_farm_num";
+    private static final String FETCH_FARM_NUM_NAME = "https://spade.farm/app/index.php/farmApp/fetch_farm_num_and_name";
+    private static final String FETCH_CROP_DETAILS = "https://spade.farm/app/index.php/farmCalendar/send_farm_crop_details";
+    private static final String REGISTER_URL_DATA_PROFILE = "https://spade.farm/app/index.php/signUp/fetch_profile";
+    private static final String URL_CHECK_COMPANY_NUM = "https://spade.farm/app/index.php/farmApp/is_binded";
+    private static final String URL_CHCECK_APP_REGISTORY = "https://spade.farm/app/index.php/signUp/send_comp_registry";
 
     //http://spade.farm/app/index.php/signUp/send_comp_registry
 
@@ -1354,12 +1354,11 @@ public class LandingActivity extends BaseActivity
                                             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                                             alarmIntent.setData((Uri.parse("custom://"+System.currentTimeMillis())));
                                             //alarmManager.cancel(pendingIntent);
-
                                             Calendar alarmStartTime = Calendar.getInstance();
                                             Calendar now = Calendar.getInstance();
-                                            alarmStartTime.set(Calendar.HOUR_OF_DAY, 18);
-                                            alarmStartTime.set(Calendar.MINUTE, 03);
-                                            alarmStartTime.set(Calendar.SECOND,20);
+                                            alarmStartTime.set(Calendar.HOUR_OF_DAY, 8);
+                                            alarmStartTime.set(Calendar.MINUTE, 00);
+                                            alarmStartTime.set(Calendar.SECOND,00);
                                             if (now.after(alarmStartTime)) {
                                                 Log.d("Hey", "Added a day");
                                                 alarmStartTime.add(Calendar.DATE, 1);
@@ -1724,7 +1723,6 @@ public class LandingActivity extends BaseActivity
         } catch (IllegalAccessException e) {
             Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode");
         }
-
     }
 
 

@@ -73,9 +73,9 @@ public class FarmImagesActivity extends AppCompatActivity {
 
     String returnResp;
     String farm_num,user_num;
-    final String API_URL = "http://spade.farm/app/index.php/farmApp/save_farm_img";
+    final String API_URL = "https://spade.farm/app/index.php/farmApp/save_farm_img";
     //final String API_NEW_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_multiple_farm_imgs";
-    final String API_NEW_URL="http://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
+    final String API_NEW_URL="https://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
     final String KEY_TOKEN="token4";
     //final String API_NEW_URL="http://192.168.1.13/myfarmapp/index.php/farmCalendar/set_farmer_reponse";
     String ct1;

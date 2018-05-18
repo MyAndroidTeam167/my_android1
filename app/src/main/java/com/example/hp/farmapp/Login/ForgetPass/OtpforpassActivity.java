@@ -58,7 +58,7 @@ public class OtpforpassActivity extends AppCompatActivity {
     Button subotpforpass;
     String otpforpasss;
     Context context;
-    String OTPVERIFY="http://spade.farm/app/index.php/signUp/forget_password";
+    String OTPVERIFY="https://spade.farm/app/index.php/signUp/forget_password";
     String response,status,details,detailedsessionid;
     String finres;
     final String KEY_MOBILE="mobNo";

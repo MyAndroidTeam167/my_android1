@@ -45,7 +45,7 @@ public class FarmSoilTestActivity extends AppCompatActivity {
     TextView tvnValue,tvnRating,tvpValue,tvpRating,tvkValue,tvkRating;
     TextView tvsValue,tvsRating,tvznValue,tvznRating,tvbValue,tvbRating;
     TextView tvfeValue,tvfeRating,tvmnValue,tvmnRating,tvcuValue,tvcuRating;
-    final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/fetch_soil_card";
+    final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/fetch_soil_card";
     String ct1;
     final String TOKEN_key="token2";
     final String PARAMS_FARM_NUM="farm_num";

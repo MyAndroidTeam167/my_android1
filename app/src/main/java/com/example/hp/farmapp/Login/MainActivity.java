@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/signUp/is_login_successful";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/signUp/is_login_successful";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     String mobilefromsigup="",passwordfromsignup="";

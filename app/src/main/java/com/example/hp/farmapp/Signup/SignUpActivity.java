@@ -51,7 +51,7 @@ Intent intent=new Intent(context,MainActivity.class);
     startActivity(intent);
     finish();}
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/signUp/insert_new_user";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/signUp/insert_new_user";
 
     public static final String KEY_MOBILE = "mobNo";
     public static final String KEY_PASSWORD = "password";

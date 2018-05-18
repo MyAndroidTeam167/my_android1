@@ -40,7 +40,7 @@ import java.util.Map;
 
 public class ShowAllFarmImagesActivity extends AppCompatActivity {
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/fetch_farm_images";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/fetch_farm_images";
     public static final String KEY_FARM_NUM = "farm_num";
     private List<FarmImageGetterSetter> farm_image_list;
     FarmImageAdapter farmImageListAdapter;

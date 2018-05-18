@@ -58,7 +58,7 @@ import java.util.regex.Pattern;
 
 public class FillProfileActivity extends BaseActivity {
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/insert_new_data_in_person";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/insert_new_data_in_person";
     ProgressDialog progressDialog;
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_MIDDLE_NAME = "middleName";

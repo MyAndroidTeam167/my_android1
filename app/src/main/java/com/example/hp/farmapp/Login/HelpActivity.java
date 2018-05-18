@@ -75,7 +75,7 @@ public class HelpActivity extends AppCompatActivity {
         pd.show();
         wv1.setWebViewClient(new MyBrowser());
 
-        String url = "http://spade.farm/app/index.php/farmApp/need_help_page";
+        String url = "https://spade.farm/app/index.php/farmApp/need_help_page";
         wv1.getSettings().setLoadsImagesAutomatically(true);
         wv1.getSettings().setLoadWithOverviewMode(true);
         wv1.getSettings().setUseWideViewPort(true);

@@ -47,7 +47,7 @@ public class ShowFarmActivity extends AppCompatActivity {
     TextView mFarmName,mCropName,mGrowingRegion,mGrowingSeason,mArea,mSoilType,mIrrigationType,mSowingDate,mHarvestDate,mSpecialNote,mFarmAddress;
     String AREA, FARM_GPSC1,FARM_GPSC2,FARM_GPSC3, FARM_GPSC4, FARM_GPSC5, FARM_GPSC6,SOIL_TYPE,IRRIGATION_TYPE,AddL1,AddL2,AddL3,City,State,Country,FarmNum,UserNum;
     String Growing_Season,Growing_Region,Sowing_date,Harvest_date,Special_Comment,Crop_name,Address;
-    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL_DATA_FARMADD = "https://spade.farm/app/index.php/signUp/fetch_farm_data";
     public static final String KEY_USER_NUM = "user_num";
     public static final String KEY_FARM_NUM = "farm_num";
     public static final String KEY_TOKEN = "token1";

@@ -64,9 +64,9 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
-    private static final String REGISTER_URL_ALL = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
-    private static final String REGISTER_URL_PENDING = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_pending_to_app";
-    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
+    private static final String REGISTER_URL_ALL = "https://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
+    private static final String REGISTER_URL_PENDING = "https://spade.farm/app/index.php/farmCalendar/send_farm_calendar_pending_to_app";
+    private static final String REGISTER_URL_CALENDAR = "https://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
    /* List<Taskdata> taskdatumsall=new ArrayList<>();
     List<Taskdata> taskdatumspending=new ArrayList<>();
     Taskdata taskdatumall=new Taskdata();

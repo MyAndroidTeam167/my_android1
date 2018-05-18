@@ -74,8 +74,8 @@ public class ShowProfileActivity extends AppCompatActivity {
     ImageButton editshowpro;
     String pictureImagePath = "";
     ProgressDialog progressDialog;
-    private static final String REGISTER_URL_DATA_PROFILE = "http://spade.farm/app/index.php/signUp/fetch_profile";
-    final String API_NEW_URL = "http://spade.farm/app/index.php/inspectorApp/save_profile_img";
+    private static final String REGISTER_URL_DATA_PROFILE = "https://spade.farm/app/index.php/signUp/fetch_profile";
+    final String API_NEW_URL = "https://spade.farm/app/index.php/inspectorApp/save_profile_img";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     JSONObject jsonObject;

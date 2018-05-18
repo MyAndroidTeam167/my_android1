@@ -55,7 +55,7 @@ public class FarmContractActivity extends AppCompatActivity {
     boolean connected = false;
     Boolean is_binded=false;
     ProgressDialog progressDialog;
-    private static final String URL_FETCH_CONTRACT = "http://spade.farm/app/index.php/farmApp/fetch_contract";
+    private static final String URL_FETCH_CONTRACT = "https://spade.farm/app/index.php/farmApp/fetch_contract";
     WebView wv_contract_form;
     String ct1,farm_num="";
     TextView no_conract_farm;

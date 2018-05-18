@@ -53,7 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText newComment;
     private ListView listview;
     String fetch_id;
-    final String URL = "http://spade.farm/app/index.php/farmApp/send_chat_messages";
+    final String URL = "https://spade.farm/app/index.php/farmApp/send_chat_messages";
     final  String KEY_TOKEN="token2";
     String ct1;
 

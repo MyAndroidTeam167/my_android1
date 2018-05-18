@@ -84,8 +84,8 @@ public class FarmActionReplyActivity extends AppCompatActivity {
     String ct1="";
 
     String fetch_id, description,farmerReply, chemical, chemical_qty, compulsary, activity, img_link, done, date_of_task,imgs_quantity;
-    String REGISTER_URL = "http://spade.farm/app/index.php/farmCalendar/fetch_farm_day_data_by_id";
-    String SAVE_FARMER_RESPONSE_URL = "http://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
+    String REGISTER_URL = "https://spade.farm/app/index.php/farmCalendar/fetch_farm_day_data_by_id";
+    String SAVE_FARMER_RESPONSE_URL = "https://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
 
     TextView tvFarmerReply, tvactivityName, tvactivityDescription, tvactivityDate, tvchemical, tvqtychemical, tvCompulsary;
 
@@ -100,7 +100,7 @@ public class FarmActionReplyActivity extends AppCompatActivity {
 
     private Button recordButton,playButton;
     boolean mStartRecording,mStartPlaying;
-    final String API_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_audio_response";
+    final String API_URL = "https://spade.farm/app/index.php/farmApp/save_audio_response";
     private boolean permissionToRecordAccepted = false;
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
     ProgressDialog progressDialog;

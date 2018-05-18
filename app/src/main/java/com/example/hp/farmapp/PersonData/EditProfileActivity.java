@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    public static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/edit_user_profile_data";
+    public static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/edit_user_profile_data";
     ProgressDialog progressDialog;
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_MIDDLE_NAME = "middleName";
