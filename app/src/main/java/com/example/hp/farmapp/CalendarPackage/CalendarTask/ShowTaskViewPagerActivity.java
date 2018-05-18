@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -49,7 +50,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,9 +64,9 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
 
-    private static final String REGISTER_URL_ALL = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
-    private static final String REGISTER_URL_PENDING = "http://spade.farm/app/index.php/farmCalendar/send_farm_calendar_pending_to_app";
-    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
+    private static final String REGISTER_URL_ALL = "https://spade.farm/app/index.php/farmCalendar/send_farm_calendar_column_data_to_app";
+    private static final String REGISTER_URL_PENDING = "https://spade.farm/app/index.php/farmCalendar/send_farm_calendar_pending_to_app";
+    private static final String REGISTER_URL_CALENDAR = "https://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
    /* List<Taskdata> taskdatumsall=new ArrayList<>();
     List<Taskdata> taskdatumspending=new ArrayList<>();
     Taskdata taskdatumall=new Taskdata();
@@ -142,7 +145,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
 
                 TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Activities");
+        title.setText(R.string.activities);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -151,12 +154,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
 
         farm_num= SharedPreferencesMethod.getString(context,"farm_num");
-        alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, SampleBootReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-        if (alarmMgr!= null) {
-            alarmMgr.cancel(alarmIntent);
-        }
+
 //        getSupportActionBar().setTitle("My Title");
 
         if (getSupportActionBar() != null){
@@ -166,7 +164,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
         }
 
          mprogressDialog =new ProgressDialog(context);
-            mprogressDialog.setMessage("Loading....");
+            mprogressDialog.setMessage(getString(R.string.loading_text));
             mprogressDialog.show();
         url=REGISTER_URL_ALL;
         AsyncTaskRunner runner=new AsyncTaskRunner();
@@ -194,7 +192,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
         final int PAGE_COUNT = 2;
-        private String tabTitles[] = new String[]{"All Activities", "Pending Activities"};
+        private String tabTitles[] = new String[]{getString(R.string.all_activities_pager),getString(R.string.pending_activities_pager)};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -260,6 +258,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                                 mytype="all";
                                 JSONArray jsonarray = null;
                                 JSONObject jsonObject=null;
+                                int pendingcount=0;
                                 try {
 
                                     jsonObject=new JSONObject(response);
@@ -292,7 +291,11 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                                             activity_imgall[i] = jsonobject.getString("img_link");
                                             is_doneall[i] = jsonobject.getString("is_done");
                                             farm_dwork_numall[i] = jsonobject.getString("farm_dwork_num");
+                                            String date_today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
+                                            if (dateall[i].compareTo(date_today) < 0) {
+                                                pendingcount++;
+                                            }
                                             Log.e("Date All :", dateall[i] + "activity All" + activityall[i]);
 
                                    /*     taskdatumall = new Taskdata();
@@ -307,6 +310,17 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
                                         }
 
+
+                                        if(pendingcount==0) {
+                                            alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                                            Intent intent = new Intent(context, SampleBootReceiver.class);
+                                            alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                                            if (alarmMgr != null) {
+                                                alarmMgr.cancel(alarmIntent);
+                                            }
+                                        }else{
+
+                                        }
                                         mprogressDialog.dismiss();
 
                                     }else{
@@ -420,6 +434,9 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Log.e("TAGerror :",error.toString());
+                            Toast.makeText(ShowTaskViewPagerActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
+
                             mprogressDialog.dismiss();
                         }
                     }){
@@ -477,7 +494,7 @@ public class ShowTaskViewPagerActivity extends AppCompatActivity {
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Activities");
+        title.setText(R.string.activities_title);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

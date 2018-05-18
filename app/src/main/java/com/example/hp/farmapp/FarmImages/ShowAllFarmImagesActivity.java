@@ -1,5 +1,6 @@
 package com.example.hp.farmapp.FarmImages;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,6 +25,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.FarmData.ShowFarmActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -38,7 +40,7 @@ import java.util.Map;
 
 public class ShowAllFarmImagesActivity extends AppCompatActivity {
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/fetch_farm_images";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/fetch_farm_images";
     public static final String KEY_FARM_NUM = "farm_num";
     private List<FarmImageGetterSetter> farm_image_list;
     FarmImageAdapter farmImageListAdapter;
@@ -52,6 +54,7 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
     boolean connected = false;
     Boolean is_binded = false;
     TextView no_farm_images;
+    ProgressDialog progressDialog;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,7 +97,7 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_show_all_farm_images);
                 init();
                 TextView title = (TextView) findViewById(R.id.tittle);
-                title.setText("Activity Images");
+                title.setText(getString(R.string.activities_images_title));
                 mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
                 setSupportActionBar(mActionBarToolbar);
                 ct1 = SharedPreferencesMethod.getString(context, "cctt");
@@ -109,6 +112,8 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
                     getSupportActionBar().setDisplayShowTitleEnabled(false);
                 }
 
+                progressDialog = ProgressDialog.show(ShowAllFarmImagesActivity.this,
+                        getString(R.string.dialog_please_wait),"");
                 AsyncTaskRunner runnermainact = new AsyncTaskRunner();
                 runnermainact.execute();
             } else {
@@ -163,7 +168,7 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
 
                                     }
 
-                                    //progressDialog.dismiss();
+                                    progressDialog.dismiss();
                                     farmImageListAdapter = new FarmImageAdapter(farm_image_list, context);
                                     recy_show_farm_images.setHasFixedSize(true);
                                     recy_show_farm_images.setAdapter(farmImageListAdapter);
@@ -189,6 +194,7 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
                                     }));*/
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show();
                                     farmImageListAdapter = new FarmImageAdapter(farm_image_list, context);
                                     if (farmImageListAdapter.getItemCount() == 0) {
                                         no_farm_images.setVisibility(View.VISIBLE);
@@ -198,14 +204,16 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
 */
                                     }
                                     recy_show_farm_images.setAdapter(farmImageListAdapter);
+                                    progressDialog.dismiss();
                                 }
                             }
                         },
                         new com.android.volley.Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                // progressDialog.dismiss();
-                                Toast.makeText(ShowAllFarmImagesActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                                Log.e("Error",error.toString());
+                                Toast.makeText(ShowAllFarmImagesActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override
@@ -239,7 +247,7 @@ public class ShowAllFarmImagesActivity extends AppCompatActivity {
 
     void basic_title() {
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Farm Images");
+        title.setText(getString(R.string.activities_images_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null) {

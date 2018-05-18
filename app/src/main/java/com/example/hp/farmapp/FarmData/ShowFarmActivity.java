@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -46,7 +47,7 @@ public class ShowFarmActivity extends AppCompatActivity {
     TextView mFarmName,mCropName,mGrowingRegion,mGrowingSeason,mArea,mSoilType,mIrrigationType,mSowingDate,mHarvestDate,mSpecialNote,mFarmAddress;
     String AREA, FARM_GPSC1,FARM_GPSC2,FARM_GPSC3, FARM_GPSC4, FARM_GPSC5, FARM_GPSC6,SOIL_TYPE,IRRIGATION_TYPE,AddL1,AddL2,AddL3,City,State,Country,FarmNum,UserNum;
     String Growing_Season,Growing_Region,Sowing_date,Harvest_date,Special_Comment,Crop_name,Address;
-    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL_DATA_FARMADD = "https://spade.farm/app/index.php/signUp/fetch_farm_data";
     public static final String KEY_USER_NUM = "user_num";
     public static final String KEY_FARM_NUM = "farm_num";
     public static final String KEY_TOKEN = "token1";
@@ -302,7 +303,8 @@ public class ShowFarmActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
-                                Toast.makeText(ShowFarmActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                Log.e("Error",error.toString());
+                                Toast.makeText(ShowFarmActivity.this,R.string.error_text, Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override
@@ -356,7 +358,7 @@ public class ShowFarmActivity extends AppCompatActivity {
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Farm Activity");
+        title.setText(R.string.farm_data_title);
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

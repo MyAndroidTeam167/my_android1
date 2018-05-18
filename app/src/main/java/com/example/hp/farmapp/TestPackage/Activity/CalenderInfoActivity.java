@@ -40,7 +40,7 @@ public class CalenderInfoActivity extends AppCompatActivity {
         pd.show();
         wv1.setWebViewClient(new MyBrowser());
 
-                String url = "http://spade.farm/app/index.php/farmCalendar";
+                String url = "https://spade.farm/app/index.php/farmCalendar";
                 wv1.getSettings().setLoadsImagesAutomatically(true);
                 wv1.getSettings().setLoadWithOverviewMode(true);
                 wv1.getSettings().setUseWideViewPort(true);

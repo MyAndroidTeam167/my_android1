@@ -266,12 +266,12 @@ public class CustomAdapter extends BaseAdapter implements MediaPlayer.OnCompleti
             } else if (byInspector.equals("Y")) {
 //            linearLayout.setBackgroundColor(Color.parseColor("#dddddd"));
                 linearLayout.setBackgroundResource(R.drawable.rounded_corner_2);
-                commentBy.setText("Inspector");
+                commentBy.setText(R.string.inspector);
                 rightImage.setVisibility(View.GONE);
             } else {
 //            linearLayout.setBackgroundColor(Color.parseColor("#dddddd"));
                 linearLayout.setBackgroundResource(R.drawable.rounded_corner_2);
-                commentBy.setText("Admin");
+                commentBy.setText(R.string.admin);
                 rightImage.setVisibility(View.GONE);
             }
             comment.setText(commentMsg);

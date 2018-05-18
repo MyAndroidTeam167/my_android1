@@ -58,7 +58,7 @@ public class OtpforpassActivity extends AppCompatActivity {
     Button subotpforpass;
     String otpforpasss;
     Context context;
-    String OTPVERIFY="http://spade.farm/app/index.php/signUp/forget_password";
+    String OTPVERIFY="https://spade.farm/app/index.php/signUp/forget_password";
     String response,status,details,detailedsessionid;
     String finres;
     final String KEY_MOBILE="mobNo";
@@ -118,7 +118,7 @@ public class OtpforpassActivity extends AppCompatActivity {
         context=this;
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Enter OTP");
+        title.setText(getString(R.string.enter_otp_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -162,7 +162,7 @@ public class OtpforpassActivity extends AppCompatActivity {
     private void submitotp() {
         mobileno= DataHandler.newInstance().getMoborEmailonforget();
         passonfrgt=DataHandler.newInstance().getPasswordonfrgt();
-        progressDialog = ProgressDialog.show(OtpforpassActivity.this,"Please Wait...", "");
+        progressDialog = ProgressDialog.show(OtpforpassActivity.this,getString(R.string.loading_text), "");
         otpforpasss=otpforpass.getText().toString().trim();
         String verifyURL= "https://2factor.in/API/V1/"+authkey+"/SMS/VERIFY/"+detailedsessionid+"/"+otpforpasss;
         //verifyURL="https://2factor.in/API/V1/996859f5-9935-11e7-94da-0200cd936042/SMS/VERIFY/742627ff-994d-11e7-94da-0200cd936042/66135";
@@ -182,7 +182,7 @@ public class OtpforpassActivity extends AppCompatActivity {
         mobileno="";
         OtpAsynctaskrunner runner = new OtpAsynctaskrunner();
         runner.execute(mainUrl,mobileno,passonfrgt,email);
-        progressDialog = ProgressDialog.show(OtpforpassActivity.this,"Please Wait Fetching Otp","To dismiss click anywhere");
+        progressDialog = ProgressDialog.show(OtpforpassActivity.this,getString(R.string.please_wait_fetchig_otp),getString(R.string.dissmiss_otp_text));
         progressDialog.setCancelable(true);
         progressDialog.setOnCancelListener(new Dialog.OnCancelListener(){
             @Override
@@ -211,7 +211,6 @@ public class OtpforpassActivity extends AppCompatActivity {
                 if(details.equals("OTP Matched")&& status.equals("Success"))
                 {
 
-                    progressDialog.dismiss();
 
                     //progressDialog.dismiss();
                     //if(!usernum.equals("")) {
@@ -222,14 +221,18 @@ public class OtpforpassActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(String response) {
                                             if (response.equals("\"Password Changed Successfully\"")) {
-                                                Toast.makeText(OtpforpassActivity.this, "Password changed Successfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(OtpforpassActivity.this, getString(R.string.password_changed), Toast.LENGTH_SHORT).show();
                                                 SharedPreferencesMethod.clear(context);
                                                 SharedPreferencesMethod.setBoolean(context, "Login", false);
                                                 Intent intent = new Intent(context, MainActivity.class);
                                                 startActivity(intent);
                                                 finish();
+                                                progressDialog.dismiss();
+
                                             } else {
-                                                Toast.makeText(OtpforpassActivity.this, "Password not changed", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(OtpforpassActivity.this, R.string.password_not_changed, Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+
                                             }
                                         }
                                     },
@@ -237,7 +240,8 @@ public class OtpforpassActivity extends AppCompatActivity {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
                                             progressDialog.dismiss();
-                                            Toast.makeText(OtpforpassActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                                            Log.e("Error",error.toString());
+                                            Toast.makeText(OtpforpassActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                                         }
                                     }) {
                                 @Override
@@ -262,7 +266,7 @@ public class OtpforpassActivity extends AppCompatActivity {
                 }
                 else {
                     progressDialog.dismiss();
-                    Toast.makeText(OtpforpassActivity.this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpforpassActivity.this, getString(R.string.please_enter_correct_otp), Toast.LENGTH_SHORT).show();
                                     }
 
             } else {
@@ -339,13 +343,14 @@ public class OtpforpassActivity extends AppCompatActivity {
                                 public void run(){
                                     //update ui here
                                     // display toast here
-                                    Toast.makeText(OtpforpassActivity.this, "Please Resend Otp Server Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OtpforpassActivity.this, getString(R.string.resend_otp_error), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }}
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_LONG).show();
                 }
                 //finally close connection
                 reader.close();

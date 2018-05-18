@@ -73,9 +73,9 @@ public class FarmImagesActivity extends AppCompatActivity {
 
     String returnResp;
     String farm_num,user_num;
-    final String API_URL = "http://spade.farm/app/index.php/farmApp/save_farm_img";
+    final String API_URL = "https://spade.farm/app/index.php/farmApp/save_farm_img";
     //final String API_NEW_URL = "https://www.oswalcorns.com/my_farm/myfarmapp/index.php/farmApp/save_multiple_farm_imgs";
-    final String API_NEW_URL="http://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
+    final String API_NEW_URL="https://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
     final String KEY_TOKEN="token4";
     //final String API_NEW_URL="http://192.168.1.13/myfarmapp/index.php/farmCalendar/set_farmer_reponse";
     String ct1;
@@ -179,7 +179,7 @@ public class FarmImagesActivity extends AppCompatActivity {
        // Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         //startActivity(intent);
         TextView title = (TextView) findViewById(R.id.tittle);
-        title.setText("Farm Images");
+        title.setText(getString(R.string.capture_farm_images_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -457,7 +457,7 @@ public class FarmImagesActivity extends AppCompatActivity {
         Log.e("checkArray", "Reached ImageUploadToServerFunction");
         progressDialog = new ProgressDialog(context);
         progressDialog.show();
-        progressDialog.setMessage("Uploading Image");
+        progressDialog.setMessage(getString(R.string.uploading_image));
         progressDialog.setCancelable(false);
  /*       ByteArrayOutputStream byteArrayOutputStreamObject1;
         byteArrayOutputStreamObject1 = new ByteArrayOutputStream();
@@ -563,8 +563,8 @@ public class FarmImagesActivity extends AppCompatActivity {
 
         final JSONArray jsonArray = new JSONArray();
 
-        if (encodedImageList.isEmpty()){
-            Toast.makeText(this, "Please select some images first.", Toast.LENGTH_SHORT).show();
+        if (encodedImageList.size()<Integer.parseInt(imgs_quantity)){
+            Toast.makeText(this, R.string.please_upload_all_images, Toast.LENGTH_SHORT).show();
             return;
         }
 else {
@@ -614,7 +614,7 @@ else {
 
                             } catch (JSONException e) {
                                 progressDialog.dismiss();
-                                Toast.makeText(context,"Some error occum=red Please Re-upload images", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,R.string.server_error, Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
 
@@ -623,7 +623,7 @@ else {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     Log.e("Message server er", volleyError.toString());
-                    Toast.makeText(getApplication(), "Error "+volleyError.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),R.string.error_text, Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
             });

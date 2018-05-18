@@ -53,7 +53,7 @@ public class HelpActivity extends AppCompatActivity {
 
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Help");
+        title.setText(getString(R.string.help_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -71,11 +71,11 @@ public class HelpActivity extends AppCompatActivity {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         wv1=(WebView)findViewById(R.id.needhelp);
         pd = new ProgressDialog(HelpActivity.this);
-        pd.setMessage("Please wait Loading...");
+        pd.setMessage(getString(R.string.dialog_please_wait));
         pd.show();
         wv1.setWebViewClient(new MyBrowser());
 
-        String url = "http://spade.farm/app/index.php/farmApp/need_help_page";
+        String url = "https://spade.farm/app/index.php/farmApp/need_help_page";
         wv1.getSettings().setLoadsImagesAutomatically(true);
         wv1.getSettings().setLoadWithOverviewMode(true);
         wv1.getSettings().setUseWideViewPort(true);

@@ -58,7 +58,7 @@ import java.util.regex.Pattern;
 
 public class FillProfileActivity extends BaseActivity {
 
-    private static final String REGISTER_URL = "http://spade.farm/app/index.php/farmApp/insert_new_data_in_person";
+    private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/insert_new_data_in_person";
     ProgressDialog progressDialog;
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_MIDDLE_NAME = "middleName";
@@ -183,7 +183,7 @@ public class FillProfileActivity extends BaseActivity {
         mobileno=SharedPreferencesMethod.getString(context,"Mobile");
 
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Fill Profile");
+        title.setText(getString(R.string.fill_profile));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
 
@@ -362,26 +362,18 @@ public class FillProfileActivity extends BaseActivity {
                 slandlineNofill = landlinefill.getText().toString();
 
                 if (sfrstnamefill.matches("")) {
-                    frstnamefill.setError("First Name Should not be null");
-                }
-                else if (slastnamefill.matches("")) {
-                    lastnamefill.setError("Last Name Should not be null");
-                }
-                else if (!isValidaadhar(adharnofill.getText().toString().trim())) {
-                    adharnofill.setError("Invalid Aadhar Number");
-                }
-               /* else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
+                    frstnamefill.setError(getString(R.string.first_name_error));
+                } else if (slastnamefill.matches("")) {
+                    lastnamefill.setError(getString(R.string.last_name_error));
+                } else if (!isValidaadhar(adharnofill.getText().toString().trim())) {
+                    adharnofill.setError(getString(R.string.aadhar_error));
+                }/* else if (!isInvalidpanno(pannofill.getText().toString().trim())) {
                     pannofill.setError("Invalid Panno.");
-                }*/
-                else if(!isValiddob(sdobfill))
-                {
-                    dobfill.setError("Please Enter Date of birth");
-                }
-                else if (!isValidMobile(mobtwofill.getText().toString().trim())) {
-                    mobtwofill.setError("Invalid Mobile Number");
-                }
-                else
-                {
+                }*/ else if (!isValiddob(sdobfill)) {
+                    dobfill.setError(getString(R.string.dob_error));
+                } else if (!isValidMobile(mobtwofill.getText().toString().trim())) {
+                    mobtwofill.setError(getString(R.string.mobile_error));
+                } else {
                     SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
                     SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -396,7 +388,7 @@ public class FillProfileActivity extends BaseActivity {
                     }
 
                     progressDialog = ProgressDialog.show(FillProfileActivity.this,
-                            "Please Wait...","");
+                            getString(R.string.dialog_please_wait),"");
                     try {
                         GetText();
                     } catch (JSONException e) {
@@ -674,7 +666,7 @@ public class FillProfileActivity extends BaseActivity {
                             SharedPreferencesMethod.setBoolean(context,"fillProfileSuccesfull",FILL_SUCESSFUL);
                             SharedPreferencesMethod.setString(context,"person_num",response);
                             DataHandler.newInstance().setFromActivty("fillprofile");
-                            Toast.makeText(FillProfileActivity.this, response, Toast.LENGTH_LONG).show();
+                            Toast.makeText(FillProfileActivity.this, getString(R.string.profile_data_submitted), Toast.LENGTH_LONG).show();
                             Intent intent =new Intent(context,LandingActivity.class);
                             startActivity(intent);
                             finish();
@@ -686,7 +678,7 @@ public class FillProfileActivity extends BaseActivity {
                     public void onErrorResponse(VolleyError error) {
                         // Log.e(TAG,error.toString());
                         progressDialog.dismiss();
-                        Toast.makeText(FillProfileActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(FillProfileActivity.this,getString(R.string.error_text),Toast.LENGTH_LONG).show();
                         Log.e("ERROR:",error.toString());
 
 
@@ -815,7 +807,7 @@ public class FillProfileActivity extends BaseActivity {
     }
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Soil Health Card List");
+        title.setText(getString(R.string.fill_profile));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

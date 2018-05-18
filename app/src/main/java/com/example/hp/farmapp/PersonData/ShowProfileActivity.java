@@ -74,8 +74,8 @@ public class ShowProfileActivity extends AppCompatActivity {
     ImageButton editshowpro;
     String pictureImagePath = "";
     ProgressDialog progressDialog;
-    private static final String REGISTER_URL_DATA_PROFILE = "http://spade.farm/app/index.php/signUp/fetch_profile";
-    final String API_NEW_URL = "http://spade.farm/app/index.php/inspectorApp/save_profile_img";
+    private static final String REGISTER_URL_DATA_PROFILE = "https://spade.farm/app/index.php/signUp/fetch_profile";
+    final String API_NEW_URL = "https://spade.farm/app/index.php/inspectorApp/save_profile_img";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
     JSONObject jsonObject;
@@ -455,6 +455,8 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
                         new com.android.volley.Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                Log.e("Error",error.toString());
+                                Toast.makeText(context, getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
                         }) {
@@ -557,7 +559,7 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
             if(myBitmap!=null){
                 ImageUploadToServerFunction();}
             else {
-                Toast.makeText(context, "Some Error Ocuurred try again later", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_text, Toast.LENGTH_SHORT).show();
             }
             farmer_profile_image.setImageBitmap(myBitmap);
 
@@ -584,7 +586,7 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
         if(myBitmap!=null){
             ImageUploadToServerFunction();}
         else {
-            Toast.makeText(context, "Some Error Ocuurred try again later", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.error_text, Toast.LENGTH_SHORT).show();
         }
         farmer_profile_image.setImageBitmap(myBitmap);
 
@@ -614,7 +616,7 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
             Log.e("checkArray", "Reached ImageUploadToServerFunction");
             progressDialog = new ProgressDialog(context);
             progressDialog.show();
-            progressDialog.setMessage("Uploading Image");
+            progressDialog.setMessage(getString(R.string.uploading_image));
             progressDialog.setCancelable(false);
             ByteArrayOutputStream byteArrayOutputStreamObject1;
             byteArrayOutputStreamObject1 = new ByteArrayOutputStream();
@@ -692,7 +694,7 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
 
                             } catch (JSONException e) {
                                 progressDialog.dismiss();
-                                Toast.makeText(context, "Some error occurred Please Re-upload images", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, R.string.server_error, Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
 
@@ -701,7 +703,7 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     Log.e("Message from server err", volleyError.toString());
-                    Toast.makeText(getApplication(), "Error Occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });
@@ -711,14 +713,14 @@ editshowpro.setOnClickListener(new View.OnClickListener() {
             Volley.newRequestQueue(this).add(jsonObjectRequest);
 
         } else {
-            Toast.makeText(context, "Capture Image First", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getString(R.string.capture_image_first), Toast.LENGTH_SHORT).show();
         }
     }
 
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Profile");
+        title.setText(getString(R.string.profile_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

@@ -92,8 +92,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/farm_name"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -102,7 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:id="@+id/farm_name_tv"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />
@@ -125,8 +125,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/area"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -135,7 +135,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:id="@+id/area_tv"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />
@@ -158,8 +158,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/soil_type"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -168,7 +168,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:id="@+id/soil_type_tv"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />
@@ -191,8 +191,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/irrigation_type"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -201,7 +201,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:id="@+id/irrigation_type_tv"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />
@@ -224,8 +224,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/special_note"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -235,7 +235,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:id="@+id/special_note_tv"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:inputType="textMultiLine"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />
@@ -257,8 +257,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="casual"
                     android:text="@string/farm_address"
+                    android:fontFamily="@font/roboto"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -268,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:id="@+id/farm_address_tv"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/roboto"
                     android:inputType="textMultiLine"
                     android:textColor="@color/ettextbrown"
                     android:textSize="20dp" />

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -360,6 +361,7 @@ public class WeatherViewPagerActivity extends BaseActivity{
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(context, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
 
@@ -369,6 +371,8 @@ public class WeatherViewPagerActivity extends BaseActivity{
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressDialog.dismiss();
+                            Log.e("Error",error.toString());
+                            Toast.makeText(context, getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                         }
                     }){
                 @Override
@@ -405,7 +409,7 @@ public class WeatherViewPagerActivity extends BaseActivity{
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Weather");
+        title.setText(getString(R.string.weather_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){

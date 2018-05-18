@@ -33,9 +33,6 @@ public class CnfrmPassActivity extends AppCompatActivity {
     String newpass,cnfrmpass;
     Toolbar mActionBarToolbar;
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent=new Intent(context,MainActivity.class);
@@ -58,26 +55,19 @@ public class CnfrmPassActivity extends AppCompatActivity {
         cnfsubmit=(Button)findViewById(R.id.cnfsubmit);
         confrmnewpass=(ShowHidePasswordEditText)findViewById(R.id.cnfnewpass);
         cnfcnfpass=(ShowHidePasswordEditText)findViewById(R.id.cnfcnfpass);
-
-
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Password Reset");
+        title.setText(getString(R.string.reset_password_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
-
         //getSupportActionBar().setTitle("My Title");
-
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
-
         cnfsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 int length = confrmnewpass.getText().toString().trim().length();
                 int length2 = cnfcnfpass.getText().toString().trim().length();
                 newpass=confrmnewpass.getText().toString();
@@ -89,7 +79,6 @@ public class CnfrmPassActivity extends AppCompatActivity {
                     cnfcnfpass.setError(getString(R.string.password_er));
                     //        Toast.makeText(MainActivity.this, length, Toast.LENGTH_SHORT).show();
                 } else if (!newpass.equals(cnfrmpass)) {
-
                     cnfcnfpass.setError(getString(R.string.samepassword));
                     confrmnewpass.setError(getString(R.string.samepassword));
                 }

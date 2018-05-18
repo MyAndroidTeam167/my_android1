@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class UpdateReceiver extends BroadcastReceiver {
     String user_num,farm_num,byfarmer,farmer_reply,fetch_id,netstatus;
-    String SAVE_FARMER_RESPONSE_URL = "http://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
+    String SAVE_FARMER_RESPONSE_URL = "https://spade.farm/app/index.php/farmCalendar/set_farmer_reponse";
     final String DATA_ID = "data_id";
     final String FARMER_REPLY = "farmer_reply";
 

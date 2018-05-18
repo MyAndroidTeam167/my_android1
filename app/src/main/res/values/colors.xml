@@ -41,4 +41,7 @@
     <color name="mid_grey">#939393</color>
     <color name="grey_lil_dark">#545454</color>
     <color name="new_check_color">#79CDCD</color>
+    <color name="light_grey_new">#33696969</color>
+    <color name="new_light_black">#595959</color>
+    <color name="black_light">#CC000000</color>
 </resources>

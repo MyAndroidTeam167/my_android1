@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -69,7 +70,7 @@ public class ShowTaskActivity extends AppCompatActivity {
         //super.onBackPressed();
         }
 
-    private static final String REGISTER_URL_CALENDAR = "http://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
+    private static final String REGISTER_URL_CALENDAR = "https://spade.farm/app/index.php/farmCalendar/send_task_list_by_date";
 
     final String TASK_DATE="task_date";
     final String KEY_FARM_NUM="farm_num";
@@ -122,7 +123,7 @@ public class ShowTaskActivity extends AppCompatActivity {
         ct1=SharedPreferencesMethod.getString(context,"cctt");
         farm_cal_mast_num = DataHandler.newInstance().getFarm_cal_mast_num();
         date = DataHandler.newInstance().getEvent_date();
-        title.setText("Task List");
+        title.setText(R.string.task_list);
 
         /*Bundle extras = getIntent().getExtras();
         if(extras!=null) {
@@ -258,6 +259,9 @@ public class ShowTaskActivity extends AppCompatActivity {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Log.e("TAGerror :",error.toString());
+                            Toast.makeText(ShowTaskActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
+
                         }
                     }){
                 @Override

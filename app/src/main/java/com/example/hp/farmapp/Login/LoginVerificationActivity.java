@@ -32,9 +32,9 @@ import java.util.Map;
 public class LoginVerificationActivity extends AppCompatActivity {
 
     Context context;
-    private static final String REGISTER_URL_CHECK_FILLED = "http://spade.farm/app/index.php/signUp/get_app_registry_data";
-    private static final String REGISTER_URL_DATA_PROFILE = "http://spade.farm/app/index.php/signUp/fetch_profile";
-    private static final String REGISTER_URL_DATA_FARMADD = "http://spade.farm/app/index.php/signUp/fetch_farm_data";
+    private static final String REGISTER_URL_CHECK_FILLED = "https://spade.farm/app/index.php/signUp/get_app_registry_data";
+    private static final String REGISTER_URL_DATA_PROFILE = "https://spade.farm/app/index.php/signUp/fetch_profile";
+    private static final String REGISTER_URL_DATA_FARMADD = "https://spade.farm/app/index.php/signUp/fetch_farm_data";
 
     public static final String KEY_USER_NUM = "user_num";
     String profiledataregisterurl,farmdaddregisterurl;

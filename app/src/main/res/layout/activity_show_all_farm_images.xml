@@ -27,5 +27,5 @@
         android:gravity="center"
         android:text="@string/no_farm_image"
         android:textSize="@dimen/_20ssp"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/bright_blue"/>
 </RelativeLayout>

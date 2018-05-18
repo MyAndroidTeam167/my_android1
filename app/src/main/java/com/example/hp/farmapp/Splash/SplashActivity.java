@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
         context=this;
-        languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
+        //languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
         init();
         scheduleAlarm();
     }
@@ -86,7 +86,7 @@ public class SplashActivity extends BaseActivity {
         context = this;
         android_id = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
         SharedPreferencesMethod.setString(context,SharedPreferencesMethod.DEVICE_ID,android_id);
-        languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
+        //languageset=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.LANGUAGE);
     }
 
 
@@ -156,7 +156,9 @@ public class SplashActivity extends BaseActivity {
     private void stop() {
         isFinish = true;
         if (t == 0) {
-            languageset=SharedPreferencesMethod.getString(context,"lang");
+            //languageset=SharedPreferencesMethod.getString(context,"lang");
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefLang", 0);
+            languageset=pref.getString("key_lang","");
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {

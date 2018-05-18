@@ -55,7 +55,7 @@ public class FarmContractActivity extends AppCompatActivity {
     boolean connected = false;
     Boolean is_binded=false;
     ProgressDialog progressDialog;
-    private static final String URL_FETCH_CONTRACT = "http://spade.farm/app/index.php/farmApp/fetch_contract";
+    private static final String URL_FETCH_CONTRACT = "https://spade.farm/app/index.php/farmApp/fetch_contract";
     WebView wv_contract_form;
     String ct1,farm_num="";
     TextView no_conract_farm;
@@ -100,7 +100,7 @@ public class FarmContractActivity extends AppCompatActivity {
                 progressDialog = ProgressDialog.show(FarmContractActivity.this,
                         getString(R.string.dialog_please_wait), "");
                 CallApi();
-        title.setText("Farm Contract");
+        title.setText(getString(R.string.farm_contract_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){
@@ -130,6 +130,7 @@ public class FarmContractActivity extends AppCompatActivity {
                                 String status = jobject.getString("status");
                                String msg=jobject.getString("msg");
                                 if (status.equals("0")) {
+                                    progressDialog.dismiss();
                                     wv_contract_form.setVisibility(View.GONE);
                                     no_conract_farm.setVisibility(View.VISIBLE);
 
@@ -162,7 +163,8 @@ public class FarmContractActivity extends AppCompatActivity {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // Log.e(TAG,error.toString());
+                             Log.e("error",error.toString());
+                            Toast.makeText(context, R.string.error_text, Toast.LENGTH_SHORT).show();
                         }
                     }) {
                 @Override
@@ -185,7 +187,7 @@ public class FarmContractActivity extends AppCompatActivity {
 
     void basic_title(){
         TextView title=(TextView)findViewById(R.id.tittle);
-        title.setText("Farm Contract");
+        title.setText(getString(R.string.farm_contract_title));
         mActionBarToolbar = (Toolbar) findViewById(R.id.confirm_order_toolbar_layout);
         setSupportActionBar(mActionBarToolbar);
         if (getSupportActionBar() != null){
