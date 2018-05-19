@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.Beans.GetProfile;
 import com.example.hp.farmapp.Database.DatabaseHandler;
@@ -36,7 +37,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
     String useremail,usermobile,userpass,messagefrmsrver,sms;
     Context context;
 

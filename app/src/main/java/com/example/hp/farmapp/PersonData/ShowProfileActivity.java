@@ -45,6 +45,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.PersonData.customfonts.MyTextView;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
@@ -66,7 +67,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.hp.farmapp.FarmData.FarmPackage.EditFarmActivity.PERSON_NUM;
 
-public class ShowProfileActivity extends AppCompatActivity {
+public class ShowProfileActivity extends BaseActivity {
 
     MyTextView nametv,emailtv,dobtv,mobnotv,mobnoalttv,landlionenotv,aadharnotv,pannotv,addresstv;
     Context context;

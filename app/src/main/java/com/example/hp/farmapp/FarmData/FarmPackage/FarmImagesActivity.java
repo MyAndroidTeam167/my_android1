@@ -36,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.FarmActionReplyActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.Utiltiy.Utility;
@@ -54,7 +55,7 @@ import java.util.Date;
  * Created by user on 15/12/17.
  */
 
-public class FarmImagesActivity extends AppCompatActivity {
+public class FarmImagesActivity extends BaseActivity {
     Toolbar mActionBarToolbar;
     Context context;
     private int REQUEST_CAMERA1 = 10, SELECT_FILE1 = 1,SELECT_FILE2 = 2,SELECT_FILE3 = 3,SELECT_FILE4 = 4;

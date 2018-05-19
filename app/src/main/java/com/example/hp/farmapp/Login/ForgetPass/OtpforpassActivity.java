@@ -33,6 +33,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
@@ -51,7 +52,7 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OtpforpassActivity extends AppCompatActivity {
+public class OtpforpassActivity extends BaseActivity {
     Toolbar mActionBarToolbar;
     EditText otpforpass;
     TextView resendotpforpass,otpsentforpass,otpreposneforpass;

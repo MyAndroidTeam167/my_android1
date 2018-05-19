@@ -48,6 +48,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.ChatBox.ChatActivity;
 import com.example.hp.farmapp.FarmData.FarmPackage.FarmImagesActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.squareup.picasso.Picasso;
@@ -67,7 +68,7 @@ import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
 
-public class FarmActionReplyActivity extends AppCompatActivity {
+public class FarmActionReplyActivity extends BaseActivity {
     Toolbar mActionBarToolbar;
     Context context;
     ImageView imgView;
@@ -285,9 +286,9 @@ public class FarmActionReplyActivity extends AppCompatActivity {
                             tvchemical.setText(chemical);
                             tvqtychemical.setText(chemical_qty + " lit/acre");
                             if (compulsary.equals("Y")) {
-                                tvCompulsary.setText(R.string.yes_text);
+                                tvCompulsary.setText("Yes");
                             } else {
-                                tvCompulsary.setText(R.string.no_text);
+                                tvCompulsary.setText("No");
                             }
                             Uri uri = Uri.parse(img_link);
                             Picasso.with(context).load(uri).into(imgView);

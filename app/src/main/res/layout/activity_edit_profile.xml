@@ -278,7 +278,7 @@
                         android:layout_width="match_parent"
                         android:textColor="@color/saddlebrown"
                         android:layout_height="wrap_content"
-                        android:text="Country"/>
+                        android:text="@string/country"/>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -313,7 +313,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/saddlebrown"
-                        android:text="State"/>
+                        android:text="@string/state"/>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -345,7 +345,7 @@
                         android:layout_width="match_parent"
                         android:textColor="@color/saddlebrown"
                         android:layout_height="wrap_content"
-                        android:text="City"/>
+                        android:text="@string/city"/>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -373,7 +373,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="22dp"
                     android:background="@color/colorPrimaryDark"
-                    android:text="Update Profile"
+                    android:text="@string/update_profile"
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="18sp" />

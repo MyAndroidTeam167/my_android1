@@ -100,15 +100,15 @@
     <string name="ph">PH</string>
     <string name="ec">EC</string>
     <string name="org_carbon">సేంద్రీయ కార్బన్</string>
-    <string name="avlb_nitrogen">అందుబాటులో నత్రజని</string>
-    <string name="avlb_phosphorus">అందుబాటులో భాస్వరం</string>
-    <string name="avlb_potassium">అందుబాటులో పొటాషియం</string>
-    <string name="avlb_sulphur">అందుబాటులో ఉన్న సల్ఫర్</string>
-    <string name="avlb_zinc">అందుబాటులో జింక్</string>
-    <string name="avlb_boron">అందుబాటులో ఉన్న బోరాన్</string>
-    <string name="avlb_iron">అందుబాటులో ఐరన్</string>
-    <string name="avlb_manganese">అందుబాటులో ఉన్న మాంగనీస్</string>
-    <string name="avlb_copper">అందుబాటులో రాగి</string>
+    <string name="avl_nitrogen">అందుబాటులో నత్రజని</string>
+    <string name="avl_phosphorous">అందుబాటులో భాస్వరం</string>
+    <string name="avl_potassium">అందుబాటులో పొటాషియం</string>
+    <string name="avl_sulphur">అందుబాటులో ఉన్న సల్ఫర్</string>
+    <string name="avl_zinc">అందుబాటులో జింక్</string>
+    <string name="avl_boron">అందుబాటులో ఉన్న బోరాన్</string>
+    <string name="avl_iron">అందుబాటులో ఐరన్</string>
+    <string name="avl_maganese">అందుబాటులో ఉన్న మాంగనీస్</string>
+    <string name="avl_copper">అందుబాటులో రాగి</string>
     <string name="sure_exit_text">మీరు నిష్క్రమించాలనుకుంటున్నారా?</string>
 
 
@@ -182,4 +182,35 @@
     <string name="register_new_account_title"> క్రొత్త ఖాతాను నమోదు చేయండి</string>
     <string name="weather_title"> వాతావరణ </string>
     <string name="soil_test_title">నేల కార్డు</string>
+    <string name="change_lang">పాస్ వర్డ్ ను మార్చండి</string>
+    <string name="name">పేరు</string>
+    <string name="dob">పుట్టిన తేది</string>
+    <string name="address">చిరునామా</string>
+    <string name="date">తేదీ</string>
+    <string name="description">వివరణ</string>
+    <string name="compulsary">తప్పనిసరిగా</string>
+    <string name="chemical">రసాయన</string>
+    <string name="chemical_quantity">రసాయన పరిమాణం</string>
+    <string name="is_done">పూర్తయ్యింది</string>
+    <string name="txt_comment">టెక్స్ట్ వ్యాఖ్య</string>
+    <string name="view_all_msg">అన్ని సందేశాలను వీక్షించండి</string>
+    <string name="audio_cmt">ఆడియో వ్యాఖ్య</string>
+    <string name="submit">Submit</string>
+    <string name="no_new_notifi">కొత్త నోటిఫికేషన్ లేదు</string>
+    <string name="no_farm_image">వ్యవసాయ చిత్రాలు అందుబాటులో లేవు</string>
+    <string name="location">నగర</string>
+    <string name="max">గరిష్ట</string>
+    <string name="min">కనీస</string>
+    <string name="humidity">ఆర్ద్రత</string>
+    <string name="wind">గాలి</string>
+
+    <string name="compulsary_field">* గుర్తించబడిన ఫీల్డ్ తప్పనిసరిै</string>
+    <string name="farm_pet_name">ఫార్మ్ పెంపుడు పేరు *</string>
+    <string name="Area_in_acres">ఎకరాలో ఏరియా</string>
+    <string name="special_comment">ప్రత్యేక గమనిక</string>
+    <string name="adhar_no">ఆధార్ నంబర్ *</string>
+    <string name="comment">వ్యాఖ్య</string>
+    <string name="save">సమర్పించండి</string>
+
+
 </resources>

@@ -11,10 +11,11 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Signup.SignUpActivity;
 
-public class CalenderInfoActivity extends AppCompatActivity {
+public class CalenderInfoActivity extends BaseActivity {
 
     WebView wv1;
     ProgressDialog pd;

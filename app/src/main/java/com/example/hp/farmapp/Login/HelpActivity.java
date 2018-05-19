@@ -17,10 +17,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.TestPackage.Activity.CalenderInfoActivity;
 import com.example.hp.farmapp.R;
 
-public class HelpActivity extends AppCompatActivity {
+public class HelpActivity extends BaseActivity {
 
     WebView wv1;
     ProgressDialog pd;

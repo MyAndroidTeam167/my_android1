@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.FarmData.ShowFarmActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditFarmActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditFarmActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String DEFAULT_LOCAL = "India";
     private static final String DEFAULT_LOCAL_STATE = "Madhya Pradesh";

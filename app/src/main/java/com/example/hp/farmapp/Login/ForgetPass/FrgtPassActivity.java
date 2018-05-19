@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.Login.ForgetPass.Confirm.CnfrmPassActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -24,7 +25,7 @@ import com.example.hp.farmapp.Settings.SettingActivity;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FrgtPassActivity extends AppCompatActivity {
+public class FrgtPassActivity extends BaseActivity {
 
     EditText frgtet;
     Toolbar mActionBarToolbar;

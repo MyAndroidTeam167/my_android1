@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.Login.LoginVerificationActivity;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
@@ -50,7 +51,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ImageActivity extends AppCompatActivity implements View.OnClickListener {
+public class ImageActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int PICK_FROM_FILE = 2;
     private static final int CAMERA_REQUEST = 1;

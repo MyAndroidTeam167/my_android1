@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.ForgetPass.FrgtPassActivity;
 import com.example.hp.farmapp.Login.ForgetPass.OtpforpassActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -24,7 +25,7 @@ import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
 import java.util.regex.Pattern;
 
-public class CnfrmPassActivity extends AppCompatActivity {
+public class CnfrmPassActivity extends BaseActivity {
 
     TextView wel;
     Button cnfsubmit;

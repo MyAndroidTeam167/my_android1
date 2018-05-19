@@ -127,7 +127,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
-                    android:text="EC"
+                    android:text="@string/ec"
                     android:textColor="@color/black_light"
                     android:textSize="16sp" />
                 <TextView
@@ -165,7 +165,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
-                    android:text="@string/organic_carbon"
+                    android:text="@string/org_carbon"
                    android:textColor="@color/black_light"
                     android:textSize="16sp" />
 
@@ -530,7 +530,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.35"
-                    android:text="Available Copper (Cu)"
+                    android:text="@string/avl_copper"
                     android:textColor="@color/black_light"
                     android:textSize="16sp" />
 

@@ -28,6 +28,7 @@ import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
 import com.example.hp.farmapp.CalendarPackage.DisplayCalendarActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -44,7 +45,7 @@ import java.util.Map;
  * Created by user on 15/12/17.
  */
 
-public class ShowTaskActivity extends AppCompatActivity {
+public class ShowTaskActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     Context context;
     LinearLayoutManager mLayoutManager;

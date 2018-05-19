@@ -74,8 +74,8 @@
     <string name="address_line_2">पता लाइन 2</string>
     <string name="address_line_3">पता लाइन 3</string>
     <string name="country">देश</string>
-    <string name="state">State</string>
-    <string name="city">राज्य</string>
+    <string name="state">राज्य</string>
+    <string name="city">शहर</string>
     <string name="update_profile">प्रोफ़ाइल अपडेट करें</string>
 
 
@@ -108,16 +108,16 @@
     <string name="test_value">मूल्य परीक्षण</string>
     <string name="ph">पी. एच.</string>
     <string name="ec">ई. सी.</string>
-    <string name="org_carbon">जैविक कार्बन</string>
-    <string name="avlb_nitrogen">उपलब्ध नाइट्रोजन</string>
-    <string name="avlb_phosphorus">उपलब्ध फॉस्फोरस</string>
-    <string name="avlb_potassium">उपलब्ध पोटेशियम</string>
-    <string name="avlb_sulphur">उपलब्ध सल्फर</string>
-    <string name="avlb_zinc">उपलब्ध जिंक</string>
-    <string name="avlb_boron">उपलब्ध बोरॉन</string>
-    <string name="avlb_iron">उपलब्ध आयरन</string>
-    <string name="avlb_manganese">उपलब्ध मैंगनीज</string>
-    <string name="avlb_copper">उपलब्ध कॉपर</string>
+    <string name="org_carbon">जैविक कार्बन (OC)</string>
+    <string name="avl_nitrogen">उपलब्ध नाइट्रोजन (N)</string>
+    <string name="avl_phosphorous">उपलब्ध फॉस्फोरस (P)</string>
+    <string name="avl_potassium">उपलब्ध पोटेशियम (K)</string>
+    <string name="avl_sulphur">उपलब्ध सल्फर (S)</string>
+    <string name="avl_zinc">उपलब्ध जिंक (Zn)</string>
+    <string name="avl_boron">उपलब्ध बोरॉन (B)</string>
+    <string name="avl_iron">उपलब्ध आयरन (Fe)</string>
+    <string name="avl_maganese">उपलब्ध मैंगनीज (Mn)</string>
+    <string name="avl_copper">उपलब्ध कॉपर (Cu)</string>
 
     <string name="record_player">रिकॉर्ड</string>
     <string name="play_player">प्ले</string>
@@ -196,6 +196,37 @@
     <string name="cancel_text"> रद्द करना </string>
     <string name="register_new_account_title">रेजीटर नया खाता</string>
     <string name="weather_title">मौसम</string>
+    <string name="date">तारीख</string>
+    <string name="description">विवरण</string>
+    <string name="compulsary">अनिवार्य</string>
+    <string name="chemical">रासायनिक</string>
+    <string name="is_done">क्या हो गया</string>
+    <string name="txt_comment">पाठ टिप्पणी</string>
+    <string name="view_all_msg">सभी संदेश देखें</string>
+    <string name="audio_cmt">ऑडियो टिप्पणी</string>
+    <string name="no_new_notifi">कोई नए संदेश नहीं हैं</string>
+    <string name="no_farm_image">खेत की छवियां उपलब्ध नहीं हैं</string>
+    <string name="chemical_quantity">रासायनिक मात्रा</string>
+    <string name="submit">जमा करें</string>
+    <string name="location">स्थान</string>
+    <string name="max">अधिकतम</string>
+    <string name="min">न्यूनतम</string>
+    <string name="humidity">नमी</string>
+    <string name="wind">हवा</string>
+
+    <string name="compulsary_field">* के साथ चिह्नित फ़ील्ड अनिवार्य है</string>
+    <string name="farm_pet_name">फार्म पालतू नाम *</string>
+    <string name="Area_in_acres">एकड़ में क्षेत्र</string>
+    <string name="special_comment">विशेष टिप्पणी</string>
+    <string name="adhar_no">आधार संख्या *</string>
+    <string name="comment">टिप्पणी</string>
+    <string name="save">जमा करें</string>
+
+
+
+
+
+
 
 
 

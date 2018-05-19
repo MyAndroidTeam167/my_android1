@@ -8,12 +8,13 @@ import android.widget.ListView;
 
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDisplayActivity extends AppCompatActivity {
+public class EventDisplayActivity extends BaseActivity {
 
 
     String[] eventmsgs;

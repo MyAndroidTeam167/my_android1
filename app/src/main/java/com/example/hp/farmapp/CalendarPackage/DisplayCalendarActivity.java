@@ -20,10 +20,11 @@ import android.widget.TextView;
 
 import com.example.hp.farmapp.CalendarPackage.Adapter.CalendarAdapter;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import java.util.GregorianCalendar;
 
-public class DisplayCalendarActivity extends AppCompatActivity {
+public class DisplayCalendarActivity extends BaseActivity {
     public GregorianCalendar cal_month, cal_month_copy;
     private CalendarAdapter cal_adapter;
     private TextView tv_month;

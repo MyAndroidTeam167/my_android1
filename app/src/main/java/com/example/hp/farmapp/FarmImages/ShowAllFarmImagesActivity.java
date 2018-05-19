@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.FarmData.ShowFarmActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -38,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShowAllFarmImagesActivity extends AppCompatActivity {
+public class ShowAllFarmImagesActivity extends BaseActivity {
 
     private static final String REGISTER_URL = "https://spade.farm/app/index.php/farmApp/fetch_farm_images";
     public static final String KEY_FARM_NUM = "farm_num";

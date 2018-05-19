@@ -38,6 +38,7 @@ import com.example.hp.farmapp.BroadCastReceiver.SampleBootReceiver;
 import com.example.hp.farmapp.CalendarPackage.Adapter.RecyclerTouchListener;
 import com.example.hp.farmapp.CalendarPackage.CalendarTask.GetterSetter.Taskdata;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 import com.example.hp.farmapp.Weather.WeatherFragments.Weather_firstFragment;
@@ -57,7 +58,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShowTaskViewPagerActivity extends AppCompatActivity {
+public class ShowTaskViewPagerActivity extends BaseActivity {
 
     Toolbar mActionBarToolbar;
     Context context;

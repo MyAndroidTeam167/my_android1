@@ -238,7 +238,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/area_dark_1_24"
-                        android:hint="Area in acres*"
+                        android:hint="@string/Area_in_acres"
                         android:inputType="numberDecimal"
                         android:singleLine="true"
                         android:textColor="@color/ettextbrown" />

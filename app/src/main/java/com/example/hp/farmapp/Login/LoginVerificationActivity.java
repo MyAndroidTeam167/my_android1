@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
 import com.example.hp.farmapp.FarmData.FarmAddActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.R;
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginVerificationActivity extends AppCompatActivity {
+public class LoginVerificationActivity extends BaseActivity {
 
     Context context;
     private static final String REGISTER_URL_CHECK_FILLED = "https://spade.farm/app/index.php/signUp/get_app_registry_data";

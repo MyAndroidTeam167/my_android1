@@ -26,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.Login.MainActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -42,7 +43,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     Toolbar mActionBarToolbar;
 
     @Override

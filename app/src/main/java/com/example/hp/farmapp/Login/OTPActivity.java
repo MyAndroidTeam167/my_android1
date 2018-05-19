@@ -33,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.Login.ForgetPass.OtpforpassActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.DataHandler.DataHandler;
@@ -58,7 +59,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OTPActivity extends AppCompatActivity {
+public class OTPActivity extends BaseActivity {
 
     EditText actotp;
     Toolbar mActionBarToolbar;

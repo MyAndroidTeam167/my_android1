@@ -116,7 +116,7 @@
     <string name="ph_param">pH Parameter</string>
     <string name="test_value">Test Value</string>
     <string name="ec_param">EC Parameter</string>
-    <string name="organic_carbon">Organic Carbon (OC)</string>
+    <string name="org_carbon">Organic Carbon (OC)</string>
     <string name="avl_nitrogen">Available Nitrogen (N)</string>
     <string name="avl_phosphorous">Available Phosphorus (P)</string>
     <string name="avl_potassium">Available Potassium (K)</string>
@@ -249,5 +249,9 @@
     <string name="register_new_account_title">Regiter New Account</string>
     <string name="weather_title">Weather</string>
     <string name="soil_health_card_for">"Soil health Card for \"Shanu ka Khet\""</string>
+    <string name="ec">EC</string>
+    <string name="chemical_quantity">Chemical Qty</string>
+    <string name="update_profile">Update Profile</string>
+
 
 </resources>

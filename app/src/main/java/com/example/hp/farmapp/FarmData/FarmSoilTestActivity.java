@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.CalendarPackage.LandingActivity.LandingActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -37,7 +38,7 @@ import java.util.Map;
 /**
  * Created by user on 15/12/17.
  */
-public class FarmSoilTestActivity extends AppCompatActivity {
+public class FarmSoilTestActivity extends BaseActivity {
     Context context;
     Toolbar mActionBarToolbar;
     Button mButton;

@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.DataHandler.DataHandler;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.PersonData.FillProfileActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
@@ -41,7 +42,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InspectorSoilCardInputActivity extends AppCompatActivity {
+public class InspectorSoilCardInputActivity extends BaseActivity {
     Context context;
     Toolbar mActionBarToolbar;
     Button submitCard;

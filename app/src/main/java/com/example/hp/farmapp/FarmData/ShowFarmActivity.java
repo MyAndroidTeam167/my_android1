@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp.farmapp.DataHandler.DataHandler;
 import com.example.hp.farmapp.FarmData.FarmPackage.EditFarmActivity;
+import com.example.hp.farmapp.LangBaseActivity.BaseActivity;
 import com.example.hp.farmapp.R;
 import com.example.hp.farmapp.Utiltiy.SharedPreferencesMethod;
 
@@ -41,7 +42,7 @@ import java.util.Map;
  * Created by user on 15/12/17.
  */
 
-public class ShowFarmActivity extends AppCompatActivity {
+public class ShowFarmActivity extends BaseActivity {
     Toolbar mActionBarToolbar;
     Context context;
     TextView mFarmName,mCropName,mGrowingRegion,mGrowingSeason,mArea,mSoilType,mIrrigationType,mSowingDate,mHarvestDate,mSpecialNote,mFarmAddress;
