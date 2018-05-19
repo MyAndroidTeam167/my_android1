@@ -121,8 +121,6 @@ public class WeatherViewPagerActivity extends BaseActivity{
         gps= SharedPreferencesMethod.getString(context,"GPS");
 
 
-
-
         if(gps.equals("0")||gps.equals("null")||gps.equals("")){
             no_gps_text.setVisibility(View.VISIBLE);
         }

@@ -158,22 +158,25 @@ public class SplashActivity extends BaseActivity {
         isFinish = true;
         if (t == 0) {
             //languageset=SharedPreferencesMethod.getString(context,"lang");
+
             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefLang", 0);
             languageset=pref.getString("key_lang","");
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
 
-                    if(languageset.equals("")){
-                Intent intent=new Intent(context,SetLanguageActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            else{
+
+            //else{
                 if (SharedPreferencesMethod.getBoolean(context, "Login")) {
                     Log.e("LoginStatus :","TRUE");
                     Log.e("Language set Data",languageset);
-                    if(languageset.equals("English")){
+                    
+                    if(languageset.equals("")){
+                        Intent intent=new Intent(context,SetLanguageActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else if(languageset.equals("English")){
                         Log.e("Language set Data",languageset);
                             changeLang("en");
                             startActivity(new Intent(context, LandingActivity.class));
@@ -194,7 +197,12 @@ public class SplashActivity extends BaseActivity {
                     }
                 else {
                     Log.e("Language set Data",languageset);
-                     if(languageset.equals("English")){
+                    if(languageset.equals("")){
+                        Intent intent=new Intent(context,SetLanguageActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                     else if(languageset.equals("English")){
                             changeLang("en");
                             startActivity(new Intent(context, MainActivity.class));
                             finish();}
@@ -210,7 +218,7 @@ public class SplashActivity extends BaseActivity {
                      }
                 }
 
-            }
+            //}
 
                 }
             }, 1300);

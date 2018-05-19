@@ -384,8 +384,10 @@ public class LandingActivity extends BaseActivity
                     if (is_app_reg_checked) {
 
                     } else {
-                        CheckAppRegistry();
                         DELAY_MILLIS = 2000;
+                        progressDialog = ProgressDialog.show(LandingActivity.this,
+                                getString(R.string.dialog_please_wait), "");
+                        CheckAppRegistry();
                     }
 
                 } else {
@@ -507,7 +509,6 @@ public class LandingActivity extends BaseActivity
                             ct1 = SharedPreferencesMethod.getString(context, "cctt");
 
                             is_weather_enabled=SharedPreferencesMethod.getString(context,SharedPreferencesMethod.COMP_WEATHER);
-
                             if(is_weather_enabled.equals("1")){
 
                             }
@@ -841,7 +842,7 @@ public class LandingActivity extends BaseActivity
                             String result = jobject.getString("result");
                             String status = jobject.getString("status");
                             if (status.equals("0")) {
-
+                                progressDialog.dismiss();
                             } else {
                                 JSONObject resultobject = new JSONObject(result);
                                 String gps = resultobject.getString("gps");
@@ -869,6 +870,7 @@ public class LandingActivity extends BaseActivity
                                 SharedPreferencesMethod.setString(context,SharedPreferencesMethod.COMP_MAX_FARMS,maxFarms);
                                 SharedPreferencesMethod.setString(context,SharedPreferencesMethod.COMP_WEATHER,weather);
                                 SharedPreferencesMethod.setBoolean(context, SharedPreferencesMethod.SETAPCHECK, true);
+                                progressDialog.dismiss();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -883,6 +885,7 @@ public class LandingActivity extends BaseActivity
                     public void onErrorResponse(VolleyError error) {
                         Log.e("checkArray",error.toString());
                         Toast.makeText(context, R.string.error_text, Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }) {
             @Override
@@ -1734,4 +1737,16 @@ public class LandingActivity extends BaseActivity
         nav_Menu.findItem(R.id.action_weather).setVisible(false);*/
     }
 
+   /* private void restartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }*/
+
+    @Override
+    protected void onRestart() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    super.onRestart();}
 }
