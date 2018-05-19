@@ -116,7 +116,7 @@ public class FarmActionReplyActivity extends BaseActivity {
 //        Intent intent=new Intent(context,LandingActivity.class);
 //        startActivity(intent);
 //        finish();
-       /* if(type.equals("from_calendar")){
+        if(type.equals("from_calendar")){
             Intent intent=new Intent(context,ShowTaskActivity.class);
             startActivity(intent);
             finish();
@@ -124,14 +124,14 @@ public class FarmActionReplyActivity extends BaseActivity {
             Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
             startActivity(intent);
             finish();
-        }*/
-       super.onBackPressed();
+        }
+       //super.onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-       /* if(type.equals("from_calendar")){
+        if(type.equals("from_calendar")){
             Intent intent=new Intent(context,ShowTaskActivity.class);
             startActivity(intent);
             finish();
@@ -139,8 +139,8 @@ public class FarmActionReplyActivity extends BaseActivity {
             Intent intent=new Intent(context,ShowTaskViewPagerActivity.class);
             startActivity(intent);
             finish();
-        }*/
-        super.onBackPressed();
+        }
+        //super.onBackPressed();
     }
 
     @Override

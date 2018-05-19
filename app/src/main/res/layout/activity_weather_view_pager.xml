@@ -20,9 +20,16 @@
         android:background="@color/white"
         android:textColor="#000000"
         android:textSize="@dimen/_10ssp"
+        app:pstsTabPaddingLeftRight="14dp"
         app:pstsDividerColor="@color/green"
         app:pstsIndicatorColor="@color/saddlebrown"
-        app:pstsUnderlineColor="@color/green_new" />
+        />
+
+<!--
+    app:pstsDividerColor="@color/green"
+     app:pstsUnderlineColor="@color/green_new"
+-->
+
 
     <TextView
         android:visibility="gone"

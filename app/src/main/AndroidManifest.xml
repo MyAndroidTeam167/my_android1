@@ -98,6 +98,7 @@
 
         <activity
             android:name=".CalendarPackage.LandingActivity.LandingActivity"
+            android:configChanges="locale|orientation"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
@@ -268,6 +269,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Settings.SettingActivity"
+            android:configChanges="locale|orientation|layoutDirection"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
